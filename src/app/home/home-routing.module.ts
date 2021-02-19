@@ -12,20 +12,25 @@ import { AlunosPraticosComponent } from '../alunos-praticos/alunos-praticos.comp
 import { TabelaPraticaComponent } from '../tabela-pratica/tabela-pratica.component';
 
 const routes: Routes = [
-    {path: 'home', component: HomeComponent},
-    {path: 'turmas', component: TurmasComponent},
-    {path: 'admin-alunos', component: AdminAlunosComponent},
-    {path: 'admin-instrutor', component: AdminInstrutorComponent},
-    {path: 'admin-funcionarios', component: AdminFuncionariosComponent},
-    {path: 'admin-franquias', component: AdminFranquiasComponent},
-    {path: 'alunos-teoricos', component: AlunosTeoricosComponent},
-    {path: 'alunos-praticos', component: AlunosPraticosComponent},
-    {path: 'turmas', component: TurmasComponent},
-    {path: 'tabela-pratica', component: TabelaPraticaComponent},
+    {
+        path: '', 
+        component: HomeComponent,
+        children: [
+            {path: 'admin-alunos', component: AdminAlunosComponent},
+            {path: 'admin-instrutor', component: AdminInstrutorComponent},
+            {path: 'admin-funcionarios', component: AdminFuncionariosComponent},
+            {path: 'admin-franquias', component: AdminFranquiasComponent},
+            {path: 'alunos-teoricos', component: AlunosTeoricosComponent},
+            {path: 'alunos-praticos', component: AlunosPraticosComponent},
+            {path: 'turmas', component: TurmasComponent},
+            {path: 'tabela-pratica', component: TabelaPraticaComponent},
+            {path: 'turmas', component: TurmasComponent},
+        ]
+    }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
 export class HomeRoutingModule { }

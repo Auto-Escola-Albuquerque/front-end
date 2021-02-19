@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +15,8 @@ import { AlunosTeoricosComponent } from './alunos-teoricos/alunos-teoricos.compo
 import { TabelaPraticaComponent } from './tabela-pratica/tabela-pratica.component';
 import { ModuloInstrutorComponent } from './modulo-instrutor/modulo-instrutor.component';
 import { AdminAlunosRoutingModule } from './admin-alunos/admin-alunos-routing.module';
+import { LoginComponent } from './login/login.component';
+
 
 @NgModule({
   declarations: [
@@ -29,14 +31,16 @@ import { AdminAlunosRoutingModule } from './admin-alunos/admin-alunos-routing.mo
     AlunosTeoricosComponent,
     TabelaPraticaComponent,
     ModuloInstrutorComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HomeRoutingModule,
-    AdminAlunosRoutingModule
+    AdminAlunosRoutingModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
