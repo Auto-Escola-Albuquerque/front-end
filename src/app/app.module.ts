@@ -3,14 +3,38 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TurmasComponent } from './turmas/turmas.component';
+import { HomeComponent } from './home/home.component';
+import { HomeRoutingModule } from './home/home-routing.module';
+import { AdminAlunosComponent } from './admin-alunos/admin-alunos.component';
+import { AdminInstrutorComponent } from './admin-instrutor/admin-instrutor.component';
+import { AdminFranquiasComponent } from './admin-franquias/admin-franquias.component';
+import { AdminFuncionariosComponent } from './admin-funcionarios/admin-funcionarios.component';
+import { AlunosPraticosComponent } from './alunos-praticos/alunos-praticos.component';
+import { AlunosTeoricosComponent } from './alunos-teoricos/alunos-teoricos.component';
+import { TabelaPraticaComponent } from './tabela-pratica/tabela-pratica.component';
+import { ModuloInstrutorComponent } from './modulo-instrutor/modulo-instrutor.component';
+import { AdminAlunosRoutingModule } from './admin-alunos/admin-alunos-routing.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TurmasComponent,
+    HomeComponent,
+    AdminAlunosComponent,
+    AdminInstrutorComponent,
+    AdminFranquiasComponent,
+    AdminFuncionariosComponent,
+    AlunosPraticosComponent,
+    AlunosTeoricosComponent,
+    TabelaPraticaComponent,
+    ModuloInstrutorComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HomeRoutingModule,
+    AdminAlunosRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
