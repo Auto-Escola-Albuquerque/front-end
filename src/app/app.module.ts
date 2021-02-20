@@ -16,6 +16,7 @@ import { TabelaPraticaComponent } from './tabela-pratica/tabela-pratica.componen
 import { ModuloInstrutorComponent } from './modulo-instrutor/modulo-instrutor.component';
 import { AdminAlunosRoutingModule } from './admin-alunos/admin-alunos-routing.module';
 import { LoginComponent } from './login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { LoginComponent } from './login/login.component';
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HomeRoutingModule,
     AdminAlunosRoutingModule,

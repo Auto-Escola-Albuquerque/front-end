@@ -1,0 +1,48 @@
+<div>
+    <form [formGroup]="myForm" class="my-form">
+        <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" class="form-control" name="name" id="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="CPF">CPF</label>
+            <input type="number" class="form-control" name="cpf" id="cpf" required>
+        </div>
+
+        <div class="form-group">
+            <label for="dataMatricula">Data de Matrícula</label>
+            <input type="date" class="form-control" name="dataMatricula" id="dataMatricula">
+        </div>
+
+        <div class="form-group">
+            <label>Gênero</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="male" [value]="1">
+                <label class="form-check-label" for="male">Masculino</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="female" [value]="2">
+                <label class="form-check-label" for="female">Feminino</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="dayClasses">Aulas Diúrnas</label>
+            <input type="number" class="form-control" name="dayClasses" id="dayClasses">
+        </div>
+
+        <div class="form-group">
+            <label for="nigthClasses">Aulas Noturnas</label>
+            <input type="number" class="form-control" name="nigthClasses" id="nigthClasses">
+        </div>
+
+        <!-- <div class="form-group">
+          <label for="observacao">Observação</label>
+          <textarea class="form-control" rows="3" name="observacao" id="observacao"></textarea>
+        </div> -->
+
+        <input type="submit" class="btn btn-primary mt-4" value="Salvar">
+        <a href="#" class="btn btn-secondary mt-4 ml-2">Cancelar</a>
+    </form>
+</div>
