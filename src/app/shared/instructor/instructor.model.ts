@@ -1,7 +1,6 @@
 export class Instructor {
     name: string;
-    cpf: number;
-    city: string;
-    password: string;
-    
+    cpf: string;
+    city: string;    
+    type: string;
 }

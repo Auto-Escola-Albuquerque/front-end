@@ -16,8 +16,17 @@ import { TabelaPraticaComponent } from './tabela-pratica/tabela-pratica.componen
 import { ModuloInstrutorComponent } from './modulo-instrutor/modulo-instrutor.component';
 import { AdminAlunosRoutingModule } from './admin-alunos/admin-alunos-routing.module';
 import { LoginComponent } from './login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, 
+    MatSortModule, MatTableModule, MatButtonModule } from "@angular/material";
 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MomentDateModule } from '@angular/material-moment-adapter';
+import {MatIconModule} from '@angular/material/icon'
 
 @NgModule({
   declarations: [
@@ -40,6 +49,20 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     HomeRoutingModule,
     AdminAlunosRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
+    MomentDateModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent],

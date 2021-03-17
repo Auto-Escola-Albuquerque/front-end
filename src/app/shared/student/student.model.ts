@@ -1,6 +1,7 @@
 export class Student {
+    seqNo: number;
     name: string;
-    cpf: number;
+    cpf: string;
     registrationDate: Date;
     gender: boolean;
     dayClasses: Number;

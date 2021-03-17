@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from '../home/home.component';
 import { Student } from '../shared/student/student.model';
 import { FormGroup, FormControl } from '@angular/forms';
+import { AutoescolaService } from '../shared/autoescola.service';
 
 @Component({
     selector: 'app-admin-alunos',
@@ -10,24 +11,31 @@ import { FormGroup, FormControl } from '@angular/forms';
     styleUrls: ['./admin-alunos.component.scss']
 })
 export class AdminAlunosComponent implements OnInit {
-        formCliente: FormGroup;
+    formStudent: FormGroup;
+    students = [];
+    student = new Student();
 
-    constructor() { }
+    constructor(private autoescolaService: AutoescolaService) { }
 
     ngOnInit() {
-        this.createForm(new Student());
+        this.formStudent = new FormGroup({
+            name: new FormControl(this.student.name),
+            cpf: new FormControl(this.student.cpf),
+            registration: new FormControl(this.student.registrationDate),
+            gender: new FormControl(this.student.gender),
+            dayClasses: new FormControl(this.student.dayClasses),
+            nigthClasses: new FormControl(this.student.nigthClasses),
+        });
+
     }
 
-    createForm(student: Student) {
-        this.formCliente = new FormGroup({ 
-            name: new FormControl(student.name),
-            cpf: new FormControl(student.cpf),
-            registration: new FormControl(student.registrationDate),
-            gender: new FormControl(student.gender),
-            dayClasses: new FormControl(student.dayClasses),
-            nigthClasses: new FormControl(student.nigthClasses),
-
-        })
+    createStudent() {
+        console.log(this.autoescolaService.postStudent(this.student));
     }
+
+    getEmployeeList() {
+        this.students = this.autoescolaService.getStudentList();
+    }
+
 
 }

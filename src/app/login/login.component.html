@@ -1,0 +1,17 @@
+
+<form [formGroup]="loginForm" class="my-form">
+    <div class="form-group">
+        <label>CPF</label>
+        <input type="text" class="form-control" formControlName="cpf" required>
+    </div>
+
+    <div class="form-group">
+        <label>Senha</label>
+        <input type="text" class="form-control" formControlName="password" required>
+    </div>
+
+    <div>
+        <input type="submit" class="btn btn-primary mt-4" value="Salvar">
+    </div>
+
+</form>
