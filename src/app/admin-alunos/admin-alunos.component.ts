@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from '../home/home.component';
 import { Student } from '../shared/student/student.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AutoescolaService } from '../shared/autoescola.service';

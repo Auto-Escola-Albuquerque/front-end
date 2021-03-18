@@ -32,6 +32,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule} from '@angular/material/menu';
 import { MainNavRoutingModule } from './main-nav/main-nav-routing.module';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { MainNavRoutingModule } from './main-nav/main-nav-routing.module';
     MatToolbarModule,
     MatListModule,
     MatMenuModule,
-    MainNavRoutingModule
+    MainNavRoutingModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent],
