@@ -4,8 +4,6 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TurmasComponent } from './turmas/turmas.component';
-import { HomeComponent } from './home/home.component';
-import { HomeRoutingModule } from './home/home-routing.module';
 import { AdminAlunosComponent } from './admin-alunos/admin-alunos.component';
 import { AdminInstrutorComponent } from './admin-instrutor/admin-instrutor.component';
 import { AdminFranquiasComponent } from './admin-franquias/admin-franquias.component';
@@ -27,12 +25,19 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MomentDateModule } from '@angular/material-moment-adapter';
 import {MatIconModule} from '@angular/material/icon'
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { MainNavComponent } from './main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule} from '@angular/material/menu';
+import { MainNavRoutingModule } from './main-nav/main-nav-routing.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     TurmasComponent,
-    HomeComponent,
     AdminAlunosComponent,
     AdminInstrutorComponent,
     AdminFranquiasComponent,
@@ -42,12 +47,12 @@ import {MatIconModule} from '@angular/material/icon'
     TabelaPraticaComponent,
     ModuloInstrutorComponent,
     LoginComponent,
+    MainNavComponent,
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HomeRoutingModule,
     AdminAlunosRoutingModule,
     FormsModule,
     HttpClientModule,
@@ -62,7 +67,13 @@ import {MatIconModule} from '@angular/material/icon'
     MatNativeDateModule,
     MatIconModule,
     MatButtonModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatSidenavModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatListModule,
+    MatMenuModule,
+    MainNavRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -10,6 +10,7 @@ import { AdminFranquiasComponent } from '../admin-franquias/admin-franquias.comp
 import { AlunosTeoricosComponent } from '../alunos-teoricos/alunos-teoricos.component';
 import { AlunosPraticosComponent } from '../alunos-praticos/alunos-praticos.component';
 import { TabelaPraticaComponent } from '../tabela-pratica/tabela-pratica.component';
+import { MainNavComponent } from '../main-nav/main-nav.component';
 
 const routes: Routes = [
     {
@@ -25,6 +26,7 @@ const routes: Routes = [
             {path: 'turmas', component: TurmasComponent},
             {path: 'tabela-pratica', component: TabelaPraticaComponent},
             {path: 'turmas', component: TurmasComponent},
+            {path: 'nav', component: MainNavComponent}
         ]
     }
 ];
