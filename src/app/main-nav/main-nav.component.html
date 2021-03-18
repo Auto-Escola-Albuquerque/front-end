@@ -1,0 +1,49 @@
+<mat-toolbar color="accent">
+    <img src="././assets/logo.svg" class="logo">
+    <span style="flex: 1 1 auto;"></span>
+    <div>
+        <button mat-icon-button matTooltip="Notifications">
+            <mat-icon>notifications</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="My Account" [matMenuTriggerFor]="accountMenu">
+            <mat-icon>account_circle</mat-icon>
+        </button>
+        <mat-menu #accountMenu [overlapTrigger]="false" yPosition="below">
+            <button mat-menu-item routerLink="#">
+                <mat-icon>person</mat-icon><span>Minha Conta</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item>
+                <mat-icon>exit_to_app</mat-icon>Sair
+            </button>
+        </mat-menu>
+    </div>
+</mat-toolbar>
+
+<mat-sidenav-container style="height: calc(100% - 64px); margin: 0;">
+    <mat-sidenav #sidenav mode="side" opened [disableClose]="true"[class.mat-elevation-z4]="true" style="width: 240px">
+        <mat-nav-list dense>
+            <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
+                <mat-expansion-panel-header>
+                    Módulo Prático
+                </mat-expansion-panel-header>
+                <mat-nav-list dense>
+                    <a mat-list-item routerLink="#"><mat-icon>people</mat-icon>Alunos</a>
+                    <a mat-list-item routerLink="#"><mat-icon>table-chart</mat-icon>Tabela Prática</a>
+                    <a mat-list-item routerLink="#"><mat-icon>attach_money</mat-icon>Multas - Práticas</a>
+                </mat-nav-list>
+            </mat-expansion-panel>
+            <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
+                <mat-expansion-panel-header>
+                    Privacy
+                </mat-expansion-panel-header>
+                <mat-nav-list dense>
+                    <a mat-list-item routerLink="#"><mat-icon>person_add</mat-icon>Partnership Request</a>
+                    <a mat-list-item routerLink="#"><mat-icon>visibility</mat-icon>Profile Visibility</a>
+                </mat-nav-list>
+            </mat-expansion-panel>
+        </mat-nav-list>
+    </mat-sidenav>
+    <router-outlet></router-outlet>
+</mat-sidenav-container>
+
