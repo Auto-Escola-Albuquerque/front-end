@@ -12,7 +12,6 @@ import { AlunosPraticosComponent } from './alunos-praticos/alunos-praticos.compo
 import { AlunosTeoricosComponent } from './alunos-teoricos/alunos-teoricos.component';
 import { TabelaPraticaComponent } from './tabela-pratica/tabela-pratica.component';
 import { ModuloInstrutorComponent } from './modulo-instrutor/modulo-instrutor.component';
-import { AdminAlunosRoutingModule } from './admin-alunos/admin-alunos-routing.module';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -33,6 +32,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule} from '@angular/material/menu';
 import { MainNavRoutingModule } from './main-nav/main-nav-routing.module';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { MatSelectModule } from '@angular/material/select';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 @NgModule({
@@ -54,7 +55,6 @@ import {MatExpansionModule} from '@angular/material/expansion';
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    AdminAlunosRoutingModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -75,7 +75,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatListModule,
     MatMenuModule,
     MainNavRoutingModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSelectModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent],

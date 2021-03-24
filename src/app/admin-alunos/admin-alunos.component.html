@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
     <form [formGroup]="formStudent" class="my-form">
         <div class="form-group">
             <label for="name">Nome</label>
@@ -45,4 +45,81 @@
 
         <input type="submit" class="btn btn-primary mt-4" value="Salvar" (click)="createStudent()">
     </form>
+</div> -->
+<div class="card">
+    <!-- <h2>Administração de Alunos</h2> -->
+    <mat-card class='card-header' ><h4>Administração de Alunos</h4></mat-card>
+
+    <div class="content">
+        <form [formGroup]="formStudent" class="my-form">
+            <mat-form-field appearance="outline" class="col-lg-12">
+                <mat-label>Nome</mat-label>
+                <input matInput formControlName="name" required>
+                <mat-error *ngIf="formStudent.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="col-lg-12">
+                <mat-label>CPF</mat-label>
+                <input matInput formControlName="cpf" required> 
+                <mat-error *ngIf="formStudent.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="col-lg-12">
+                <mat-label>Data de Matrícula</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="registration" required>
+                <mat-error *ngIf="formStudent.invalid">{{getErrorMessage()}}</mat-error>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="col-lg-12">
+                <mat-label>Sexo</mat-label>
+                <mat-select formControlName="gender">
+                    <mat-option value="one">Masculino</mat-option>
+                    <mat-option value="two">Feminino</mat-option>
+                </mat-select>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="col-lg-12">
+                <mat-label>Aulas Diúrnas</mat-label>
+                <input matInput formControlName="dayClasses">
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="col-lg-12">
+                <mat-label>Aulas Noturnas</mat-label>
+                <input matInput formControlName="nigthClasses">
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="col-lg-12">
+                <mat-label>Matéria 1</mat-label>
+                <input matInput formControlName="subject1">
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="col-lg-12">
+                <mat-label>Matéria 2</mat-label>
+                <input matInput formControlName="subject2">
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="col-lg-12">
+                <mat-label>Matéria 3</mat-label>
+                <input matInput formControlName="subject3">
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="col-lg-12">
+                <mat-label>Matéria 4</mat-label>
+                <input matInput formControlName="subject4">
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="col-lg-12">
+                <mat-label>Matéria 5</mat-label>
+                <input matInput formControlName="subject5">
+            </mat-form-field>
+    
+            <div class="form-element">
+                <button mat-raised-button color="primary" type="submit" class="button">Salvar</button>
+              </div>
+        </form>
+    </div>
+
+
 </div>

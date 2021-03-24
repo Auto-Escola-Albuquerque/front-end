@@ -13,6 +13,8 @@ export class Student {
     constructor() {
         this.theoreticalFines = 0;
         this.practicalFines = 0;
+        this.dayClasses = 0;
+        this.nigthClasses = 0;
         this.subjects = new Array(5);
         this.subjects.fill(0);
     }

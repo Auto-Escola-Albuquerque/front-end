@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
     <form [formGroup]="formEmployee" class="my-form">
         <div class="form-group">
             <label for="nome">Nome</label>
@@ -15,13 +15,43 @@
             <input type="password" class="form-control" formControlName='password' [(ngModel)]="employee.password">
         </div>
     
-        <!-- <div class="form-group">
+        <div class="form-group">
             <label for="nome">Confirmar Senha</label>
             <input type="password" class="form-control" formControlName='confirmPassword'>
-        </div> -->
+        </div>
         <div>
             <input type="submit" class="btn btn-primary mt-4" value="Salvar" (click)="createEmployee()">
         </div>
     </form>
 
+</div> -->
+
+<div class="card">
+    <mat-card class='card-header' ><h4>Administração de Funcionários</h4></mat-card>
+
+    <form [formGroup]="formEmployee" class="my-form">
+        <mat-form-field appearance="outline">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="name" required>
+            <mat-error *ngIf="formEmployee.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>CPF</mat-label>
+            <input matInput formControlName="cpf" required>
+            <mat-error *ngIf="formEmployee.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Informe sua senha</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <div class="form-element">
+            <button mat-raised-button color="primary" type="submit" class="button" [disabled]="disabledButton()">Salvar</button>
+          </div>
+    </form>
 </div>

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminAlunosRoutingModule } from './admin-alunos-routing.module';
 import { AdminAlunosComponent } from './admin-alunos.component';
 import { FormGroup, FormControl } from '@angular/forms';
 
@@ -9,7 +8,6 @@ import { FormGroup, FormControl } from '@angular/forms';
   declarations: [AdminAlunosComponent],
   imports: [
     CommonModule,
-    AdminAlunosRoutingModule,
     FormGroup,
     FormControl
   ]
