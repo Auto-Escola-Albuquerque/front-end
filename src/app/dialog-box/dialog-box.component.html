@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Atualizar aulas da matéria</h1>
+<div mat-dialog-content>
+  <mat-form-field *ngIf="action != 'Delete'; else elseTemplate">
+    <input placeholder="Atualizar aulas" matInput [(ngModel)]="local_data.obj.subjects[index]">
+  </mat-form-field>
+  <!-- <ng-template #elseTemplate>
+    Sure to delete <b>{{local_data.obj.name}}</b>?
+  </ng-template> -->
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="doAction()" mat-flat-button color="warn">Atualizar</button>
+  <button mat-button (click)="closeDialog()">Cancelar</button>
+</div>

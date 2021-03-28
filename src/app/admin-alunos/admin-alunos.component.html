@@ -1,125 +1,76 @@
-<!-- <div>
-    <form [formGroup]="formStudent" class="my-form">
-        <div class="form-group">
-            <label for="name">Nome</label>
-            <input type="text" class="form-control" formControlName="name" [(ngModel)]="student.name">
-        </div>
-
-        <div class="form-group">
-            <label for="CPF">CPF</label>
-            <input type="text" class="form-control" formControlName="cpf" [(ngModel)]="student.cpf">
-        </div>
-
-        <div class="form-group">
-            <label for="dataMatricula">Data de Matrícula</label>
-            <input type="date" class="form-control" formControlName="registration" [(ngModel)]="student.registration">
-        </div>
-
-        <div class="form-group">
-            <label>Gênero</label>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" id="male" 
-                [value]="1"
-                formControlName="gender"
-                [(ngModel)]="student.gender">
-                <label class="form-check-label" for="male">Masculino</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" id="female" 
-                [value]="2"
-                formControlName="gender"
-                [(ngModel)]="student.gender">
-                <label class="form-check-label" for="female">Feminino</label>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="dayClasses">Aulas Diúrnas</label>
-            <input type="number" class="form-control" formControlName="dayClasses" [(ngModel)]="student.dayClasses">
-        </div>
-
-        <div class="form-group">
-            <label for="nigthClasses">Aulas Noturnas</label>
-            <input type="number" class="form-control" formControlName="nigthClasses" [(ngModel)]="student.nigthClasses">
-        </div>
-
-        <input type="submit" class="btn btn-primary mt-4" value="Salvar" (click)="createStudent()">
-    </form>
-</div> -->
 <div class="card">
     <!-- <h2>Administração de Alunos</h2> -->
-    <mat-card class='card-header' ><h4>Administração de Alunos</h4></mat-card>
+    <mat-card class='card-header'>
+        <h4>Administração de Alunos</h4>
+    </mat-card>
 
     <div class="content">
-        <form [formGroup]="formStudent" class="my-form">
-            <mat-form-field appearance="outline" class="col-lg-12">
+        <form [formGroup]="formStudent" class="my-form" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="legacy" class="col-lg-5">
                 <mat-label>Nome</mat-label>
                 <input matInput formControlName="name" required>
                 <mat-error *ngIf="formStudent.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
-    
-            <mat-form-field appearance="outline" class="col-lg-12">
+
+            <mat-form-field appearance="legacy" class="col-lg-5">
                 <mat-label>CPF</mat-label>
-                <input matInput formControlName="cpf" required> 
+                <input matInput formControlName="cpf" required>
                 <mat-error *ngIf="formStudent.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
-    
-            <mat-form-field appearance="outline" class="col-lg-12">
+
+            <mat-form-field appearance="legacy" class="col-lg-5">
                 <mat-label>Data de Matrícula</mat-label>
                 <input matInput [matDatepicker]="picker" formControlName="registration" required>
                 <mat-error *ngIf="formStudent.invalid">{{getErrorMessage()}}</mat-error>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
-    
-            <mat-form-field appearance="outline" class="col-lg-12">
+
+            <mat-form-field appearance="legacy" class="col-lg-5">
                 <mat-label>Sexo</mat-label>
                 <mat-select formControlName="gender">
                     <mat-option value="one">Masculino</mat-option>
                     <mat-option value="two">Feminino</mat-option>
                 </mat-select>
             </mat-form-field>
-    
-            <mat-form-field appearance="outline" class="col-lg-12">
+
+            <mat-form-field appearance="legacy" class="col-lg-5">
                 <mat-label>Aulas Diúrnas</mat-label>
                 <input matInput formControlName="dayClasses">
             </mat-form-field>
-    
-            <mat-form-field appearance="outline" class="col-lg-12">
+
+            <mat-form-field appearance="legacy" class="col-lg-5">
                 <mat-label>Aulas Noturnas</mat-label>
                 <input matInput formControlName="nigthClasses">
             </mat-form-field>
-            
-            <mat-form-field appearance="outline" class="col-lg-12">
+
+            <mat-form-field appearance="legacy" class="col-lg-5">
                 <mat-label>Matéria 1</mat-label>
                 <input matInput formControlName="subject1">
             </mat-form-field>
-    
-            <mat-form-field appearance="outline" class="col-lg-12">
+
+            <mat-form-field appearance="legacy" class="col-lg-5">
                 <mat-label>Matéria 2</mat-label>
                 <input matInput formControlName="subject2">
             </mat-form-field>
-    
-            <mat-form-field appearance="outline" class="col-lg-12">
+
+            <mat-form-field appearance="legacy" class="col-lg-5">
                 <mat-label>Matéria 3</mat-label>
                 <input matInput formControlName="subject3">
             </mat-form-field>
-    
-            <mat-form-field appearance="outline" class="col-lg-12">
+
+            <mat-form-field appearance="legacy" class="col-lg-5">
                 <mat-label>Matéria 4</mat-label>
                 <input matInput formControlName="subject4">
             </mat-form-field>
-    
-            <mat-form-field appearance="outline" class="col-lg-12">
+
+            <mat-form-field appearance="legacy" class="col-lg-5">
                 <mat-label>Matéria 5</mat-label>
                 <input matInput formControlName="subject5">
             </mat-form-field>
-    
-            <div class="form-element">
-                <button mat-raised-button color="primary" type="submit" class="button">Salvar</button>
-              </div>
+
+            <button mat-raised-button color="primary" type="submit" class="button">Salvar</button>
         </form>
     </div>
-
-
 </div>
+

@@ -10,6 +10,7 @@ import { AlunosPraticosComponent } from '../alunos-praticos/alunos-praticos.comp
 import { TurmasComponent } from '../turmas/turmas.component';
 import { TabelaPraticaComponent } from '../tabela-pratica/tabela-pratica.component';
 import { MainNavComponent } from './main-nav.component';
+import { AdminClassesComponent } from '../admin-classes/admin-classes.component';
 
 const routes: Routes = [
     {
@@ -20,6 +21,7 @@ const routes: Routes = [
             {path: 'admin-instrutor', component: AdminInstrutorComponent},
             {path: 'admin-funcionarios', component: AdminFuncionariosComponent},
             {path: 'admin-franquias', component: AdminFranquiasComponent},
+            {path: 'admin-classes', component: AdminClassesComponent},
             {path: 'alunos-teoricos', component: AlunosTeoricosComponent},
             {path: 'alunos-praticos', component: AlunosPraticosComponent},
             {path: 'turmas', component: TurmasComponent},

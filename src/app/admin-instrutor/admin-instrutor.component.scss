@@ -28,7 +28,18 @@
     border-radius: .25rem;
 }
 
+.col-lg-5 {
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
 .mat-raised-button {
     background-color: #FFD700;
     color: #000;
+    margin-left: 10%;
+}
+
+.content{
+    padding-top: 20px;
+    position: relative;
 }

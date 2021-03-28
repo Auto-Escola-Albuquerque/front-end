@@ -75,23 +75,23 @@ export class TurmasComponent implements OnInit {
         s5.gender = true
         s5.registrationDate = new Date('07/04/2021')
 
-        let count = 0;
         for(let i = 0; i < 10; i++) {
-            s1.seqNo = count++
-            s2.seqNo = count++
-            s3.seqNo = count++
-            s4.seqNo = count++
-            s5.seqNo = count++
             this.students.push(s1, s2, s3, s4, s5);
         }
     }
 
     ngOnInit() {
+        let i = 0
+        for(let std of this.students) {
+            std.seqNo = i;
+            i++;
+        }
         this.dataSource = new MatTableDataSource(this.students);
     }
 
     ngAfterViewInit() {
         this.dataSource.paginator = this.matPaginator
+        this.matPaginator._intl.itemsPerPageLabel = "Quantidade de alunos por página";
         this.dataSource.sort = this.sort;
     }
 

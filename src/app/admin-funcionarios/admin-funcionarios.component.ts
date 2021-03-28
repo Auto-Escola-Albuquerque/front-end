@@ -28,7 +28,7 @@ export class AdminFuncionariosComponent implements OnInit {
     }
 
     getEmployeeList() {
-        this.employees = this.autoescolaService.getEmployeeList();
+        // this.employees = this.autoescolaService.getEmployeeList();
     }
 
     getErrorMessage() {

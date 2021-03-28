@@ -34,7 +34,10 @@ import { MainNavRoutingModule } from './main-nav/main-nav-routing.module';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import {MatGridListModule} from '@angular/material/grid-list';
-
+import { AdminClassesComponent } from './admin-classes/admin-classes.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { DialogBoxComponent } from './dialog-box/dialog-box.component';
+import { AutoescolaService } from './shared/autoescola.service';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     ModuloInstrutorComponent,
     LoginComponent,
     MainNavComponent,
+    AdminClassesComponent,
+    DialogBoxComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,9 +82,11 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MainNavRoutingModule,
     MatExpansionModule,
     MatSelectModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDialogModule,
   ],
-  providers: [],
+  entryComponents: [DialogBoxComponent],
+  providers: [AutoescolaService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

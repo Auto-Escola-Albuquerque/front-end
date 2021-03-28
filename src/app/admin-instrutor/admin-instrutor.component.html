@@ -1,67 +1,46 @@
-<!-- <form [formGroup]="myForm" class="my-form">
-    <div class="form-group">
-        <label for="nome">Nome</label>
-        <input type="text" class="form-control" name="nome" id="nome" required>
-    </div>
-
-    <div class="form-group">
-        <label for="tipo">Tipo</label>
-        <select class="form-control" name="tipo" id="tipo">
-            <option value="1">Prático</option>
-            <option value="2">Teórico</option>
-            <option value="3">Prático e Teórico</option>
-        </select>
-    </div>
-
-    <div class="form-group">
-        <label for="CPF">CPF</label>
-        <input type="text" class="form-control" name="cpf" id="cpf" required>
-    </div>
-    <div>
-        <input type="submit" class="btn btn-primary mt-4" value="Salvar">
-
-    </div>
-
-</form> -->
-
 <div class="card">
-    <mat-card class='card-header'><h4>Administração de Instrutores</h4></mat-card>
+    <mat-card class='card-header'>
+        <h4>Administração de Instrutores</h4>
+    </mat-card>
 
-    <form [formGroup]="formInstructor" class="my-form">
-        <mat-form-field appearance="outline">
-            <mat-label>Nome</mat-label>
-            <input matInput formControlName="name" required>
-            <mat-error *ngIf="formInstructor.invalid">{{getErrorMessage()}}</mat-error>
-        </mat-form-field>
+    <div class="content">
+        <form [formGroup]="formInstructor" class="my-form">
+            <mat-form-field appearance="legacy" class="col-lg-5">
+                <mat-label>Nome</mat-label>
+                <input matInput formControlName="name" required>
+                <mat-error *ngIf="formInstructor.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>CPF</mat-label>
-            <input matInput formControlName="cpf" required>
-            <mat-error *ngIf="formInstructor.invalid">{{getErrorMessage()}}</mat-error>
-        </mat-form-field>
+            <mat-form-field appearance="legacy" class="col-lg-5">
+                <mat-label>CPF</mat-label>
+                <input matInput formControlName="cpf" required>
+                <mat-error *ngIf="formInstructor.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
 
-        <mat-form-field appearance="outline" class="col-lg-12">
-            <mat-label>Tipo</mat-label>
-            <mat-select formControlName="type">
-                <mat-option value="one">Prático</mat-option>
-                <mat-option value="two">Teórico</mat-option>
-                <mat-option value="three">Ambos</mat-option>
-            </mat-select>
-            <mat-error *ngIf="formInstructor.invalid">{{getErrorMessage()}}</mat-error>
-        </mat-form-field>
+            <mat-form-field appearance="legacy" class="col-lg-5">
+                <mat-label>Tipo</mat-label>
+                <mat-select formControlName="type">
+                    <mat-option value="one">Prático</mat-option>
+                    <mat-option value="two">Teórico</mat-option>
+                    <mat-option value="three">Ambos</mat-option>
+                </mat-select>
+                <mat-error *ngIf="formInstructor.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
 
-        <mat-form-field appearance="outline" class="col-lg-12">
-            <mat-label>Cidade</mat-label>
-            <mat-select formControlName="city">
-                <mat-option value="one">Viçosa</mat-option>
-                <mat-option value="two">Maribondo</mat-option>
-                <mat-option value="three">Atalaia</mat-option>
-            </mat-select>
-            <mat-error *ngIf="formInstructor.invalid">{{getErrorMessage()}}</mat-error>
-        </mat-form-field>
+            <mat-form-field appearance="legacy" class="col-lg-5">
+                <mat-label>Cidade</mat-label>
+                <mat-select formControlName="city">
+                    <mat-option value="one">Viçosa</mat-option>
+                    <mat-option value="two">Maribondo</mat-option>
+                    <mat-option value="three">Atalaia</mat-option>
+                </mat-select>
+                <mat-error *ngIf="formInstructor.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </form>
+    </div>
 
-        <div class="form-element">
-            <button mat-raised-button color="primary" type="submit" class="button" [disabled]="disabledButton()">Salvar</button>
-          </div>
-    </form>
+</div>
+
+<div class="form-element">
+    <button mat-raised-button color="primary" type="submit" class="button" [disabled]="disabledButton()">Salvar</button>
 </div>
