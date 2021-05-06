@@ -16,7 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, 
+import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
     MatSortModule, MatTableModule, MatButtonModule } from "@angular/material";
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -38,6 +38,7 @@ import { AdminClassesComponent } from './admin-classes/admin-classes.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 import { AutoescolaService } from './shared/autoescola.service';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import { AutoescolaService } from './shared/autoescola.service';
     MatSelectModule,
     MatGridListModule,
     MatDialogModule,
+    MatCheckboxModule,
   ],
   entryComponents: [DialogBoxComponent],
   providers: [AutoescolaService],

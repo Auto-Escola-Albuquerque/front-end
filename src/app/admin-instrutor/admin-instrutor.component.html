@@ -36,11 +36,11 @@
                 </mat-select>
                 <mat-error *ngIf="formInstructor.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
+          <button mat-raised-button color="primary" type="submit"  (click)="onSubmit()" class="button" [disabled]="disabledButton()">Salvar</button>
+
         </form>
     </div>
 
 </div>
 
-<div class="form-element">
-    <button mat-raised-button color="primary" type="submit" class="button" [disabled]="disabledButton()">Salvar</button>
-</div>
+

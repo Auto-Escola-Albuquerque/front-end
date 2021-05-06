@@ -25,11 +25,13 @@
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
             </mat-form-field>
+
+            <button mat-raised-button color="primary" (click)="onClickSubmit()" type="submit" class="button">Salvar</button>
+
         </form>
     </div>
-   
 </div>
 
-<div class="form-element">
+<!-- <div class="form-element">
     <button mat-raised-button color="primary" type="submit" class="button" [disabled]="disabledButton()">Salvar</button>
-</div>
+</div> -->

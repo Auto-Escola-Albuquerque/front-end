@@ -10,21 +10,21 @@ import { AutoescolaService } from '../shared/autoescola.service';
     styleUrls: ['./admin-funcionarios.component.scss']
 })
 export class AdminFuncionariosComponent implements OnInit {
-    formEmployee: FormGroup;
+
+    formEmployee = new FormGroup({
+        name: new FormControl('', [Validators.required]),
+        cpf: new FormControl('', [Validators.required, Validators.maxLength(11)]),
+        password: new FormControl('', [Validators.required]),
+    });
+    
     employees = [];
     employee = new Employee();
-    constructor(private autoescolaService: AutoescolaService) { }
 
-    ngOnInit() {
-        this.formEmployee = new FormGroup({
-            name: new FormControl(this.employee.name, [Validators.required]),
-            cpf: new FormControl(this.employee.cpf, [Validators.required, Validators.maxLength(11)]),
-            password: new FormControl(this.employee.password, [Validators.required]),
-        })
+
+    constructor(private autoescolaService: AutoescolaService) {
     }
 
-    createEmployee() {
-        console.log(this.autoescolaService.postEmployee(this.employee))
+    ngOnInit() {
     }
 
     getEmployeeList() {
@@ -43,5 +43,15 @@ export class AdminFuncionariosComponent implements OnInit {
         if(this.employee.name && this.employee.cpf)
             return true;
         return false;    
+    }
+
+    onClickSubmit() {
+        let employee = new Employee();
+        
+        employee.name = this.formEmployee.value.name;
+        employee.cpf = this.formEmployee.value.cpf;
+        employee.password = this.formEmployee.value.password;
+
+        this.autoescolaService.postEmployee(employee);
     }
 }

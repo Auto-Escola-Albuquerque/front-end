@@ -29,7 +29,7 @@ export class TurmasComponent implements OnInit {
     @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
     @ViewChild(MatPaginator, { static: false }) matPaginator: MatPaginator;
     @ViewChild(MatSort, { static: false }) sort: MatSort;
-    
+
 
     students = [];
     displayedColumns = ['N°', 'name', 'cpf', 'registrationDate', 'update']
@@ -37,56 +37,56 @@ export class TurmasComponent implements OnInit {
 
     constructor() {
 
-        let s1 = new Student();
-        let s2 = new Student();
-        let s3 = new Student();
-        let s4 = new Student();
-        let s5 = new Student();
-
-
-        s1.name = 'Arthur Sávio Bernardo de Melo'
-        s1.cpf = '12345678912'
-        s1.gender = true
-        s1.registrationDate = new Date('01/16/2021')
-
-   
-        s2.name = 'Guilherme Volney Mota Amaral'
-        s2.cpf = '12345678912'
-        s2.gender = true
-        s2.registrationDate = new Date('02/15/2021')
-
-
-     
-        s3.name = 'Leonardo Freire de Albuquerque'
-        s3.cpf = '12345678912'
-        s3.gender = true
-        s3.registrationDate = new Date('04/20/2021')
-
-
-     
-        s4.name = 'Severiano Alexandre Magno de Lima'
-        s4.cpf = '12345678912'
-        s4.gender = true
-        s4.registrationDate = new Date('07/04/2021')
-
-     
-        s5.name = 'Galo Cego Magno de Lima'
-        s5.cpf = '12345678912'
-        s5.gender = true
-        s5.registrationDate = new Date('07/04/2021')
-
-        for(let i = 0; i < 10; i++) {
-            this.students.push(s1, s2, s3, s4, s5);
-        }
+        // let s1 = new Student();
+        // let s2 = new Student();
+        // let s3 = new Student();
+        // let s4 = new Student();
+        // let s5 = new Student();
+        //
+        //
+        // s1.name = 'Arthur Sávio Bernardo de Melo'
+        // s1.cpf = '12345678912'
+        // s1.gender = true
+        // s1.registrationDate = new Date('01/16/2021')
+        //
+        //
+        // s2.name = 'Guilherme Volney Mota Amaral'
+        // s2.cpf = '12345678912'
+        // s2.gender = true
+        // s2.registrationDate = new Date('02/15/2021')
+        //
+        //
+        //
+        // s3.name = 'Leonardo Freire de Albuquerque'
+        // s3.cpf = '12345678912'
+        // s3.gender = true
+        // s3.registrationDate = new Date('04/20/2021')
+        //
+        //
+        //
+        // s4.name = 'Severiano Alexandre Magno de Lima'
+        // s4.cpf = '12345678912'
+        // s4.gender = true
+        // s4.registrationDate = new Date('07/04/2021')
+        //
+        //
+        // s5.name = 'Galo Cego Magno de Lima'
+        // s5.cpf = '12345678912'
+        // s5.gender = true
+        // s5.registrationDate = new Date('07/04/2021')
+        //
+        // for(let i = 0; i < 10; i++) {
+        //     this.students.push(s1, s2, s3, s4, s5);
+        // }
     }
 
     ngOnInit() {
-        let i = 0
-        for(let std of this.students) {
-            std.seqNo = i;
-            i++;
-        }
-        this.dataSource = new MatTableDataSource(this.students);
+        // let i = 0
+        // for(let std of this.students) {
+        //     std.seqNo = i;
+        //     i++;
+        // }
+        // this.dataSource = new MatTableDataSource(this.students);
     }
 
     ngAfterViewInit() {

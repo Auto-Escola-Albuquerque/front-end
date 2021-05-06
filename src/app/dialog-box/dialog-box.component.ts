@@ -9,14 +9,18 @@ import { Student } from '../shared/student/student.model';
 })
 export class DialogBoxComponent implements OnInit {
     action: string;
-    local_data: any;
+    localData: any;
     index: number;
+    type: String;
+    obj: any;
 
     constructor(public dialogRef: MatDialogRef<DialogBoxComponent>,
-        @Optional() @Inject(MAT_DIALOG_DATA) public data: Student) {
-        this.local_data = data
-        this.index = this.local_data.index;
-        this.action = this.local_data.action;
+        @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
+        this.localData = data;
+        this.obj = this.localData.obj;
+        this.index = this.localData.index;
+        this.action = this.localData.action;
+        this.type = this.localData.type;
     }
 
     ngOnInit() {
@@ -24,7 +28,7 @@ export class DialogBoxComponent implements OnInit {
 
     doAction() {
         this.dialogRef.close({
-            event: this.action, data: this.local_data
+            event: this.action, data: this.obj
         });
     }
 
