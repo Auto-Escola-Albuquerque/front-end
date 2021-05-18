@@ -39,6 +39,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 import { AutoescolaService } from './shared/autoescola.service';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { AdminAlunosDialogComponent } from './admin-alunos-dialog/admin-alunos-dialog.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MainNavComponent,
     AdminClassesComponent,
     DialogBoxComponent,
+    AdminAlunosDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,7 +89,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatDialogModule,
     MatCheckboxModule,
   ],
-  entryComponents: [DialogBoxComponent],
+  entryComponents: [DialogBoxComponent, AdminAlunosDialogComponent],
   providers: [AutoescolaService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

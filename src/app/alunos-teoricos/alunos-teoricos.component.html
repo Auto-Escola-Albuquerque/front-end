@@ -5,6 +5,7 @@
         <mat-form-field fxFlex="40%">
             <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filtrar Aluno">
         </mat-form-field>
+
     </div>
 
     <div class="mat-elevation-z8 data-table">
@@ -87,7 +88,6 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
         </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20, 30]"></mat-paginator>
     </div>
     <button mat-raised-button color="primary" (click)='onSubmit()' type="submit" class="button">Salvar</button>
 

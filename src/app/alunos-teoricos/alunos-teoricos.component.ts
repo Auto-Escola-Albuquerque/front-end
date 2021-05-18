@@ -6,7 +6,6 @@ import { Student } from '../shared/student/student.model';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { AutoescolaService } from '../shared/autoescola.service';
-import {map} from 'rxjs/operators';
 
 export const MY_DATE_FORMATS = {
     parse: {
@@ -34,7 +33,6 @@ export class AlunosTeoricosComponent implements OnInit {
     dataSource: any;
 
     @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
-    @ViewChild(MatPaginator, { static: false }) matPaginator: MatPaginator;
     @ViewChild(MatSort, { static: false }) sort: MatSort;
 
     constructor(public dialog: MatDialog, private autoescolaservice: AutoescolaService,
@@ -54,16 +52,10 @@ export class AlunosTeoricosComponent implements OnInit {
             this.students[i].subjects = this.subjects[i];
         }
         this.dataSource = new MatTableDataSource(this.students);
-        this.dataSource.paginator = this.matPaginator;
         this.dataSource.sort = this.sort;
-        this.ngAfterViewInit();
       });
     }
-
-    ngAfterViewInit() {
-        this.matPaginator._intl.itemsPerPageLabel = "Quantidade de alunos por página";
-    }
-    doFilter(value: String) {
+    doFilter(value: string) {
         this.dataSource.filter = value.trim().toLowerCase();
     }
     openDialog(obj: Student, index: number) {
@@ -78,7 +70,7 @@ export class AlunosTeoricosComponent implements OnInit {
     }
     updateRowData(obj: any) {
         this.dataSource = this.dataSource.data.filter((value, key) => {
-            if(value.id == obj.id) {
+            if (value.id === obj.id) {
                 value.subjects = obj.subjects;
             }
             return true;

@@ -1,0 +1,97 @@
+<div>
+  <h1 mat-dialog-title>Adicionar Novo Aluno</h1>
+  <div mat-dialog-content>
+    <div class="content">
+      <form [formGroup]="formStudent" class="my-form" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="legacy" class="col-lg-5">
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="name" required>
+<!--          <mat-error *ngIf="formStudent.invalid">{{getErrorMessage()}}</mat-error>-->
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="col-lg-5">
+          <mat-label>CPF</mat-label>
+          <input matInput formControlName="cpf" required>
+<!--          <mat-error *ngIf="formStudent.invalid">{{getErrorMessage()}}</mat-error>-->
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="col-lg-5">
+          <mat-label>Data de Matrícula</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="registration" required>
+<!--          <mat-error *ngIf="formStudent.invalid">{{getErrorMessage()}}</mat-error>-->
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="col-lg-5">
+          <mat-label>Sexo</mat-label>
+          <mat-select formControlName="gender" required>
+            <mat-option value="1">Masculino</mat-option>
+            <mat-option value="0">Feminino</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="col-lg-5">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="col-lg-5">
+          <mat-label>Telefone</mat-label>
+          <input matInput formControlName="phone" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="col-lg-5" >
+          <mat-label>Aulas Práticas</mat-label>
+          <input matInput formControlName="practicalFines" [disabled]="true">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="col-lg-5">
+          <mat-label>Aulas Teóricas</mat-label>
+          <input matInput formControlName="theoreticalFines">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="col-lg-5">
+          <mat-label>Aulas Diúrnas</mat-label>
+          <input matInput formControlName="dayClasses">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="col-lg-5">
+          <mat-label>Aulas Noturnas</mat-label>
+          <input matInput formControlName="nightClasses">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="col-lg-5">
+          <mat-label>Direção Defensiva</mat-label>
+          <input matInput formControlName="defensiveDriving">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="col-lg-5">
+          <mat-label>Legislação</mat-label>
+          <input matInput formControlName="legislation">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="col-lg-5">
+          <mat-label>Mecânica</mat-label>
+          <input matInput formControlName="mechanics">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="col-lg-5">
+          <mat-label>Meio Ambiente</mat-label>
+          <input matInput formControlName="environment">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="col-lg-5">
+          <mat-label>Primeiros Socorros</mat-label>
+          <input matInput formControlName="firstAid">
+        </mat-form-field>
+
+      </form>
+    </div>
+  </div>
+  <div mat-dialog-actions class="buttons">
+    <button mat-button (click)="onSubmit()" mat-flat-button color="warn">Salvar</button>
+    <button mat-button (click)="closeDialog()">Cancelar</button>
+  </div>
+</div>
+

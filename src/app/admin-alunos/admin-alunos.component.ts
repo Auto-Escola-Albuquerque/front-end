@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild, Inject} from '@angular/core';
 import { Student } from '../shared/student/student.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AutoescolaService } from '../shared/autoescola.service';
 import * as moment from 'moment';
 import {Subjects} from '../shared/subjects/subjects.model';
 import {Subject} from 'rxjs';
-
+import { MatPaginator, MatTableDataSource, MatTable, MatDialog } from '@angular/material';
+import { MatSort } from '@angular/material/sort';
+import {AdminAlunosDialogComponent} from '../admin-alunos-dialog/admin-alunos-dialog.component';
 
 
 @Component({
@@ -31,11 +33,16 @@ export class AdminAlunosComponent implements OnInit {
         legislation: new FormControl(0),
         mechanics: new FormControl(0),
     });
+
+    displayedColumns = ['N°', 'name', 'cpf', 'registrationDate'];
+    dataSource: any;
     students = [];
     student = new Student();
-    hide = true;
 
-    constructor(public autoescolaService: AutoescolaService) {
+    @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
+    @ViewChild(MatSort, { static: false }) sort: MatSort;
+
+    constructor(public autoescolaservice: AutoescolaService, private changeDetectorRefs: ChangeDetectorRef, public dialog: MatDialog) {
         if  (this.formStudent.value.name.length === 0) {
             this.formStudent.controls.dayClasses.disable();
             this.formStudent.controls.nightClasses.disable();
@@ -50,6 +57,16 @@ export class AdminAlunosComponent implements OnInit {
     }
 
     ngOnInit() {
+      this.autoescolaservice.getSubjectsList().subscribe();
+
+      this.autoescolaservice.getStudentList().subscribe(data => {
+        this.students = data;
+        for (let i = 0; i < this.students.length; i++){
+          this.students[i].seqNo = i + 1;
+        }
+        this.dataSource = new MatTableDataSource(this.students);
+        this.dataSource.sort = this.sort;
+      });
     }
 
     getErrorMessage() {
@@ -60,30 +77,14 @@ export class AdminAlunosComponent implements OnInit {
         return this.formStudent.hasError('maxLength') ? 'CPF deve conter apenas 11 dígitos' : '';
     }
 
-    disabledButton() {
-        if (this.student.name == undefined || this.student.cpf == undefined || this.student.registrationDate == undefined) {
-            return true;
-        }
-        return false;
+    doFilter(value: string) {
+      this.dataSource.filter = value.trim().toLowerCase();
     }
 
-    onSubmit() {
-        try {
-            const student = new Student();
-            student.name = this.formStudent.value.name;
-            student.cpf = this.formStudent.value.cpf;
-            student.registrationDate = moment(this.formStudent.value.registration).format('MM-DD-YYYY');
-            student.gender = this.formStudent.value.gender;
-            student.email = this.formStudent.value.email;
-            student.phone = this.formStudent.value.phone;
-            student.theoreticalFines = this.formStudent.value.theoreticalFines;
-            student.practicalFines = this.formStudent.value.practicalFines;
-            student.dayClasses = this.formStudent.value.dayClasses;
-            student.nightClasses = this.formStudent.value.nightClasses;
-            student.subjects = null;
-            this.autoescolaService.postStudent(student);
-        } catch (error) {
-            console.log('Erro ao vincular matéria ao aluno');
-        }
+    openDialog(obj: any) {
+      const dialogRef = this.dialog.open(AdminAlunosDialogComponent, {
+        width: '50%',
+        data: {data: obj}
+      });
     }
 }
