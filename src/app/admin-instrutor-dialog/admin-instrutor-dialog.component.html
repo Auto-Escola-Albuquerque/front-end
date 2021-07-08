@@ -1,0 +1,50 @@
+<div class="card">
+  <mat-card class='card-header'>
+    <h4>Adicionar novo instrutor</h4>
+  </mat-card>
+
+  <div class="content">
+    <form [formGroup]="formInstructor" class="my-form">
+      <mat-form-field appearance="legacy" class="col-lg-5">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="name" required>
+<!--        <mat-error *ngIf="formInstructor.invalid">{{getErrorMessage()}}</mat-error>-->
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="col-lg-5">
+        <mat-label>CPF</mat-label>
+        <input matInput formControlName="cpf" required>
+<!--        <mat-error *ngIf="formInstructor.invalid">{{getErrorMessage()}}</mat-error>-->
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="col-lg-5">
+        <mat-label>Tipo</mat-label>
+        <mat-select formControlName="type">
+          <mat-option value="Prático">Prático</mat-option>
+          <mat-option value="Teórico">Teórico</mat-option>
+          <mat-option value="Ambos">Ambos</mat-option>
+        </mat-select>
+<!--        <mat-error *ngIf="formInstructor.invalid">{{getErrorMessage()}}</mat-error>-->
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="col-lg-5">
+        <mat-label>Cidade</mat-label>
+        <mat-select formControlName="city">
+          <mat-option value="Viçosa">Viçosa</mat-option>
+          <mat-option value="Maribondo">Maribondo</mat-option>
+          <mat-option value="Atalaia">Atalaia</mat-option>
+        </mat-select>
+<!--        <mat-error *ngIf="formInstructor.invalid">{{getErrorMessage()}}</mat-error>-->
+      </mat-form-field>
+    </form>
+  </div>
+  <div mat-dialog-actions class="buttons">
+    <button mat-button (click)="onSubmit()" mat-flat-button color="warn">Salvar</button>
+    <button mat-button (click)="closeDialog()">Cancelar</button>
+  </div>
+</div>
+
+
+
+
+

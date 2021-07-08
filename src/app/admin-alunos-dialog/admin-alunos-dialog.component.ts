@@ -37,7 +37,6 @@ export class AdminAlunosDialogComponent implements OnInit {
   index: number;
   type: string;
   obj: any;
-  students = [];
   student = new Student();
 
   constructor(public dialogRef: MatDialogRef<DialogBoxComponent>, @Optional() @Inject(MAT_DIALOG_DATA) public data: any,

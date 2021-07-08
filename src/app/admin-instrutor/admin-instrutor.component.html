@@ -1,46 +1,45 @@
-<div class="card">
-    <mat-card class='card-header'>
-        <h4>Administração de Instrutores</h4>
-    </mat-card>
+<h2>Administração de Instrutor</h2>
+<div fxLayout fxLayoutAlign="center center">
+  <mat-form-field fxFlex="40%">
+    <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filtrar Instrutor">
+  </mat-form-field>
+</div>
+<div class="mat-elevation-z8 data-table">
+  <table mat-table matSort class="table" [dataSource]="dataSource">
+    <ng-container matColumnDef="N°">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> N° </th>
+      <td mat-cell *matCellDef="let instructor" class="gray-element"> {{instructor.seq}} </td>
+    </ng-container>
 
-    <div class="content">
-        <form [formGroup]="formInstructor" class="my-form">
-            <mat-form-field appearance="legacy" class="col-lg-5">
-                <mat-label>Nome</mat-label>
-                <input matInput formControlName="name" required>
-                <mat-error *ngIf="formInstructor.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+      <td mat-cell *matCellDef="let instructor" class="gray-element"> {{instructor.name}}
+      </td>
+    </ng-container>
 
-            <mat-form-field appearance="legacy" class="col-lg-5">
-                <mat-label>CPF</mat-label>
-                <input matInput formControlName="cpf" required>
-                <mat-error *ngIf="formInstructor.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
+    <ng-container matColumnDef="cpf">
+      <th mat-header-cell *matHeaderCellDef> CPF </th>
+      <td mat-cell *matCellDef="let instructor" class="gray-element"> {{instructor.cpf}} </td>
+    </ng-container>
 
-            <mat-form-field appearance="legacy" class="col-lg-5">
-                <mat-label>Tipo</mat-label>
-                <mat-select formControlName="type">
-                    <mat-option value="one">Prático</mat-option>
-                    <mat-option value="two">Teórico</mat-option>
-                    <mat-option value="three">Ambos</mat-option>
-                </mat-select>
-                <mat-error *ngIf="formInstructor.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Tipo </th>
+      <td mat-cell *matCellDef="let instructor" class="gray-element"> {{instructor.type}} </td>
+    </ng-container>
 
-            <mat-form-field appearance="legacy" class="col-lg-5">
-                <mat-label>Cidade</mat-label>
-                <mat-select formControlName="city">
-                    <mat-option value="one">Viçosa</mat-option>
-                    <mat-option value="two">Maribondo</mat-option>
-                    <mat-option value="three">Atalaia</mat-option>
-                </mat-select>
-                <mat-error *ngIf="formInstructor.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-          <button mat-raised-button color="primary" type="submit"  (click)="onSubmit()" class="button" [disabled]="disabledButton()">Salvar</button>
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> Excluir Instrutor </th>
+      <td mat-cell *matCellDef="let instructor">
+        <button mat-icon-button (click)="openDeleteDialog(instructor)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-        </form>
-    </div>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
+  </table>
 </div>
 
-
+<button mat-raised-button color="primary" type="submit" (click)="openDialog()" class="button">Adicionar novo instrutor</button>

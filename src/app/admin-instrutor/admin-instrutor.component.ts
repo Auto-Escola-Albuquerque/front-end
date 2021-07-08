@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { Instructor } from '../shared/instructor/instructor.model';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AutoescolaService } from '../shared/autoescola.service';
-
+import {MatDialog, MatTable, MatTableDataSource} from '@angular/material';
+import {MatSort} from '@angular/material/sort';
+import {AdminInstrutorDialogComponent} from '../admin-instrutor-dialog/admin-instrutor-dialog.component';
+import {DeleteDialogComponent} from '../delete-dialog/delete-dialog.component';
 
 @Component({
     selector: 'app-admin-instrutor',
@@ -10,41 +12,38 @@ import { AutoescolaService } from '../shared/autoescola.service';
     styleUrls: ['./admin-instrutor.component.scss']
 })
 export class AdminInstrutorComponent implements OnInit {
-    formInstructor = new FormGroup({
-      name: new FormControl('', [Validators.required]),
-      cpf: new FormControl('', [Validators.required, Validators.maxLength(11)]),
-      type: new FormControl('', [Validators.required]),
-      city: new FormControl('', [Validators.required])
-    });
+    displayedColumns = ['N°', 'name', 'cpf', 'type', 'delete'];
+    dataSource: any;
+    @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
+    @ViewChild(MatSort, { static: false }) sort: MatSort;
     instructors = [];
-    instructor = new Instructor();
 
-    constructor(private autoescolaService: AutoescolaService) { }
+    constructor(public autoescolaservice: AutoescolaService, public dialog: MatDialog) { }
 
     ngOnInit() {
-
-    }
-
-
-    onSubmit() {
-      const instructor = new Instructor();
-      instructor.name = this.formInstructor.value.name;
-      instructor.cpf = this.formInstructor.value.cpf;
-      instructor.type = this.formInstructor.value.type;
-
-      this.autoescolaService.postInstructor(instructor);
-    }
-
-    disabledButton() {
-
-    }
-
-    getErrorMessage() {
-        if (this.formInstructor.hasError('required')) {
-            return 'Este campo não pode ser vazio';
+      this.autoescolaservice.getInstructorList().subscribe(data => {
+        this.instructors = data;
+        for (let i = 0; i < this.instructors.length; i++){
+          this.instructors[i].seq = i + 1;
         }
-
-        return this.formInstructor.hasError('maxLength') ? 'CPF deve conter apenas 11 dígitos' : '';
+        this.dataSource = new MatTableDataSource(this.instructors);
+        this.dataSource.sort = this.sort;
+      });
+    }
+    doFilter(value: string) {
+      this.dataSource.filter = value.trim().toLowerCase();
+    }
+    openDialog(obj: any) {
+      const dialogRef = this.dialog.open(AdminInstrutorDialogComponent, {
+        width: '50%',
+        data: {data: obj}
+      });
+    }
+    openDeleteDialog(obj: any) {
+      const dialogRef = this.dialog.open(DeleteDialogComponent, {
+        width: '20%',
+        data: {data : obj, type : 'admin-instrutor-teorico'}
+      });
     }
 
 }

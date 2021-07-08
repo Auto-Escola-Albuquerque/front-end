@@ -1,0 +1,43 @@
+<div class="card">
+  <mat-card class='card-header'>
+    <h4>Adicionar novo funcionário</h4>
+  </mat-card>
+
+  <div class="content">
+    <form [formGroup]="formEmployee" class="my-form">
+      <mat-form-field appearance="legacy" class="col-lg-5">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="username" required>
+<!--        <mat-error *ngIf="formEmployee.invalid">{{getErrorMessage()}}</mat-error>-->
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="col-lg-5">
+        <mat-label>Tipo</mat-label>
+        <mat-select formControlName="isAdmin">
+          <mat-option value="True">Gerente</mat-option>
+          <mat-option value="False">Funcionário</mat-option>
+        </mat-select>
+        <!--        <mat-error *ngIf="formInstructor.invalid">{{getErrorMessage()}}</mat-error>-->
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="col-lg-5">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" required>
+<!--        <mat-error *ngIf="formEmployee.invalid">{{getErrorMessage()}}</mat-error>-->
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="col-lg-5">
+        <mat-label>Senha</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
+    <div mat-dialog-actions class="buttons">
+      <button mat-button (click)="onSubmit()" mat-flat-button color="warn" [class.spinner]="loading" [disabled]="loading">Salvar</button>
+      <button mat-button (click)="closeDialog()">Cancelar</button>
+    </div>
+  </div>
+</div>

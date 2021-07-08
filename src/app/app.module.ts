@@ -40,6 +40,12 @@ import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 import { AutoescolaService } from './shared/autoescola.service';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AdminAlunosDialogComponent } from './admin-alunos-dialog/admin-alunos-dialog.component';
+import { AdminInstrutorDialogComponent } from './admin-instrutor-dialog/admin-instrutor-dialog.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { TrafficTicketComponent } from './traffic-ticket/traffic-ticket.component';
+import { TrafficTicketBoxComponent } from './traffic-ticket-box/traffic-ticket-box.component';
+import { AdminFuncionariosDialogComponent } from './admin-funcionarios-dialog/admin-funcionarios-dialog.component';
+import { InstrutorTeoricoComponent } from './instrutor-teorico/instrutor-teorico.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +64,12 @@ import { AdminAlunosDialogComponent } from './admin-alunos-dialog/admin-alunos-d
     AdminClassesComponent,
     DialogBoxComponent,
     AdminAlunosDialogComponent,
+    AdminInstrutorDialogComponent,
+    DeleteDialogComponent,
+    TrafficTicketComponent,
+    TrafficTicketBoxComponent,
+    AdminFuncionariosDialogComponent,
+    InstrutorTeoricoComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,7 +101,8 @@ import { AdminAlunosDialogComponent } from './admin-alunos-dialog/admin-alunos-d
     MatDialogModule,
     MatCheckboxModule,
   ],
-  entryComponents: [DialogBoxComponent, AdminAlunosDialogComponent],
+  entryComponents: [DialogBoxComponent, AdminAlunosDialogComponent, AdminInstrutorDialogComponent, DeleteDialogComponent, TrafficTicketBoxComponent,
+  AdminFuncionariosDialogComponent],
   providers: [AutoescolaService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

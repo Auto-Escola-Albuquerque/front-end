@@ -11,10 +11,12 @@ import { TurmasComponent } from '../turmas/turmas.component';
 import { TabelaPraticaComponent } from '../tabela-pratica/tabela-pratica.component';
 import { MainNavComponent } from './main-nav.component';
 import { AdminClassesComponent } from '../admin-classes/admin-classes.component';
+import {TrafficTicketComponent} from '../traffic-ticket/traffic-ticket.component';
+import {InstrutorTeoricoComponent} from '../instrutor-teorico/instrutor-teorico.component';
 
 const routes: Routes = [
     {
-        path: '', 
+        path: '',
         component: MainNavComponent,
         children: [
             {path: 'admin-alunos', component: AdminAlunosComponent},
@@ -27,6 +29,8 @@ const routes: Routes = [
             {path: 'turmas', component: TurmasComponent},
             {path: 'tabela-pratica', component: TabelaPraticaComponent},
             {path: 'turmas', component: TurmasComponent},
+            {path: 'multas', component: TrafficTicketComponent},
+            {path: 'instrutor-teorico', component: InstrutorTeoricoComponent}
         ]
     }
 ];

@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { DrivingSchool } from './driving-school/driving-school.model';
 import {Instructor} from './instructor/instructor.model';
 import {Subjects} from './subjects/subjects.model';
+import {Trafficticket} from './traffic-ticket/trafficticket.model';
 
 @Injectable()
 export class AutoescolaService {
@@ -18,7 +19,7 @@ export class AutoescolaService {
     }
 
     getStudent(id: string) {
-        return this.authHttp.get(`${this.url}/estudante/${id}/`);
+        return this.authHttp.get(`${this.url}/estudante/${id}`);
     }
 
     getStudentList(): Observable <Student[]> {
@@ -26,17 +27,39 @@ export class AutoescolaService {
     }
 
     getEmployee(id: string) {
-        return this.authHttp.get(`${this.url}/usuario/${id}/`);
+        return this.authHttp.get(`${this.url}/usuario/${id}`);
+    }
+
+    getEmployeeList(): Observable <Employee[]> {
+      return this.authHttp.get<Employee[]>(`${this.url}/usuario/`);
+    }
+
+    getInstructor(id: string) {
+        return this.authHttp.get(`${this.url}/instrutor/${id}/`);
+    }
+
+    getInstructorList(): Observable<Instructor[]>{
+        return this.authHttp.get<Instructor[]>(`${this.url}/instrutor/`);
+    }
+
+    getTheoreticalInstructorList(): Observable<Instructor[]>{
+        return this.authHttp.get<Instructor[]>(`${this.url}/instrutor-teorico/`);
+    }
+
+    getPracticalInstructorList(): Observable<Instructor[]> {
+        return this.authHttp.get<Instructor[]>(`${this.url}/instrutor-pratico/`);
+    }
+
+    getTrafficTicket(id: string) {
+        return this.authHttp.get(`${this.url}/multas/${id}`);
+    }
+
+    getTrafficTicketList() {
+        return this.authHttp.get(`${this.url}/multas/`);
     }
 
     getClass(id: string) {
         return this.authHttp.get(`${this.url}/class/${id}/`);
-    }
-
-    getEmployeeList() {
-        this.authHttp.get(`${this.url}/usuario/`).subscribe(data => {
-            return data;
-        });
     }
 
     getDrivingSchool(id: string) {
@@ -75,6 +98,18 @@ export class AutoescolaService {
         });
     }
 
+    postEmployee(employee: Employee) {
+      this.authHttp.post(`${this.url}/usuario/`, employee).subscribe(data => {
+        return data;
+      });
+    }
+
+    postTrafficTicket(traffic: Trafficticket) {
+        this.authHttp.post(`${this.url}/multas/`, traffic).subscribe(data => {
+          return data;
+        });
+    }
+
     postDrivingSchool(school: DrivingSchool) {
         this.authHttp.post(`${this.url}/driving-school/`, school).subscribe(data => {
             console.log(data)
@@ -87,12 +122,6 @@ export class AutoescolaService {
         id = data;
       })).subscribe();
       return id;
-    }
-
-    postEmployee(employee: Employee) {
-        return this.authHttp.post(`${this.url}/usuario/`, employee).subscribe(data => {
-            console.log(data);
-        });
     }
 
     postClass(cls: Class) {
@@ -125,24 +154,33 @@ export class AutoescolaService {
         return this.authHttp.put(`${this.url}/class/`, cls);
     }
 
-    deleteStudent(id: string) {
-        const headers = { 'id': id }
-
-        return this.authHttp.delete(`${this.url}/student/`, { headers })
-            .subscribe(() => status = "Delete Successful");
+    deleteStudent(student: Student) {
+        return this.authHttp.delete(`${this.url}/estudante/${student.id}`).subscribe();
     }
 
-    deleteEmployee(id: string) {
-        const headers = { 'id': id }
-
-        return this.authHttp.delete(`${this.url}/user/`, { headers })
-            .subscribe(() => status = "Delete Successful");
+    deleteTrafficTicket(ticket: Trafficticket) {
+        return this.authHttp.delete(`${this.url}/multas/${ticket.id}`).subscribe();
     }
 
-    deleteClass(id: string) {
-        const headers = { 'id': id }
-
-        return this.authHttp.delete(`${this.url}/class/`, { headers })
-            .subscribe(() => status = "Delete Successful");
+    deleteEmployee(employee: Employee) {
+        return this.authHttp.delete(`${this.url}/usuario/${employee.id}`).subscribe();
     }
+
+    deleteInstructor(instructor: Instructor) {
+        return this.authHttp.delete(`${this.url}/instrutor/${instructor.id}`).subscribe();
+    }
+
+    // deleteEmployee(id: string) {
+    //     const headers = { 'id': id }
+    //
+    //     return this.authHttp.delete(`${this.url}/user/`, { headers })
+    //         .subscribe(() => status = "Delete Successful");
+    // }
+    //
+    // deleteClass(id: string) {
+    //     const headers = { 'id': id }
+    //
+    //     return this.authHttp.delete(`${this.url}/class/`, { headers })
+    //         .subscribe(() => status = "Delete Successful");
+    // }
 }

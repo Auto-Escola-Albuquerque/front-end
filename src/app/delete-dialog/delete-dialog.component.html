@@ -1,0 +1,24 @@
+<div>
+  <div *ngIf="this.type == 'admin-alunos'">
+    <h1 mat-dialog-title>Deseja excluir o aluno?</h1>
+    <p mat-dialog-content >{{this.localData.name}}</p>
+  </div>
+  <div *ngIf="this.type == 'multas'">
+    <h1 mat-dialog-title>Deseja excluir a multa?</h1>
+<!--    <p mat-dialog-content >{{this.localData.name}}</p>-->
+  </div>
+  <div *ngIf="this.type == 'admin-funcionarios'">
+    <h1 mat-dialog-title>Deseja excluir o funcionário?</h1>
+    <!--    <p mat-dialog-content >{{this.localData.name}}</p>-->
+  </div>
+  <div *ngIf="this.type == 'admin-instrutor-teorico'">
+    <h1 mat-dialog-title>Deseja excluir o instrutor?</h1>
+    <!--    <p mat-dialog-content >{{this.localData.name}}</p>-->
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-flat-button type="submit" color="warn" (click)="onSubmit()">Deletar</button>
+    <button mat-button (click)="closeDialog()">Cancelar</button>
+  </div>
+</div>
+
+

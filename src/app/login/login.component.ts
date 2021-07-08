@@ -23,11 +23,11 @@ export class LoginComponent implements OnInit {
   createForm() {
     let employee = new Employee();
     this.loginForm = new FormGroup({
-        cpf: new FormControl(employee.cpf),
+        cpf: new FormControl(employee.email),
         password: new FormControl(employee.password)
     });
   }
 
-  
+
 
 }

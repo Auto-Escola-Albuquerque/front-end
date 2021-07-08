@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Employee } from '../shared/employee/employee.model';
 import { AutoescolaService } from '../shared/autoescola.service';
+import {AdminAlunosDialogComponent} from '../admin-alunos-dialog/admin-alunos-dialog.component';
+import {DeleteDialogComponent} from '../delete-dialog/delete-dialog.component';
+import {MatDialog, MatTable, MatTableDataSource} from '@angular/material';
+import {MatSort} from '@angular/material/sort';
+import {AdminFuncionariosDialogComponent} from '../admin-funcionarios-dialog/admin-funcionarios-dialog.component';
 
 
 @Component({
@@ -10,48 +15,54 @@ import { AutoescolaService } from '../shared/autoescola.service';
     styleUrls: ['./admin-funcionarios.component.scss']
 })
 export class AdminFuncionariosComponent implements OnInit {
-
-    formEmployee = new FormGroup({
-        name: new FormControl('', [Validators.required]),
-        cpf: new FormControl('', [Validators.required, Validators.maxLength(11)]),
-        password: new FormControl('', [Validators.required]),
-    });
-    
+    displayedColumns = ['N°', 'username', 'email', 'delete'];
+    dataSource: any;
     employees = [];
     employee = new Employee();
 
+    @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
+    @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-    constructor(private autoescolaService: AutoescolaService) {
+    constructor(private autoescolaService: AutoescolaService, public dialog: MatDialog) {
     }
 
     ngOnInit() {
-    }
-
-    getEmployeeList() {
-        // this.employees = this.autoescolaService.getEmployeeList();
-    }
-
-    getErrorMessage() {
-        if(this.formEmployee.hasError('required')) {
-            return 'Este campo não pode ser vazio';
+      this.autoescolaService.getEmployeeList().subscribe(data => {
+        this.employees = data;
+        for (let i = 0; i < this.employees.length; i++){
+          this.employees[i].seq = i + 1;
         }
-
-        return this.formEmployee.hasError('maxLength') ? 'CPF deve conter apenas 11 dígitos':'';
+        this.dataSource = new MatTableDataSource(this.employees);
+        this.dataSource.sort = this.sort;
+      });
     }
 
-    disabledButton() {
-        if(this.employee.name && this.employee.cpf)
-            return true;
-        return false;    
+    doFilter(value: string) {
+      this.dataSource.filter = value.trim().toLowerCase();
+    }
+    openDialog(obj: any) {
+      const dialogRef = this.dialog.open(AdminFuncionariosDialogComponent, {
+        width: '50%',
+        data: {data: obj}
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.updateRowData(result.data);
+      });
+    }
+    updateRowData(obj: any) {
+      this.dataSource = this.dataSource.data.filter((value, key) => {
+        if (value.id === obj.id) {
+          value.subjects = obj.subjects;
+        }
+        return true;
+      });
     }
 
-    onClickSubmit() {
-        let employee = new Employee();
-        
-        employee.name = this.formEmployee.value.name;
-        employee.cpf = this.formEmployee.value.cpf;
-        employee.password = this.formEmployee.value.password;
-
-        this.autoescolaService.postEmployee(employee);
-    }
+  openDeleteDialog(obj: any) {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '20%',
+      data: {data : obj, type : 'admin-funcionarios'}
+    });
+  }
 }
