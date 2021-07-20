@@ -1,0 +1,52 @@
+<div class="card">
+  <mat-card class='card-header'>
+    <h4  mat-dialog-title>Adicionar nova aula</h4>
+  </mat-card>
+
+  <div class="content">
+    <form [formGroup]="formInstructorClass" class="my-form">
+
+      <mat-form-field appearance="legacy" class="col-lg-5">
+        <mat-label>Instrutor</mat-label>
+        <mat-select formControlName="instructor" required [(ngModel)]="this.formInstructorClass.value.instructor">
+          <div *ngFor="let i of this.instructors">
+            <mat-option [value]="i">{{i.name}}</mat-option>
+          </div>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="col-lg-5">
+        <mat-label>Quantidade</mat-label>
+        <input matInput formControlName="count" required>
+        <!--        <mat-error *ngIf="formInstructor.invalid">{{getErrorMessage()}}</mat-error>-->
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="col-lg-5">
+        <mat-label>Tipo</mat-label>
+        <mat-select formControlName="type">
+          <mat-option value="Prático">Prática</mat-option>
+          <mat-option value="Teórico">Teórica</mat-option>
+        </mat-select>
+        <!--        <mat-error *ngIf="formInstructor.invalid">{{getErrorMessage()}}</mat-error>-->
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="col-lg-5">
+        <mat-label>Data da aula</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date" required>
+        <!--          <mat-error *ngIf="formStudent.invalid">{{getErrorMessage()}}</mat-error>-->
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+    </form>
+  </div>
+  <div mat-dialog-actions class="buttons">
+    <button mat-button (click)="onSubmit()" mat-flat-button color="warn">Salvar</button>
+    <button mat-button (click)="closeDialog()">Cancelar</button>
+  </div>
+</div>
+
+
+
+
+

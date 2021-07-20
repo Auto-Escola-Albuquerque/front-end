@@ -1,45 +1,59 @@
-<div *ngFor="let inst of this.instructor">
-  <h3>{{inst.name}}</h3>
-
-    <!--<div class="mat-elevation-z8 data-table">-->
-    <!--  <table mat-table matSort class="table" [dataSource]="dataSource">-->
-    <!--    <ng-container matColumnDef="N°">-->
-    <!--      <th mat-header-cell *matHeaderCellDef mat-sort-header> N° </th>-->
-    <!--      <td mat-cell *matCellDef="let instructor" class="gray-element"> {{instructor.seq}} </td>-->
-    <!--    </ng-container>-->
-
-    <!--    <ng-container matColumnDef="name">-->
-    <!--      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>-->
-    <!--      <td mat-cell *matCellDef="let instructor" class="gray-element"> {{instructor.name}}-->
-    <!--      </td>-->
-    <!--    </ng-container>-->
-
-    <!--    <ng-container matColumnDef="cpf">-->
-    <!--      <th mat-header-cell *matHeaderCellDef> CPF </th>-->
-    <!--      <td mat-cell *matCellDef="let instructor" class="gray-element"> {{instructor.cpf}} </td>-->
-    <!--    </ng-container>-->
-
-    <!--    <ng-container matColumnDef="type">-->
-    <!--      <th mat-header-cell *matHeaderCellDef> Tipo </th>-->
-    <!--      <td mat-cell *matCellDef="let instructor" class="gray-element"> {{instructor.type}} </td>-->
-    <!--    </ng-container>-->
-
-    <!--    <ng-container matColumnDef="delete">-->
-    <!--      <th mat-header-cell *matHeaderCellDef> Excluir Instrutor </th>-->
-    <!--      <td mat-cell *matCellDef="let instructor">-->
-    <!--        <button mat-icon-button (click)="openDeleteDialog(instructor)">-->
-    <!--          <mat-icon>delete</mat-icon>-->
-    <!--        </button>-->
-    <!--      </td>-->
-    <!--    </ng-container>-->
-
-    <!--    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
-    <!--    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
-
-    <!--  </table>-->
-<!--  </div>-->
-
-    <button mat-raised-button color="primary" type="submit" (click)="openDialog()" class="button">Adicionar nova aula</button>
+<h3>{{this.instructor.name}}</h3>
+  <div class="mat-elevation-z8 data-table" *ngIf="this.instructor.type == 'Teórico' || this.instructor.type == 'Ambos'">
+    <h4>Aulas Teóricas</h4>
+    <table mat-table matSort class="table" [dataSource]="dataSourceP">
+      <ng-container matColumnDef="count">
+        <th mat-header-cell *matHeaderCellDef> Quantidade </th>
+        <td mat-cell *matCellDef="let instructorClass" class="gray-element"> {{instructorClass.count}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Data </th>
+        <td mat-cell *matCellDef="let instructorClass" class="gray-element"> {{instructorClass.date}} </td>
+      </ng-container>
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef> Excluir Aula </th>
+        <td mat-cell *matCellDef="let instructorClass">
+          <button mat-icon-button (click)="openDeleteDialog(instructorClass)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <h5>{{this.tSum}}</h5>
 </div>
+
+<div class="mat-elevation-z8 data-table" *ngIf="this.instructor.type == 'Prático' || this.instructor.type == 'Ambos'">
+  <h4>Aulas Práticas</h4>
+  <table mat-table matSort class="table" [dataSource]="dataSourceP">
+    <ng-container matColumnDef="count">
+      <th mat-header-cell *matHeaderCellDef> Quantidade </th>
+      <td mat-cell *matCellDef="let instructorClass" class="gray-element"> {{instructorClass.count}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Data </th>
+      <td mat-cell *matCellDef="let instructorClass" class="gray-element"> {{instructorClass.date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> Excluir Aula </th>
+      <td mat-cell *matCellDef="let instructorClass">
+        <button mat-icon-button (click)="openDeleteDialog(instructorClass)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <h5>Total de Aulas: {{this.pSum}}</h5>
+</div>
+
+<button mat-raised-button color="primary" type="submit" (click)="openDialog()" class="button">Adicionar nova aula</button>
+
 
 

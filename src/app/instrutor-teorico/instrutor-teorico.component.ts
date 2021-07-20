@@ -1,10 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {AutoescolaService} from '../shared/autoescola.service';
-import {AdminFuncionariosDialogComponent} from '../admin-funcionarios-dialog/admin-funcionarios-dialog.component';
 import {DeleteDialogComponent} from '../delete-dialog/delete-dialog.component';
-import {MatDialog, MatTable} from '@angular/material';
-import {Employee} from '../shared/employee/employee.model';
-import {MatSort} from '@angular/material/sort';
+import {MatDialog, MatTable, MatTableDataSource} from '@angular/material';
+import {InstructorClassDialogComponent} from '../instructor-class-dialog/instructor-class-dialog.component';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-instrutor-teorico',
@@ -12,25 +11,43 @@ import {MatSort} from '@angular/material/sort';
   styleUrls: ['./instrutor-teorico.component.scss']
 })
 export class InstrutorTeoricoComponent implements OnInit {
-  instructor = [];
+  instructorClassP = [];
+  instructorClassT = [];
+  instructor: any;
   displayedColumns = ['count', 'date', 'delete'];
-  dataSource: any;
-  @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  dataSourceP: any;
+  dataSourceT: any;
+  id: any;
+  tSum = 0;
+  pSum = 0;
 
-  constructor(private autoescolaservice: AutoescolaService, public dialog: MatDialog) { }
+  @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
+
+  constructor(private autoescolaservice: AutoescolaService, public dialog: MatDialog,  private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.autoescolaservice.getTheoreticalInstructorList().subscribe(data => {
-        this.instructor = data;
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.autoescolaservice.getInstructor(this.id).subscribe(data => {
+      this.instructor = data;
+    });
+    this.autoescolaservice.getInstructorClass(this.id).subscribe(data => {
+        this.instructorClassP = data;
+        for (const i of data) {
+            if (i.type === 'Teórica') {
+              this.instructorClassP.push(i);
+              this.tSum += i.count;
+            } else {
+              this.instructorClassT.push(i);
+              this.pSum += i.count;
+            }
+        }
+        this.dataSourceP = new MatTableDataSource(this.instructorClassP);
+        this.dataSourceT = new MatTableDataSource(this.instructorClassT);
     });
   }
 
-  doFilter(value: string) {
-    this.dataSource.filter = value.trim().toLowerCase();
-  }
   openDialog(obj: any) {
-    const dialogRef = this.dialog.open(AdminFuncionariosDialogComponent, {
+    const dialogRef = this.dialog.open(InstructorClassDialogComponent, {
       width: '50%',
       data: {data: obj}
     });
@@ -40,18 +57,18 @@ export class InstrutorTeoricoComponent implements OnInit {
     });
   }
   updateRowData(obj: any) {
-    this.dataSource = this.dataSource.data.filter((value, key) => {
-      if (value.id === obj.id) {
-        value.subjects = obj.subjects;
-      }
-      return true;
-    });
+    // this.dataSource = this.dataSource.data.filter((value, key) => {
+    //   if (value.id === obj.id) {
+    //     value.subjects = obj.subjects;
+    //   }
+    //   return true;
+    // });
   }
 
   openDeleteDialog(obj: any) {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '20%',
-      data: {data : obj, type : 'admin-funcionarios'}
+      data: {data : obj, type : 'admin-instructor-class'}
     });
   }
 

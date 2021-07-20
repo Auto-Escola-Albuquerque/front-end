@@ -30,7 +30,7 @@ const routes: Routes = [
             {path: 'tabela-pratica', component: TabelaPraticaComponent},
             {path: 'turmas', component: TurmasComponent},
             {path: 'multas', component: TrafficTicketComponent},
-            {path: 'instrutor-teorico', component: InstrutorTeoricoComponent}
+            {path: 'instrutor/:id', component: InstrutorTeoricoComponent}
         ]
     }
 ];

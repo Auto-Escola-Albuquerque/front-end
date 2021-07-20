@@ -9,6 +9,7 @@ import { DrivingSchool } from './driving-school/driving-school.model';
 import {Instructor} from './instructor/instructor.model';
 import {Subjects} from './subjects/subjects.model';
 import {Trafficticket} from './traffic-ticket/trafficticket.model';
+import {InstructorClass} from './instructor-class/instructor-class.model';
 
 @Injectable()
 export class AutoescolaService {
@@ -35,10 +36,10 @@ export class AutoescolaService {
     }
 
     getInstructor(id: string) {
-        return this.authHttp.get(`${this.url}/instrutor/${id}/`);
+        return this.authHttp.get(`${this.url}/instrutor/${id}`);
     }
 
-    getInstructorList(): Observable<Instructor[]>{
+    getInstructorList(): Observable<Instructor[]> {
         return this.authHttp.get<Instructor[]>(`${this.url}/instrutor/`);
     }
 
@@ -48,6 +49,10 @@ export class AutoescolaService {
 
     getPracticalInstructorList(): Observable<Instructor[]> {
         return this.authHttp.get<Instructor[]>(`${this.url}/instrutor-pratico/`);
+    }
+
+    getInstructorClass(id: number): Observable<InstructorClass[]> {
+      return this.authHttp.get<InstructorClass[]>(`${this.url}/aula-instrutor/${id}`);
     }
 
     getTrafficTicket(id: string) {
@@ -132,6 +137,10 @@ export class AutoescolaService {
         return this.authHttp.post(`${this.url}/instrutor/`, instructor).subscribe(data => {
           console.log(data);
         });
+    }
+
+    postInstructorClass(instructorClass: InstructorClass) {
+        return this.authHttp.post(`${this.url}/aula-instrutor/`, instructorClass).subscribe();
     }
 
     patchStudentCheck(student: Student) {

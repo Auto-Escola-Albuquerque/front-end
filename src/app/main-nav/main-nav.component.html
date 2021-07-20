@@ -27,7 +27,7 @@
         <mat-nav-list dense>
             <mat-expansion-panel [class.mat-elevation-z0]="true">
                 <mat-expansion-panel-header>
-                    Módulo Prático
+                    Prático
                 </mat-expansion-panel-header>
                 <mat-nav-list dense>
                     <a mat-list-item routerLink="#">
@@ -44,7 +44,7 @@
 
             <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
                 <mat-expansion-panel-header>
-                    Módulo Teórico
+                    Teórico
                 </mat-expansion-panel-header>
                 <mat-nav-list dense>
                     <a mat-list-item routerLink="/alunos-teoricos">
@@ -58,15 +58,18 @@
 
             <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
                 <mat-expansion-panel-header>
-                    Módulo Instrutor
+                    Instrutor
                 </mat-expansion-panel-header>
-                <mat-nav-list dense>
-                    <a mat-list-item routerLink="/instrutor-pratico">
-                        Instrutor Prático
-                    </a>
-                    <a mat-list-item routerLink="/instrutor-teorico">
-                        Instrutor Teórico
-                    </a>
+                <mat-nav-list dense *ngFor="let instructor of this.instructors">
+<!--                    <a mat-list-item routerLink="/instrutor-pratico">-->
+<!--                        Instrutor Prático-->
+<!--                    </a>-->
+<!--                    <a mat-list-item routerLink="/instrutor-teorico">-->
+<!--                        Instrutor Teórico-->
+<!--                    </a>-->
+                      <a mat-list-item [routerLink]="['/instrutor', instructor.id]">
+                          {{instructor.name}}
+                      </a>
                 </mat-nav-list>
             </mat-expansion-panel>
 

@@ -46,6 +46,7 @@ import { TrafficTicketComponent } from './traffic-ticket/traffic-ticket.componen
 import { TrafficTicketBoxComponent } from './traffic-ticket-box/traffic-ticket-box.component';
 import { AdminFuncionariosDialogComponent } from './admin-funcionarios-dialog/admin-funcionarios-dialog.component';
 import { InstrutorTeoricoComponent } from './instrutor-teorico/instrutor-teorico.component';
+import { InstructorClassDialogComponent } from './instructor-class-dialog/instructor-class-dialog.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { InstrutorTeoricoComponent } from './instrutor-teorico/instrutor-teorico
     TrafficTicketBoxComponent,
     AdminFuncionariosDialogComponent,
     InstrutorTeoricoComponent,
+    InstructorClassDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,8 +103,8 @@ import { InstrutorTeoricoComponent } from './instrutor-teorico/instrutor-teorico
     MatDialogModule,
     MatCheckboxModule,
   ],
-  entryComponents: [DialogBoxComponent, AdminAlunosDialogComponent, AdminInstrutorDialogComponent, DeleteDialogComponent, TrafficTicketBoxComponent,
-  AdminFuncionariosDialogComponent],
+  entryComponents: [DialogBoxComponent, AdminAlunosDialogComponent, AdminInstrutorDialogComponent, DeleteDialogComponent,
+      TrafficTicketBoxComponent, InstructorClassDialogComponent, AdminFuncionariosDialogComponent],
   providers: [AutoescolaService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

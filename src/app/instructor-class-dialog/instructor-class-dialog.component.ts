@@ -1,0 +1,52 @@
+import {Component, Inject, OnInit, Optional} from '@angular/core';
+import {Trafficticket} from '../shared/traffic-ticket/trafficticket.model';
+import * as moment from 'moment';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
+import {AutoescolaService} from '../shared/autoescola.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {InstructorClass} from '../shared/instructor-class/instructor-class.model';
+
+@Component({
+  selector: 'app-instructor-class-dialog',
+  templateUrl: './instructor-class-dialog.component.html',
+  styleUrls: ['./instructor-class-dialog.component.scss']
+})
+export class InstructorClassDialogComponent implements OnInit {
+
+  formInstructorClass = new FormGroup({
+    instructor: new FormControl('', [Validators.required]),
+    count: new FormControl('', [Validators.required]),
+    type: new FormControl('', [Validators.required]),
+    date: new FormControl('', [Validators.required]),
+  });
+
+  action: string;
+  localData: any;
+  index: number;
+  type: string;
+  obj: any;
+  instructors = [];
+
+  constructor(public dialogRef: MatDialogRef<DialogBoxComponent>, @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+              public autoescolaservice: AutoescolaService) {
+      this.autoescolaservice.getInstructorList().subscribe(data => {
+          this.instructors = data;
+      });
+  }
+  ngOnInit() {
+  }
+  closeDialog() {
+    this.dialogRef.close({ event: 'Cancel' });
+  }
+  onSubmit() {
+    const instructorClass = new InstructorClass();
+    instructorClass.instructor = this.formInstructorClass.value.instructor.id;
+    instructorClass.count = this.formInstructorClass.value.count;
+    instructorClass.date = moment(this.formInstructorClass.value.date).format('MM-DD-YYYY');
+    instructorClass.type = this.formInstructorClass.value.type;
+    this.autoescolaservice.postInstructorClass(instructorClass);
+    this.dialogRef.close();
+  }
+
+}
