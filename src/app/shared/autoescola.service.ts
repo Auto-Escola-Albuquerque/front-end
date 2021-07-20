@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Student } from './student/student.model';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Employee } from './employee/employee.model';
 import { Class } from './class/class.model';
 import {from, Observable} from 'rxjs';
@@ -18,6 +18,7 @@ export class AutoescolaService {
     constructor(private authHttp: HttpClient) {
 
     }
+
 
     getStudent(id: string) {
         return this.authHttp.get(`${this.url}/estudante/${id}`);
@@ -140,7 +141,7 @@ export class AutoescolaService {
     }
 
     postInstructorClass(instructorClass: InstructorClass) {
-        return this.authHttp.post(`${this.url}/aula-instrutor/`, instructorClass).subscribe();
+        return this.authHttp.post(`${this.url}/aula-instrutor/`, instructorClass);
     }
 
     patchStudentCheck(student: Student) {
@@ -177,6 +178,14 @@ export class AutoescolaService {
 
     deleteInstructor(instructor: Instructor) {
         return this.authHttp.delete(`${this.url}/instrutor/${instructor.id}`).subscribe();
+    }
+
+    deleteInstructorClass(instructorClass: InstructorClass) {
+      return this.authHttp.delete(`${this.url}/aula-instrutor/${instructorClass.id}`).subscribe();
+    }
+
+    deleteAllInstructorClass() {
+        return this.authHttp.delete(`${this.url}/aula-instrutor/`).subscribe();
     }
 
     // deleteEmployee(id: string) {

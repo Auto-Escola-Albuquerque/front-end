@@ -6,6 +6,8 @@ import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
 import {AutoescolaService} from '../shared/autoescola.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {InstructorClass} from '../shared/instructor-class/instructor-class.model';
+import {SnackBarService} from '../shared/snack-bar.service';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-instructor-class-dialog',
@@ -29,7 +31,7 @@ export class InstructorClassDialogComponent implements OnInit {
   instructors = [];
 
   constructor(public dialogRef: MatDialogRef<DialogBoxComponent>, @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
-              public autoescolaservice: AutoescolaService) {
+              public autoescolaservice: AutoescolaService, private ns: SnackBarService) {
       this.autoescolaservice.getInstructorList().subscribe(data => {
           this.instructors = data;
       });
@@ -45,8 +47,21 @@ export class InstructorClassDialogComponent implements OnInit {
     instructorClass.count = this.formInstructorClass.value.count;
     instructorClass.date = moment(this.formInstructorClass.value.date).format('MM-DD-YYYY');
     instructorClass.type = this.formInstructorClass.value.type;
-    this.autoescolaservice.postInstructorClass(instructorClass);
+    let response = 'empty';
+    this.autoescolaservice.postInstructorClass(instructorClass).subscribe(
+      data => {
+        this.success();
+      },
+      error => {
+        this.error();
+      });
     this.dialogRef.close();
   }
+  success() {
+    this.ns.success('Aula adicionada com sucesso!');
+  }
 
+  error() {
+    this.ns.error('Erro ao adicionar aula ao instrutor. Tente novamente!');
+  }
 }

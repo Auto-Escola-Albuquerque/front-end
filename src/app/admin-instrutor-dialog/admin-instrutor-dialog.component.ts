@@ -39,16 +39,14 @@ export class AdminInstrutorDialogComponent implements OnInit {
   ngOnInit() {
   }
   onSubmit() {
-    try {
       const instructor = new Instructor();
       instructor.name = this.formInstructor.value.name;
       instructor.cpf = this.formInstructor.value.cpf;
       instructor.type = this.formInstructor.value.type;
       instructor.city = null;
+
+      let response;
       this.autoescolaservice.postInstructor(instructor);
       this.dialogRef.close();
-    } catch (error) {
-      console.log('Erro ao criar instância de instrutor-teorico');
-    }
   }
 }

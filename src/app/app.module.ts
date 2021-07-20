@@ -47,6 +47,9 @@ import { TrafficTicketBoxComponent } from './traffic-ticket-box/traffic-ticket-b
 import { AdminFuncionariosDialogComponent } from './admin-funcionarios-dialog/admin-funcionarios-dialog.component';
 import { InstrutorTeoricoComponent } from './instrutor-teorico/instrutor-teorico.component';
 import { InstructorClassDialogComponent } from './instructor-class-dialog/instructor-class-dialog.component';
+import {SnackBarService} from './shared/snack-bar.service';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { DummyComponent } from './dummy/dummy.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +75,7 @@ import { InstructorClassDialogComponent } from './instructor-class-dialog/instru
     AdminFuncionariosDialogComponent,
     InstrutorTeoricoComponent,
     InstructorClassDialogComponent,
+    DummyComponent,
   ],
   imports: [
     BrowserModule,
@@ -102,10 +106,11 @@ import { InstructorClassDialogComponent } from './instructor-class-dialog/instru
     MatGridListModule,
     MatDialogModule,
     MatCheckboxModule,
+    MatSnackBarModule
   ],
   entryComponents: [DialogBoxComponent, AdminAlunosDialogComponent, AdminInstrutorDialogComponent, DeleteDialogComponent,
       TrafficTicketBoxComponent, InstructorClassDialogComponent, AdminFuncionariosDialogComponent],
-  providers: [AutoescolaService],
+  providers: [AutoescolaService, SnackBarService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

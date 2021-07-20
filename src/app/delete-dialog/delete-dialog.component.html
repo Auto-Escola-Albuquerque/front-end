@@ -15,6 +15,10 @@
     <h1 mat-dialog-title>Deseja excluir o instrutor?</h1>
     <!--    <p mat-dialog-content >{{this.localData.name}}</p>-->
   </div>
+  <div *ngIf="this.type == 'admin-aula-instrutor'">
+    <h1 mat-dialog-title>Deseja excluir aula do instrutor?</h1>
+    <!--    <p mat-dialog-content >{{this.localData.name}}</p>-->
+  </div>
   <div mat-dialog-actions>
     <button mat-button mat-flat-button type="submit" color="warn" (click)="onSubmit()">Deletar</button>
     <button mat-button (click)="closeDialog()">Cancelar</button>

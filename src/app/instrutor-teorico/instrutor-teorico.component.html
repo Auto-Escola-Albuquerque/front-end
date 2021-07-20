@@ -1,6 +1,5 @@
-<h3>{{this.instructor.name}}</h3>
   <div class="mat-elevation-z8 data-table" *ngIf="this.instructor.type == 'Teórico' || this.instructor.type == 'Ambos'">
-    <h4>Aulas Teóricas</h4>
+    <h4>Instrutor: {{this.instructor.name}} - Aulas Teóricas</h4>
     <table mat-table matSort class="table" [dataSource]="dataSourceP">
       <ng-container matColumnDef="count">
         <th mat-header-cell *matHeaderCellDef> Quantidade </th>
@@ -22,11 +21,11 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <h5>{{this.tSum}}</h5>
+    <h5>Total de Aulas: {{this.tSum}}</h5>
 </div>
 
 <div class="mat-elevation-z8 data-table" *ngIf="this.instructor.type == 'Prático' || this.instructor.type == 'Ambos'">
-  <h4>Aulas Práticas</h4>
+  <h4>Instrutor: {{this.instructor.name}} - Aulas Práticas</h4>
   <table mat-table matSort class="table" [dataSource]="dataSourceP">
     <ng-container matColumnDef="count">
       <th mat-header-cell *matHeaderCellDef> Quantidade </th>

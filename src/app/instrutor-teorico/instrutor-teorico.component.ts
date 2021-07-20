@@ -4,6 +4,7 @@ import {DeleteDialogComponent} from '../delete-dialog/delete-dialog.component';
 import {MatDialog, MatTable, MatTableDataSource} from '@angular/material';
 import {InstructorClassDialogComponent} from '../instructor-class-dialog/instructor-class-dialog.component';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import {SnackBarService} from '../shared/snack-bar.service';
 
 @Component({
   selector: 'app-instrutor-teorico',
@@ -13,6 +14,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 export class InstrutorTeoricoComponent implements OnInit {
   instructorClassP = [];
   instructorClassT = [];
+  instructorClass = [];
   instructor: any;
   displayedColumns = ['count', 'date', 'delete'];
   dataSourceP: any;
@@ -23,7 +25,8 @@ export class InstrutorTeoricoComponent implements OnInit {
 
   @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
 
-  constructor(private autoescolaservice: AutoescolaService, public dialog: MatDialog,  private route: ActivatedRoute) {}
+  constructor(private autoescolaservice: AutoescolaService, public dialog: MatDialog,  private route: ActivatedRoute,
+              private ns: SnackBarService) {}
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -31,13 +34,16 @@ export class InstrutorTeoricoComponent implements OnInit {
       this.instructor = data;
     });
     this.autoescolaservice.getInstructorClass(this.id).subscribe(data => {
-        this.instructorClassP = data;
-        for (const i of data) {
+        this.instructorClass = data;
+        if (this.instructorClass.length === 0) {
+            this.error();
+        }
+        for (const i of this.instructorClass) {
             if (i.type === 'Teórica') {
-              this.instructorClassP.push(i);
-              this.tSum += i.count;
-            } else {
               this.instructorClassT.push(i);
+              this.tSum += i.count;
+            } else if (i.type === 'Prática') {
+              this.instructorClassP.push(i);
               this.pSum += i.count;
             }
         }
@@ -65,10 +71,18 @@ export class InstrutorTeoricoComponent implements OnInit {
     // });
   }
 
+  success() {
+      this.ns.success('Teste');
+  }
+
+  error() {
+      this.ns.error('Este instrutor ainda não possui aulas cadastradas');
+  }
+
   openDeleteDialog(obj: any) {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '20%',
-      data: {data : obj, type : 'admin-instructor-class'}
+      data: {data : obj, type : 'admin-aula-instrutor'}
     });
   }
 
