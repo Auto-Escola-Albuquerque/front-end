@@ -61,12 +61,12 @@
                     Instrutor
                 </mat-expansion-panel-header>
                 <mat-nav-list dense *ngFor="let instructor of this.instructors">
-<!--                      <a mat-list-item [routerLink]="['/instrutor', instructor.id]">-->
-<!--                          {{instructor.name}}-->
-<!--                      </a>-->
-                  <a mat-list-item (click)="changeRoute('/instrutor/' + instructor.id)">
-                    {{instructor.name}}
-                  </a>
+                      <a mat-list-item [routerLink]="['/instrutor', instructor.id]">
+                          {{instructor.name}}
+                      </a>
+<!--                  <a mat-list-item (click)="changeRoute('/instrutor/' + instructor.id)">-->
+<!--                    {{instructor.name}}-->
+<!--                  </a>-->
 
                 </mat-nav-list>
             </mat-expansion-panel>

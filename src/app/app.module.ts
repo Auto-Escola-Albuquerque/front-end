@@ -49,7 +49,6 @@ import { InstrutorTeoricoComponent } from './instrutor-teorico/instrutor-teorico
 import { InstructorClassDialogComponent } from './instructor-class-dialog/instructor-class-dialog.component';
 import {SnackBarService} from './shared/snack-bar.service';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { DummyComponent } from './dummy/dummy.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +74,6 @@ import { DummyComponent } from './dummy/dummy.component';
     AdminFuncionariosDialogComponent,
     InstrutorTeoricoComponent,
     InstructorClassDialogComponent,
-    DummyComponent,
   ],
   imports: [
     BrowserModule,

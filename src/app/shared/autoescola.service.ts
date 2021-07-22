@@ -188,17 +188,4 @@ export class AutoescolaService {
         return this.authHttp.delete(`${this.url}/aula-instrutor/`).subscribe();
     }
 
-    // deleteEmployee(id: string) {
-    //     const headers = { 'id': id }
-    //
-    //     return this.authHttp.delete(`${this.url}/user/`, { headers })
-    //         .subscribe(() => status = "Delete Successful");
-    // }
-    //
-    // deleteClass(id: string) {
-    //     const headers = { 'id': id }
-    //
-    //     return this.authHttp.delete(`${this.url}/class/`, { headers })
-    //         .subscribe(() => status = "Delete Successful");
-    // }
 }
