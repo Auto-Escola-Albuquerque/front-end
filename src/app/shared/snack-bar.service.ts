@@ -14,6 +14,11 @@ export class SnackBarService {
       horizontalPosition: 'center',
       verticalPosition: 'top'
   };
+  config2: MatSnackBarConfig = {
+      duration: 5000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top'
+  };
   success(msg: string) {
     this.config['panelClass'] = ['success', 'notification'];
     this.snackBar.open(msg,'', this.config);
@@ -22,5 +27,10 @@ export class SnackBarService {
   error(msg: string) {
     this.config['panelClass'] = ['error', 'notification'];
     this.snackBar.open(msg,'', this.config);
+  }
+
+  empty(msg: string) {
+    this.config['panelClass'] = ['notification'];
+    this.snackBar.open(msg, '', this.config2);
   }
 }

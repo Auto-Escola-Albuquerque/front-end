@@ -44,12 +44,12 @@ export class AutoescolaService {
         return this.authHttp.get<Instructor[]>(`${this.url}/instrutor/`);
     }
 
-    getTheoreticalInstructorList(): Observable<Instructor[]>{
-        return this.authHttp.get<Instructor[]>(`${this.url}/instrutor-teorico/`);
+    getTheoreticalInstructorClassList(id: string) {
+        return this.authHttp.get(`${this.url}/aula-teorica-instrutor/${id}`);
     }
 
-    getPracticalInstructorList(): Observable<Instructor[]> {
-        return this.authHttp.get<Instructor[]>(`${this.url}/instrutor-pratico/`);
+    getPracticalInstructorClassList(id: string) {
+        return this.authHttp.get(`${this.url}/aula-pratica-instrutor/${id}`);
     }
 
     getInstructorClass(id: number): Observable<InstructorClass[]> {

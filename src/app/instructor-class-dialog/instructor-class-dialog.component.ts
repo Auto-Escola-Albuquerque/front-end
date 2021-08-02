@@ -19,32 +19,36 @@ export class InstructorClassDialogComponent implements OnInit {
   formInstructorClass = new FormGroup({
     instructor: new FormControl('', [Validators.required]),
     count: new FormControl('', [Validators.required]),
+    check: new FormControl('', [Validators.required]),
     type: new FormControl('', [Validators.required]),
     date: new FormControl('', [Validators.required]),
   });
-
+  id: number;
   action: string;
   localData: any;
   index: number;
   type: string;
-  obj: any;
   instructors = [];
 
   constructor(public dialogRef: MatDialogRef<DialogBoxComponent>, @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
               public autoescolaservice: AutoescolaService, private ns: SnackBarService) {
-      this.autoescolaservice.getInstructorList().subscribe(data => {
-          this.instructors = data;
-      });
+    this.type = this.data.data.type === 'Prático' ? 'Prática' : 'Teórica';
+    this.formInstructorClass.patchValue({
+      instructor: this.data.data.name,
+      type: this.type,
+    });
   }
   ngOnInit() {
   }
   closeDialog() {
     this.dialogRef.close({ event: 'Cancel' });
   }
+
   onSubmit() {
     const instructorClass = new InstructorClass();
-    instructorClass.instructor = this.formInstructorClass.value.instructor.id;
+    instructorClass.instructor = this.data.data.id;
     instructorClass.count = this.formInstructorClass.value.count;
+    instructorClass.check = this.formInstructorClass.value.check;
     instructorClass.date = moment(this.formInstructorClass.value.date).format('MM-DD-YYYY');
     instructorClass.type = this.formInstructorClass.value.type;
     let response = 'empty';
@@ -60,8 +64,7 @@ export class InstructorClassDialogComponent implements OnInit {
   success() {
     this.ns.success('Aula adicionada com sucesso!');
   }
-
   error() {
-    this.ns.error('Erro ao adicionar aula ao instrutor. Tente novamente!');
+    this.ns.error('Erro ao adicionar aula ao instrutor. Verifique os campos e tente novamente!');
   }
 }

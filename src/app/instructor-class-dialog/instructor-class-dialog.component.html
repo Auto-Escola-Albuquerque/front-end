@@ -8,11 +8,7 @@
 
       <mat-form-field appearance="legacy" class="col-lg-5">
         <mat-label>Instrutor</mat-label>
-        <mat-select formControlName="instructor" required [(ngModel)]="this.formInstructorClass.value.instructor">
-          <div *ngFor="let i of this.instructors">
-            <mat-option [value]="i">{{i.name}}</mat-option>
-          </div>
-        </mat-select>
+          <input matInput formControlName="instructor" readonly>
       </mat-form-field>
 
       <mat-form-field appearance="legacy" class="col-lg-5">
@@ -21,13 +17,16 @@
         <!--        <mat-error *ngIf="formInstructor.invalid">{{getErrorMessage()}}</mat-error>-->
       </mat-form-field>
 
-      <mat-form-field appearance="legacy" class="col-lg-5">
+      <mat-form-field appearance="legacy" class="col-lg-5" *ngIf="this.data.data.type === 'Ambos'">
         <mat-label>Tipo</mat-label>
         <mat-select formControlName="type">
           <mat-option value="Prática">Prática</mat-option>
           <mat-option value="Teórica">Teórica</mat-option>
         </mat-select>
-        <!--        <mat-error *ngIf="formInstructor.invalid">{{getErrorMessage()}}</mat-error>-->
+      </mat-form-field>
+      <mat-form-field appearance="legacy" class="col-lg-5" *ngIf="this.data.data.type !== 'Ambos'">
+        <mat-label>Tipo</mat-label>
+        <input matInput formControlName="type" readonly>
       </mat-form-field>
 
       <mat-form-field appearance="legacy" class="col-lg-5">

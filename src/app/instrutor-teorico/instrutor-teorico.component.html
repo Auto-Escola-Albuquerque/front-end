@@ -1,21 +1,26 @@
   <div class="mat-elevation-z8 data-table" *ngIf="this.instructor.type == 'Teórico' || this.instructor.type == 'Ambos'">
     <h4>Instrutor: {{this.instructor.name}} - Aulas Teóricas</h4>
-    <table mat-table matSort class="table" [dataSource]="dataSourceP">
+
+    <table mat-table matSort class="table" [dataSource]="dataSourceT">
       <ng-container matColumnDef="count">
         <th mat-header-cell *matHeaderCellDef> Quantidade </th>
         <td mat-cell *matCellDef="let instructorClass" class="gray-element"> {{instructorClass.count}}
         </td>
       </ng-container>
       <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef> Data </th>
-        <td mat-cell *matCellDef="let instructorClass" class="gray-element"> {{instructorClass.date}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Data </th>
+        <td mat-cell *matCellDef="let instructorClass" class="gray-element"> {{instructorClass.date  | date: 'dd/MM/yyyy'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="check">
+        <th mat-header-cell *matHeaderCellDef> Check </th>
+        <td mat-cell *matCellDef="let instructorClass">
+          <mat-checkbox [checked]="instructorClass.check" (change)="this.changeCheck(instructorClass)"></mat-checkbox>
+        </td>
       </ng-container>
       <ng-container matColumnDef="delete">
         <th mat-header-cell *matHeaderCellDef> Excluir Aula </th>
         <td mat-cell *matCellDef="let instructorClass">
-          <button mat-icon-button (click)="openDeleteDialog(instructorClass)">
-            <mat-icon>delete</mat-icon>
-          </button>
+          <mat-checkbox (change)="this.addDeleteItems(instructorClass)"></mat-checkbox>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -26,6 +31,7 @@
 
 <div class="mat-elevation-z8 data-table" *ngIf="this.instructor.type == 'Prático' || this.instructor.type == 'Ambos'">
   <h4>Instrutor: {{this.instructor.name}} - Aulas Práticas</h4>
+
   <table mat-table matSort class="table" [dataSource]="dataSourceP">
     <ng-container matColumnDef="count">
       <th mat-header-cell *matHeaderCellDef> Quantidade </th>
@@ -34,16 +40,20 @@
     </ng-container>
 
     <ng-container matColumnDef="date">
-      <th mat-header-cell *matHeaderCellDef> Data </th>
-      <td mat-cell *matCellDef="let instructorClass" class="gray-element"> {{instructorClass.date}} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Data </th>
+      <td mat-cell *matCellDef="let instructorClass" class="gray-element"> {{instructorClass.date | date: 'dd/MM/yyyy'}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="check">
+      <th mat-header-cell *matHeaderCellDef> Check </th>
+      <td mat-cell *matCellDef="let instructorClass">
+        <mat-checkbox [checked]="instructorClass.check" (change)="this.changeCheck(instructorClass)"></mat-checkbox>
+      </td>
+    </ng-container>
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef> Excluir Aula </th>
       <td mat-cell *matCellDef="let instructorClass">
-        <button mat-icon-button (click)="openDeleteDialog(instructorClass)">
-          <mat-icon>delete</mat-icon>
-        </button>
+        <mat-checkbox (change)="this.addDeleteItems(instructorClass)"></mat-checkbox>
       </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -52,7 +62,28 @@
   <h5>Total de Aulas: {{this.pSum}}</h5>
 </div>
 
-<button mat-raised-button color="primary" type="submit" (click)="openDialog()" class="button">Adicionar nova aula</button>
+<div class="button-table">
+  <table>
+    <tr>
+      <td>
+        <div>
+          <button mat-raised-button color="primary" type="submit" (click)="openDialog(this.instructor)" class="button">Adicionar nova aula</button>
+        </div>
+      </td>
+      <td>
+        <div>
+          <button mat-raised-button color="primary" type="submit" (click)="openDialog(this.instructor)" class="button">Atualizar checks</button>
+        </div>
+      </td>
+      <td>
+        <div>
+          <button mat-raised-button color="primary" type="submit" (click)="openDialog(this.instructor)" class="button">Excluir Aulas</button>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+
 
 
 
