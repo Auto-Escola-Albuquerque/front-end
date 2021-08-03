@@ -28,6 +28,7 @@ export class InstrutorTeoricoComponent implements OnInit {
   pSum = 0;
   id: any;
   deleteItems = [];
+  checkList = [];
 
   @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
@@ -79,6 +80,17 @@ export class InstrutorTeoricoComponent implements OnInit {
   }
   changeCheck(instructorClass: InstructorClass) {
     instructorClass.check === true ? instructorClass.check = false : instructorClass.check = true;
+    if (this.checkList.includes(instructorClass)) {
+      this.checkList.splice(this.checkList.indexOf(instructorClass), 1);
+    } else {
+      this.checkList.push(instructorClass);
+    }
+  }
+  updateCheck() {
+    for (const i of this.checkList) {
+      console.log(i);
+      this.autoescolaservice.putInstructorClassCheck(i);
+    }
   }
   addDeleteItems(instructorClass: InstructorClass) {
     this.deleteItems.push(instructorClass.id);

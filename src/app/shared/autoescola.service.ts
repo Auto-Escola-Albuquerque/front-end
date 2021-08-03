@@ -147,7 +147,9 @@ export class AutoescolaService {
     patchStudentCheck(student: Student) {
       return this.authHttp.patch(`${this.url}/estudante-check/${student.id}`, student).subscribe();
     }
-
+    putInstructorClassCheck(instructorClass: InstructorClass) {
+      return this.authHttp.put(`${this.url}/aula-instrutor/${instructorClass.id}`, instructorClass).subscribe();
+    }
     putSubjects(subject: Subjects) {
         return this.authHttp.put(`${this.url}/subject/${subject.id}`, subject).subscribe();
     }

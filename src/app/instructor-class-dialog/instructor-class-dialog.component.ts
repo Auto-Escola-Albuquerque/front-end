@@ -43,7 +43,6 @@ export class InstructorClassDialogComponent implements OnInit {
   closeDialog() {
     this.dialogRef.close({ event: 'Cancel' });
   }
-
   onSubmit() {
     const instructorClass = new InstructorClass();
     instructorClass.instructor = this.data.data.id;
