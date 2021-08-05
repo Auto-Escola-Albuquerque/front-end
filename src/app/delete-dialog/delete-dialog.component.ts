@@ -40,8 +40,12 @@ export class DeleteDialogComponent implements OnInit {
     } else if (this.type === 'admin-instrutor-teorico') {
       this.autoescolaservice.deleteInstructor(this.localData);
     } else if (this.type === 'admin-aula-instrutor') {
-      this.autoescolaservice.deleteInstructorClass(this.localData);
+      for (const i of this.localData) {
+        this.autoescolaservice.deleteInstructorClass(i);
+      }
     }
-    this.dialogRef.close();
+    this.dialogRef.close({
+      event: this.action, data: this.localData
+    });
   }
 }

@@ -48,15 +48,15 @@ export class InstrutorTeoricoComponent implements OnInit {
           this.instructorClassT = data;
           this.dataSourceT = new MatTableDataSource(this.instructorClassT);
           this.dataSourceT.sort = this.sort;
-          this.instructorClassT.forEach(i => this.tSum += i.count);
           this.checkIsEmpty(this.instructorClassT, 'Teórico');
+          this.updateTSum();
         });
         this.autoescolaservice.getPracticalInstructorClassList(routeParams.id).subscribe(data => {
           this.instructorClassP = data;
           this.dataSourceP = new MatTableDataSource(this.instructorClassP);
           this.dataSourceP.sort = this.sort;
-          this.instructorClassP.forEach(i => this.pSum += i.count);
           this.checkIsEmpty(this.instructorClassP, 'Prático');
+          this.updatePSum();
         });
       });
     }
@@ -67,33 +67,35 @@ export class InstrutorTeoricoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.updateRowData(result.data);
+      this.updateRowData();
     });
   }
-  updateRowData(obj: any) {
-    // this.dataSource = this.dataSource.data.filter((value, key) => {
-    //   if (value.id === obj.id) {
-    //     value.subjects = obj.subjects;
-    //   }
-    //   return true;
-    // });
-  }
   changeCheck(instructorClass: InstructorClass) {
-    instructorClass.check === true ? instructorClass.check = false : instructorClass.check = true;
     if (this.checkList.includes(instructorClass)) {
-      this.checkList.splice(this.checkList.indexOf(instructorClass), 1);
-    } else {
-      this.checkList.push(instructorClass);
+       this.checkList.splice(this.checkList.indexOf(instructorClass), 1);
     }
+    instructorClass.check === true ? instructorClass.check = false : instructorClass.check = true;
+    this.checkList.push(instructorClass);
   }
   updateCheck() {
     for (const i of this.checkList) {
-      console.log(i);
-      this.autoescolaservice.putInstructorClassCheck(i);
+      this.autoescolaservice.patchInstructorClassCheck(i);
     }
   }
+  updateTSum() {
+    this.tSum = 0;
+    this.instructorClassT.forEach(i => this.tSum += i.count);
+  }
+  updatePSum() {
+    this.pSum = 0;
+    this.instructorClassP.forEach(i => this.pSum += i.count);
+  }
   addDeleteItems(instructorClass: InstructorClass) {
-    this.deleteItems.push(instructorClass.id);
+    if (this.deleteItems.includes(instructorClass)) {
+      this.deleteItems.splice(this.deleteItems.indexOf(instructorClass), 1);
+    } else {
+      this.deleteItems.push(instructorClass);
+    }
   }
   checkIsEmpty(instructorClass: InstructorClass, type: string) {
       if (type === 'Prático' && this.instructorClass.length === 0) {
@@ -107,5 +109,25 @@ export class InstrutorTeoricoComponent implements OnInit {
       width: '20%',
       data: {data : obj, type : 'admin-aula-instrutor'}
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.updateRowData();
+    });
+  }
+  updateRowData() {
+    if (this.instructor.type === 'Teórico' || this.instructor.type === 'Ambos') {
+      this.autoescolaservice.getTheoreticalInstructorClassList(this.instructor.id).subscribe(data => {
+        this.instructorClassT = data;
+        this.dataSourceT.data = data;
+        this.updateTSum();
+      });
+    }
+    if (this.instructor.type === 'Prático' || this.instructor.type === 'Ambos') {
+      this.autoescolaservice.getPracticalInstructorClassList(this.instructor.id).subscribe(data => {
+        this.instructorClassP = data;
+        this.dataSourceP.data = data;
+        this.updatePSum();
+      });
+    }
   }
 }

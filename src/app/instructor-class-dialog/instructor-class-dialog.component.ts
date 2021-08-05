@@ -47,7 +47,6 @@ export class InstructorClassDialogComponent implements OnInit {
     const instructorClass = new InstructorClass();
     instructorClass.instructor = this.data.data.id;
     instructorClass.count = this.formInstructorClass.value.count;
-    instructorClass.check = this.formInstructorClass.value.check;
     instructorClass.date = moment(this.formInstructorClass.value.date).format('MM-DD-YYYY');
     instructorClass.type = this.formInstructorClass.value.type;
     let response = 'empty';
@@ -58,8 +57,9 @@ export class InstructorClassDialogComponent implements OnInit {
       error => {
         this.error();
       });
-    this.dialogRef.close();
-  }
+    this.dialogRef.close({
+      event: this.action, data: this.data.data
+    });  }
   success() {
     this.ns.success('Aula adicionada com sucesso!');
   }
