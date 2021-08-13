@@ -10,6 +10,7 @@ import {Instructor} from './instructor/instructor.model';
 import {Subjects} from './subjects/subjects.model';
 import {Trafficticket} from './traffic-ticket/trafficticket.model';
 import {InstructorClass} from './instructor-class/instructor-class.model';
+import {Relationship} from './relationship/relationship.model';
 
 @Injectable()
 export class AutoescolaService {
@@ -22,6 +23,10 @@ export class AutoescolaService {
 
     getStudent(id: string) {
         return this.authHttp.get(`${this.url}/estudante/${id}`);
+    }
+
+    getStudentRelationship(id: string) {
+      return this.authHttp.get(`${this.url}/estudantes-relacao/${id}`);
     }
 
     getStudentList(): Observable <Student[]> {
@@ -52,6 +57,10 @@ export class AutoescolaService {
         return this.authHttp.get(`${this.url}/aula-pratica-instrutor/${id}`);
     }
 
+    getRelationShipByClass(id: number) {
+      return this.authHttp.get(`${this.url}/relacao-turma/${id}`);
+    }
+
     getInstructorClass(id: number): Observable<InstructorClass[]> {
       return this.authHttp.get<InstructorClass[]>(`${this.url}/aula-instrutor/${id}`);
     }
@@ -64,10 +73,12 @@ export class AutoescolaService {
         return this.authHttp.get(`${this.url}/multas/`);
     }
 
-    getClass(id: string) {
-        return this.authHttp.get(`${this.url}/class/${id}/`);
+    getClass(id: number) {
+        return this.authHttp.get(`${this.url}/turma/${id}`);
     }
-
+    getClassList() {
+      return this.authHttp.get(`${this.url}/turma/`);
+    }
     getDrivingSchool(id: string) {
         this.authHttp.get(`${this.url}/driving-school/${id}`).subscribe(data => {
             return data;
@@ -91,17 +102,8 @@ export class AutoescolaService {
     getSubjectsList(): Observable<Subjects[]> {
       return this.authHttp.get<Subjects[]>(`${this.url}/subject/`);
     }
-
-    getClassList() {
-        let classes: any;
-        classes = this.authHttp.get(`${this.url}/class/list/`);
-        return classes;
-    }
-
     postStudent(student: Student) {
-        this.authHttp.post(`${this.url}/estudante/`, student).subscribe(data => {
-            return data;
-        });
+        return this.authHttp.post(`${this.url}/estudante/`, student);
     }
 
     postEmployee(employee: Employee) {
@@ -131,7 +133,11 @@ export class AutoescolaService {
     }
 
     postClass(cls: Class) {
-        return this.authHttp.post(`${this.url}/class/`, cls);
+        return this.authHttp.post(`${this.url}/turma/`, cls);
+    }
+
+    postRelationship(relation: Relationship) {
+      return this.authHttp.post(`${this.url}/relacao/`, relation);
     }
 
     postInstructor(instructor: Instructor) {
@@ -144,8 +150,8 @@ export class AutoescolaService {
         return this.authHttp.post(`${this.url}/aula-instrutor/`, instructorClass);
     }
 
-    patchStudentCheck(student: Student) {
-      return this.authHttp.patch(`${this.url}/estudante-check/${student.id}`, student).subscribe();
+    patchStudent(student: Student) {
+      return this.authHttp.patch(`${this.url}/estudante-check/${student.id}`, student);
     }
     patchInstructorClassCheck(instructorClass: InstructorClass) {
       return this.authHttp.patch(`${this.url}/aula-instrutor/${instructorClass.id}`, instructorClass).subscribe();
@@ -155,7 +161,7 @@ export class AutoescolaService {
     }
 
     putStudent(student: Student) {
-        return this.authHttp.put(`${this.url}/estudante/check/${student.id}`, student).subscribe();
+        return this.authHttp.put(`${this.url}/estudante/${student.id}`, student).subscribe();
     }
 
     putEmployee(employee: Employee) {
@@ -163,7 +169,7 @@ export class AutoescolaService {
     }
 
     putClass(cls: Class) {
-        return this.authHttp.put(`${this.url}/class/`, cls);
+        return this.authHttp.put(`${this.url}/turma/`, cls);
     }
 
     deleteStudent(student: Student) {

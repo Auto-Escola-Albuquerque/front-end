@@ -1,4 +1,6 @@
 export class Class {
+    id: number;
+    seq: number;
     name: string;
-    shift: string;
+    shift: number;
 }

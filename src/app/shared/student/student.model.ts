@@ -1,5 +1,3 @@
-import {Subjects} from '../subjects/subjects.model';
-
 export class Student {
     id: string;
     seqNo: number;
@@ -13,7 +11,11 @@ export class Student {
     nightClasses: number;
     theoreticalFines: number;
     practicalFines: number;
-    subjects: any;
+    defensiveDriving: number;
+    legislation: number;
+    mechanics: number;
+    environment: number;
+    firstAid: number;
     check1: boolean;
     check2: boolean;
     check3: boolean;
@@ -23,6 +25,9 @@ export class Student {
         this.practicalFines = 0;
         this.dayClasses = 0;
         this.nightClasses = 0;
-        this.subjects = new Subjects();
+        this.defensiveDriving = 0;
+        this.legislation = 0;
+        this.mechanics = 0;
+        this.firstAid = 0;
     }
 }
