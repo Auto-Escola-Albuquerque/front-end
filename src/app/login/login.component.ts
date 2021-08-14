@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { Employee } from '../shared/employee/employee.model'
 
 @Component({
@@ -7,27 +9,31 @@ import { Employee } from '../shared/employee/employee.model'
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     // submitted = false;
     // onSubmit() { this.submitted = true; }
 
-  constructor() {
+  form = new FormGroup({
+    login: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required])
+  });
+  public loginInvalid = false;
+  private formSubmitAttempt = false;
+  private returnUrl: string;
+
+  constructor(private fb: FormBuilder, private route: ActivatedRoute,
+                     private router: Router,
+                    ) {
+
         this.createForm();
    }
 
   ngOnInit() {
   }
-
-  createForm() {
-    let employee = new Employee();
-    this.loginForm = new FormGroup({
-        cpf: new FormControl(employee.email),
-        password: new FormControl(employee.password)
-    });
+  onSubmit() {
   }
-
-
+  createForm() {
+  }
 
 }

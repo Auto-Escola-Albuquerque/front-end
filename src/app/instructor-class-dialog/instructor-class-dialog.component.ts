@@ -59,7 +59,8 @@ export class InstructorClassDialogComponent implements OnInit {
       });
     this.dialogRef.close({
       event: this.action, data: this.data.data
-    });  }
+    });
+  }
   success() {
     this.ns.success('Aula adicionada com sucesso!');
   }

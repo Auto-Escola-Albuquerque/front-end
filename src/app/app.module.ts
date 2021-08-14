@@ -49,6 +49,9 @@ import { InstrutorTeoricoComponent } from './instrutor-teorico/instrutor-teorico
 import { InstructorClassDialogComponent } from './instructor-class-dialog/instructor-class-dialog.component';
 import {SnackBarService} from './shared/snack-bar.service';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
+import { AdminClassesDialogComponent } from './admin-classes-dialog/admin-classes-dialog.component';
+import { AddRelationshipDialogComponent } from './add-relationship-dialog/add-relationship-dialog.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +77,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     AdminFuncionariosDialogComponent,
     InstrutorTeoricoComponent,
     InstructorClassDialogComponent,
+    AdminClassesDialogComponent,
+    AddRelationshipDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -104,10 +109,11 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatGridListModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCardModule
   ],
   entryComponents: [DialogBoxComponent, AdminAlunosDialogComponent, AdminInstrutorDialogComponent, DeleteDialogComponent,
-      TrafficTicketBoxComponent, InstructorClassDialogComponent, AdminFuncionariosDialogComponent],
+      TrafficTicketBoxComponent, InstructorClassDialogComponent, AdminFuncionariosDialogComponent, AdminClassesDialogComponent, AddRelationshipDialogComponent],
   providers: [AutoescolaService, SnackBarService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

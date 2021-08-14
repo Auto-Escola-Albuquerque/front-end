@@ -1,0 +1,31 @@
+<div class="card">
+    <h4  mat-dialog-title>Adicionar aluno à turma</h4>
+  <div class="content">
+    <form [formGroup]="formRelationship" class="my-form">
+
+      <mat-form-field appearance="legacy" class="col-lg-5">
+        <mat-label>Turma</mat-label>
+        <input matInput formControlName="class" readonly>
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="col-lg-5">
+        <mat-label>Estudante</mat-label>
+        <mat-select formControlName="student" required [(ngModel)]="this.formRelationship.value.student">
+          <div *ngFor="let i of this.students">
+            <mat-option [value]="i">{{i.name}}</mat-option>
+          </div>
+        </mat-select>
+      </mat-form-field>
+
+    </form>
+  </div>
+  <div mat-dialog-actions class="buttons">
+    <button mat-button (click)="onSubmit()" mat-flat-button color="warn">Salvar</button>
+    <button mat-button (click)="closeDialog()">Cancelar</button>
+  </div>
+</div>
+
+
+
+
+

@@ -1,9 +1,9 @@
 h2 {
-    padding-left: 15%;
+    padding-left: 10%;
 }
 
 .mat-form-field {
-    padding-left: 15%;
+    padding-left: 10%;
 }
 
 
@@ -14,7 +14,7 @@ h2 {
 
 .data-table {
     width: 70%;
-    margin-left: 15%;
+    margin-left: 10%;
 }
 
 button {
@@ -25,7 +25,9 @@ button {
 .w-25 {
     width: 25px;
 }
-
+td{
+  padding-right: 10px;
+}
 .mat-cell{
     font-size:14px;
     font-family: Verdana,Sans-Serif;
@@ -33,6 +35,19 @@ button {
 
 .centralize {
     text-align: center;
+}
+
+.button-table {
+  padding-left: 10%;
+  padding-top: 20px;
+}
+
+.mat-flat-button {
+  transition: transform .4s;
+}
+
+.mat-flat-button:hover {
+  transform: scale(1.1);
 }
 
 .mat-raised-button {

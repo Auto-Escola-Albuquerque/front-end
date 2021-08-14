@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatTable } from '@angular/material';
+import {MatPaginator, MatTableDataSource, MatTable, MatDialog} from '@angular/material';
 import { MatSort } from '@angular/material/sort';
 import { Class } from '../shared/class/class.model';
 import { AutoescolaService } from '../shared/autoescola.service';
+import {AdminClassesDialogComponent} from '../admin-classes-dialog/admin-classes-dialog.component';
 
 @Component({
     selector: 'app-admin-classes',
@@ -14,36 +15,34 @@ export class AdminClassesComponent implements OnInit {
     @ViewChild(MatPaginator, { static: false }) matPaginator: MatPaginator;
     @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-    classes = [];
-    displayedColumns = ['N°', 'name', 'shift', 'size', 'update']
+    classes: any;
+    displayedColumns = ['N°', 'name', 'shift', 'size', 'update', 'delete'];
     dataSource: any;
 
-    constructor(private autoescolaService: AutoescolaService) { }
+    constructor(private autoescolaService: AutoescolaService, public dialog: MatDialog) { }
 
     ngOnInit() {
-        this.dataSource = new MatTableDataSource(this.classes);
+      this.updateRowData();
     }
-
-    ngAfterViewInit() {
-        this.dataSource.paginator = this.matPaginator
-        this.dataSource.sort = this.sort;
-    }
-
-    doFilter(value: String) {
+    doFilter(value: string) {
         this.dataSource.filter = value.trim().toLowerCase();
     }
-
-    createClass() {
-        let newClass = new Class();
-        this.classes.push(newClass);
-        this.autoescolaService.postClass(newClass);
-        this.refresh()
-        console.log('dasd')
+    openDialog(obj: any) {
+      const dialogRef = this.dialog.open(AdminClassesDialogComponent, {
+        width: '50%',
+        data: {data: obj}
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.updateRowData();
+      });
     }
-
-    refresh() {
-        this.autoescolaService.getClassList().subscribe((data: Class[]) => {
-            this.dataSource.data = data;
-        })
+    updateRowData() {
+      this.autoescolaService.getClassList().subscribe(data => {
+        this.classes = data;
+        for (let i = 0; i < this.classes.length; i++) {
+          this.classes[i].seq = i + 1;
+        }
+        this.dataSource = new MatTableDataSource(this.classes);
+      });
     }
 }

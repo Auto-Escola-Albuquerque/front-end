@@ -5,6 +5,7 @@ import {Student} from '../shared/student/student.model';
 import * as moment from 'moment';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { AutoescolaService } from '../shared/autoescola.service';
+import {SnackBarService} from '../shared/snack-bar.service';
 
 
 @Component({
@@ -40,7 +41,7 @@ export class AdminAlunosDialogComponent implements OnInit {
   student = new Student();
 
   constructor(public dialogRef: MatDialogRef<DialogBoxComponent>, @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
-              public autoescolaservice: AutoescolaService) {
+              public autoescolaservice: AutoescolaService, private ns: SnackBarService) {
 
     this.localData = data;
     this.obj = this.localData.obj;
@@ -56,7 +57,6 @@ export class AdminAlunosDialogComponent implements OnInit {
   }
 
   onSubmit() {
-    try {
       const student = new Student();
       student.name = this.formStudent.value.name;
       student.cpf = this.formStudent.value.cpf;
@@ -68,11 +68,18 @@ export class AdminAlunosDialogComponent implements OnInit {
       student.practicalFines = this.formStudent.value.practicalFines;
       student.dayClasses = this.formStudent.value.dayClasses;
       student.nightClasses = this.formStudent.value.nightClasses;
-      student.subjects = null;
-      this.autoescolaservice.postStudent(student);
+      this.autoescolaservice.postStudent(student).subscribe(
+        data =>{
+          this.success();
+        }, error => {
+          this.error();
+        });
       this.dialogRef.close();
-    } catch (error) {
-      console.log('Erro ao vincular matéria ao aluno');
-    }
+  }
+  success() {
+    this.ns.success('Aluno adicionado com sucesso!');
+  }
+  error() {
+    this.ns.error('Erro ao adicionar aluno. Verifique os campos e tente novamente!');
   }
 }

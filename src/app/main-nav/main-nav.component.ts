@@ -19,11 +19,14 @@ export class MainNavComponent {
             shareReplay()
         );
     instructors: any;
-
+    classes: any;
     constructor(private breakpointObserver: BreakpointObserver, private autoescolaservice: AutoescolaService,
                 private router: Router) {
         this.autoescolaservice.getInstructorList().subscribe(data => {
             this.instructors = data;
+        });
+        this.autoescolaservice.getClassList().subscribe(data => {
+            this.classes = data;
         });
     }
 }

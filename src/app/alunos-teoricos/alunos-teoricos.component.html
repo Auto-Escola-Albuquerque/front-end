@@ -1,5 +1,5 @@
 <div>
-    <h2>Alunos Teóricos</h2>
+    <h2>{{this.class.name}}: {{this.class.shift}}</h2>
 
     <div fxLayout fxLayoutAlign="center center">
         <mat-form-field fxFlex="40%">
@@ -21,45 +21,35 @@
                 </td>
             </ng-container>
 
-            <ng-container matColumnDef="cpf">
-                <th mat-header-cell *matHeaderCellDef> CPF </th>
-                <td mat-cell *matCellDef="let student" class="gray-element"> {{student.cpf}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="registrationDate">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Data de Matrícula </th>
-                <td mat-cell *matCellDef="let student" class="gray-element"> {{student.registrationDate | date: 'dd/MM/yyyy'}} </td>
-            </ng-container>
-
             <ng-container matColumnDef="mat1">
                 <th mat-header-cell *matHeaderCellDef> Direção Defensiva </th>
-                <td mat-cell *matCellDef="let student" (click)="openDialog(student, 0)" class="centralize"> {{student.subjects.defensiveDriving}}
+                <td mat-cell *matCellDef="let student" (click)="openDialog(student, 0)" class="centralize"> {{student.defensiveDriving}}
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="mat2">
                 <th mat-header-cell *matHeaderCellDef> Legislação </th>
-                <td mat-cell *matCellDef="let student" (click)="openDialog(student, 1)" class="centralize"> {{student.subjects.legislation}}
+                <td mat-cell *matCellDef="let student" (click)="openDialog(student, 1)" class="centralize"> {{student.legislation}}
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="mat3">
                 <th mat-header-cell *matHeaderCellDef> Mecânica </th>
-                <td mat-cell *matCellDef="let student" (click)="openDialog(student, 2)" class="centralize"> {{student.subjects.mechanics}}
+                <td mat-cell *matCellDef="let student" (click)="openDialog(student, 2)" class="centralize"> {{student.mechanics}}
                 </td>
 
             </ng-container>
 
             <ng-container matColumnDef="mat4">
                 <th mat-header-cell *matHeaderCellDef> Meio Ambiente </th>
-                <td mat-cell *matCellDef="let student" (click)="openDialog(student, 3)" class="centralize"> {{student.subjects.environment}}
+                <td mat-cell *matCellDef="let student" (click)="openDialog(student, 3)" class="centralize"> {{student.environment}}
 
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="mat5">
                 <th mat-header-cell *matHeaderCellDef> Primeiros Socorros </th>
-                <td mat-cell *matCellDef="let student" (click)="openDialog(student, 4)" class="centralize"> {{student.subjects.firstAid}}
+                <td mat-cell *matCellDef="let student" (click)="openDialog(student, 4)" class="centralize"> {{student.firstAid}}
                 </td>
             </ng-container>
 
@@ -84,11 +74,35 @@
               </td>
             </ng-container>
 
+            <ng-container matColumnDef="delete">
+              <th mat-header-cell *matHeaderCellDef> Excluir aluno da turma </th>
+              <td mat-cell *matCellDef="let student" class="centralize">
+                <button mat-icon-button (click)="openDeleteDialog(student)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
         </table>
     </div>
-    <button mat-raised-button color="primary" (click)='onSubmit()' type="submit" class="button">Salvar</button>
-
+<!--    <button mat-raised-button color="primary" (click)='onSubmit()' type="submit" class="button">Salvar</button>-->
+</div>
+<div class="button-table">
+  <table>
+    <tr>
+      <td>
+        <div>
+          <button mat-flat-button color="warn" type="submit" (click)="onSubmit()" class="button">Salvar Alterações</button>
+        </div>
+      </td>
+      <td>
+        <div>
+          <button mat-flat-button style="background-color: #FFD700;" type="submit" (click)="openAddDialog()" class="button">Adicionar aluno à turma</button>
+        </div>
+      </td>
+    </tr>
+  </table>
 </div>

@@ -24,11 +24,11 @@ const routes: Routes = [
             {path: 'admin-funcionarios', component: AdminFuncionariosComponent},
             {path: 'admin-franquias', component: AdminFranquiasComponent},
             {path: 'admin-classes', component: AdminClassesComponent},
-            {path: 'alunos-teoricos', component: AlunosTeoricosComponent},
+            // {path: 'alunos-teoricos', component: AlunosTeoricosComponent},
             {path: 'alunos-praticos', component: AlunosPraticosComponent},
             {path: 'turmas', component: TurmasComponent},
             {path: 'tabela-pratica', component: TabelaPraticaComponent},
-            {path: 'turmas', component: TurmasComponent},
+            {path: 'turma/:id', component: AlunosTeoricosComponent},
             {path: 'multas', component: TrafficTicketComponent},
             {path: 'instrutor/:id', component: InstrutorTeoricoComponent}
         ]

@@ -75,12 +75,9 @@
                 <mat-expansion-panel-header>
                     Turmas
                 </mat-expansion-panel-header>
-                <mat-nav-list dense>
-                    <a mat-list-item routerLink="/turmas">
-                        Turma 1
-                    </a>
-                    <a mat-list-item routerLink="/turmas">
-                        Turma 2
+                <mat-nav-list dense *ngFor="let classes of this.classes">
+                    <a mat-list-item [routerLink]="['/turma', classes.id]">
+                        {{classes.name}}
                     </a>
                 </mat-nav-list>
             </mat-expansion-panel>

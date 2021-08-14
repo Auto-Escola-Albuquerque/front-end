@@ -6,6 +6,11 @@ import { Student } from '../shared/student/student.model';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { AutoescolaService } from '../shared/autoescola.service';
+import {ActivatedRoute} from '@angular/router';
+import {AddRelationshipDialogComponent} from '../add-relationship-dialog/add-relationship-dialog.component';
+import {Class} from '../shared/class/class.model';
+import {SnackBarService} from '../shared/snack-bar.service';
+import {DeleteDialogComponent} from '../delete-dialog/delete-dialog.component';
 
 export const MY_DATE_FORMATS = {
     parse: {
@@ -26,33 +31,33 @@ export const MY_DATE_FORMATS = {
 })
 export class AlunosTeoricosComponent implements OnInit {
     students: any;
-    subjects: any;
+    class: any;
+    value: any;
 
-    displayedColumns = ['N°', 'name', 'cpf', 'registrationDate', 'mat1', 'mat2',
-        'mat3', 'mat4', 'mat5', 'c1', 'c2', 'c3'];
+    displayedColumns = ['N°', 'name', 'mat1', 'mat2',
+        'mat3', 'mat4', 'mat5', 'c1', 'c2', 'c3', 'delete'];
     dataSource: any;
 
     @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
     @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-    constructor(public dialog: MatDialog, private autoescolaservice: AutoescolaService,
-      private changeDetectorRefs: ChangeDetectorRef) {
-
+    constructor(public dialog: MatDialog, public addDialog: MatDialog, private autoescolaservice: AutoescolaService,
+      private changeDetectorRefs: ChangeDetectorRef, private route: ActivatedRoute, private ns: SnackBarService) {
     }
 
     ngOnInit() {
-      this.autoescolaservice.getSubjectsList().subscribe(data => {
-        this.subjects = data;
-      });
-
-      this.autoescolaservice.getStudentList().subscribe(data => {
-        this.students = data;
-        for (let i = 0; i < this.students.length; i++){
-            this.students[i].seqNo = i + 1;
-            this.students[i].subjects = this.subjects[i];
-        }
-        this.dataSource = new MatTableDataSource(this.students);
-        this.dataSource.sort = this.sort;
+      this.route.params.subscribe(routeParams => {
+        this.autoescolaservice.getClass(routeParams.id).subscribe(data => {
+          this.class = data;
+          this.autoescolaservice.getStudentRelationship(routeParams.id).subscribe(data => {
+            this.students = data;
+            for(let i = 0; i < this.students.length; i++) {
+              this.students[i].seqNo = i+1;
+            }
+            this.dataSource = new MatTableDataSource(this.students);
+            this.dataSource.sort = this.sort;
+          });
+        });
       });
     }
     doFilter(value: string) {
@@ -65,17 +70,48 @@ export class AlunosTeoricosComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            this.updateRowData(result.data);
+            this.updateRowData2(result.data);
         });
     }
-    updateRowData(obj: any) {
-        this.dataSource = this.dataSource.data.filter((value, key) => {
-            if (value.id === obj.id) {
-                value.subjects = obj.subjects;
-            }
-            return true;
+    openAddDialog() {
+      const dialogRef = this.addDialog.open(AddRelationshipDialogComponent, {
+        width: '400px',
+        data: this.class
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.updateRowData();
+      });
+    }
+    openDeleteDialog(obj: any) {
+      const dialogRef = this.dialog.open(DeleteDialogComponent, {
+        width: '20%',
+        data: {data : obj, type : 'relacao-estudante'}
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.updateRowData();
+      });
+    }
+
+    updateRowData() {
+        this.autoescolaservice.getStudentRelationship(this.class.id).subscribe(data => {
+          this.students = data;
+          for (let i = 0; i < this.students.length; i++) {
+            this.students[i].seqNo = i + 1;
+          }
+          this.dataSource.data = this.students;
         });
     }
+    updateRowData2(obj: any) {
+      this.dataSource = this.dataSource.data.filter((value, key) => {
+          if (value.id === obj.id) {
+              value.subjects = obj.subjects;
+          }
+          return true;
+      });
+    }
+
     changeCheck1(student: Student) {
       student.check1 == true ? student.check1 = false : student.check1 = true;
     }
@@ -90,8 +126,18 @@ export class AlunosTeoricosComponent implements OnInit {
 
     onSubmit() {
         for (const i of this.students) {
-          this.autoescolaservice.patchStudentCheck(i);
-          this.autoescolaservice.putSubjects(i.subjects);
+          this.autoescolaservice.patchStudent(i).subscribe(data => {
+            this.success();
+          }, error => {
+            this.error();
+          });
         }
+    }
+
+    success() {
+      this.ns.success('Alterações Salvas com sucesso');
+    }
+    error() {
+      this.ns.error('Erro salvar alterações. Verifique os campos e tente novamente!');
     }
 }

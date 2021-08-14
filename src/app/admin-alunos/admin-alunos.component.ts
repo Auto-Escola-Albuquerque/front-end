@@ -25,16 +25,7 @@ export class AdminAlunosComponent implements OnInit {
     }
 
     ngOnInit() {
-      this.autoescolaservice.getSubjectsList().subscribe();
-
-      this.autoescolaservice.getStudentList().subscribe(data => {
-        this.students = data;
-        for (let i = 0; i < this.students.length; i++){
-          this.students[i].seqNo = i + 1;
-        }
-        this.dataSource = new MatTableDataSource(this.students);
-        this.dataSource.sort = this.sort;
-      });
+      this.updateRowData();
     }
     doFilter(value: string) {
       this.dataSource.filter = value.trim().toLowerCase();
@@ -44,7 +35,22 @@ export class AdminAlunosComponent implements OnInit {
         width: '50%',
         data: {data: obj}
       });
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.updateRowData();
+      });
     }
+    updateRowData() {
+      this.autoescolaservice.getStudentList().subscribe(data => {
+        this.students = data;
+        for (let i = 0; i < this.students.length; i++){
+          this.students[i].seqNo = i + 1;
+        }
+        this.dataSource = new MatTableDataSource(this.students);
+        this.dataSource.sort = this.sort;
+      });
+    }
+
     openDeleteDialog(obj: any) {
       const dialogRef = this.dialog.open(DeleteDialogComponent, {
         width: '20%',

@@ -191,6 +191,9 @@ export class AutoescolaService {
     deleteInstructorClass(instructorClass: InstructorClass) {
         return this.authHttp.delete(`${this.url}/aula-instrutor/${instructorClass.id}`).subscribe();
     }
+    deleteRelationship(student: any) {
+        return this.authHttp.delete(`${this.url}/relacao-delete/${student.id}`).subscribe();
+    }
 
     deleteAllInstructorClass() {
         return this.authHttp.delete(`${this.url}/aula-instrutor/`).subscribe();

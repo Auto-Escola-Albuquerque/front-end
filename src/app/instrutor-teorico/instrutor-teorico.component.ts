@@ -5,11 +5,8 @@ import {MatDialog, MatTable, MatTableDataSource} from '@angular/material';
 import {InstructorClassDialogComponent} from '../instructor-class-dialog/instructor-class-dialog.component';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {SnackBarService} from '../shared/snack-bar.service';
-import {async} from 'rxjs/internal/scheduler/async';
-import {Student} from '../shared/student/student.model';
 import {InstructorClass} from '../shared/instructor-class/instructor-class.model';
 import {MatSort} from '@angular/material/sort';
-import {Instructor} from '../shared/instructor/instructor.model';
 
 @Component({
   selector: 'app-instrutor-teorico',

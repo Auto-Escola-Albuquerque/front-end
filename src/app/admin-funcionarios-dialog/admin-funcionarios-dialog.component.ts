@@ -18,9 +18,7 @@ export class AdminFuncionariosDialogComponent implements OnInit {
     isAdmin: new FormControl('', [Validators.required])
   });
 
-  action: string;
   localData: any;
-  index: number;
   type: string;
   obj: any;
   loading = false;
@@ -31,8 +29,6 @@ export class AdminFuncionariosDialogComponent implements OnInit {
 
       this.localData = data;
       this.obj = this.localData.obj;
-      this.index = this.localData.index;
-      this.action = this.localData.action;
       this.type = this.localData.type;
   }
   ngOnInit() {
