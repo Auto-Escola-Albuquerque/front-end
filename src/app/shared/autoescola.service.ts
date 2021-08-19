@@ -107,15 +107,11 @@ export class AutoescolaService {
     }
 
     postEmployee(employee: Employee) {
-      this.authHttp.post(`${this.url}/usuario/`, employee).subscribe(data => {
-        return data;
-      });
+       return this.authHttp.post(`${this.url}/usuario/`, employee);
     }
 
     postTrafficTicket(traffic: Trafficticket) {
-        this.authHttp.post(`${this.url}/multas/`, traffic).subscribe(data => {
-          return data;
-        });
+        return this.authHttp.post(`${this.url}/multas/`, traffic);
     }
 
     postDrivingSchool(school: DrivingSchool) {
@@ -193,6 +189,9 @@ export class AutoescolaService {
     }
     deleteRelationship(student: any) {
         return this.authHttp.delete(`${this.url}/relacao-delete/${student.id}`).subscribe();
+    }
+    deleteClasses(cls: Class) {
+      return this.authHttp.delete(`${this.url}/turma/${cls.id}`).subscribe();
     }
 
     deleteAllInstructorClass() {

@@ -22,6 +22,15 @@
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="col-lg-5">
+          <mat-label>Tipo</mat-label>
+          <mat-select formControlName="type" required [(ngModel)]="this.formTicket.value.type">
+            <mat-option value="Teórica">Multa Teórica</mat-option>
+            <mat-option value="Prática">Multa Prática</mat-option>
+          </mat-select>
+        </mat-form-field>
+
       </form>
     </div>
   </div>

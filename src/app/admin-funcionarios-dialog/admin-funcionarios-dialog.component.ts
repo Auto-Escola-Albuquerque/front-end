@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AutoescolaService} from '../shared/autoescola.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
+import {SnackBarService} from '../shared/snack-bar.service';
 
 @Component({
   selector: 'app-admin-funcionarios-dialog',
@@ -22,10 +23,11 @@ export class AdminFuncionariosDialogComponent implements OnInit {
   type: string;
   obj: any;
   loading = false;
+  action: string;
 
   constructor(public autoescolaservice: AutoescolaService,
               @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
-              public dialogRef: MatDialogRef<DialogBoxComponent>) {
+              public dialogRef: MatDialogRef<DialogBoxComponent>, private ns: SnackBarService) {
 
       this.localData = data;
       this.obj = this.localData.obj;
@@ -45,8 +47,20 @@ export class AdminFuncionariosDialogComponent implements OnInit {
     employee.email = this.formEmployee.value.email;
     employee.isAdmin = this.formEmployee.value.isAdmin;
     employee.password = this.formEmployee.value.password;
-    this.autoescolaservice.postEmployee(employee);
+    this.autoescolaservice.postEmployee(employee).subscribe(data => {
+      this.success();
+    }, error => {
+      this.error();
+    });
 
-    this.closeDialog();
+    this.dialogRef.close({
+      event: this.action
+    });
+  }
+  success() {
+    this.ns.success('O funcionário foi adicionado com sucesso!');
+  }
+  error() {
+    this.ns.error('Erro ao cadastrar funcionário. Verifique os campos e tente novamente!');
   }
 }

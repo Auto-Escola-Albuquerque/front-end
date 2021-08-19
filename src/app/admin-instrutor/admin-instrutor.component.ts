@@ -21,6 +21,12 @@ export class AdminInstrutorComponent implements OnInit {
     constructor(public autoescolaservice: AutoescolaService, public dialog: MatDialog) { }
 
     ngOnInit() {
+      this.updateRowData();
+    }
+    doFilter(value: string) {
+      this.dataSource.filter = value.trim().toLowerCase();
+    }
+    updateRowData() {
       this.autoescolaservice.getInstructorList().subscribe(data => {
         this.instructors = data;
         for (let i = 0; i < this.instructors.length; i++){
@@ -30,13 +36,14 @@ export class AdminInstrutorComponent implements OnInit {
         this.dataSource.sort = this.sort;
       });
     }
-    doFilter(value: string) {
-      this.dataSource.filter = value.trim().toLowerCase();
-    }
     openDialog(obj: any) {
       const dialogRef = this.dialog.open(AdminInstrutorDialogComponent, {
         width: '50%',
         data: {data: obj}
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.updateRowData();
       });
     }
     openDeleteDialog(obj: any) {
@@ -44,6 +51,9 @@ export class AdminInstrutorComponent implements OnInit {
         width: '20%',
         data: {data : obj, type : 'admin-instrutor-teorico'}
       });
-    }
 
+      dialogRef.afterClosed().subscribe(result => {
+        this.updateRowData();
+      });
+    }
 }

@@ -19,6 +19,10 @@
     <h1 mat-dialog-title>Deseja excluir aula do instrutor?</h1>
     <!--    <p mat-dialog-content >{{this.localData.name}}</p>-->
   </div>
+  <div *ngIf="this.type == 'admin-classes'">
+    <h1 mat-dialog-title>Deseja excluir a turma?</h1>
+    <!--    <p mat-dialog-content >{{this.localData.name}}</p>-->
+  </div>
   <div *ngIf="this.type == 'relacao-estudante'">
     <h1 mat-dialog-title>Deseja excluir aluno da turma?</h1>
     <!--    <p mat-dialog-content >{{this.localData.name}}</p>-->

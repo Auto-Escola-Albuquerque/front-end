@@ -23,11 +23,19 @@
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field appearance="legacy" class="col-lg-5">
+        <mat-form-field appearance="legacy" class="col-lg-5" *ngIf="this.type === 'add'">
           <mat-label>Sexo</mat-label>
           <mat-select formControlName="gender" required>
             <mat-option value="1">Masculino</mat-option>
             <mat-option value="0">Feminino</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="col-lg-5" *ngIf="this.type === 'update'">
+          <mat-label>Sexo</mat-label>
+          <mat-select formControlName="gender" required [(value)]=selected>
+            <mat-option value="Masculino">Masculino</mat-option>
+            <mat-option value="Feminino">Feminino</mat-option>
           </mat-select>
         </mat-form-field>
 

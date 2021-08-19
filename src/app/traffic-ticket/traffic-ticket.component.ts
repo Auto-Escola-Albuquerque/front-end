@@ -14,7 +14,7 @@ import {DeleteDialogComponent} from '../delete-dialog/delete-dialog.component';
   styleUrls: ['./traffic-ticket.component.scss']
 })
 export class TrafficTicketComponent implements OnInit {
-    displayedColumns = ['id', 'student', 'count', 'date', 'delete'];
+    displayedColumns = ['id', 'student', 'count', 'date', 'type', 'delete'];
     dataSource: any;
     tickets: any;
 
@@ -25,7 +25,9 @@ export class TrafficTicketComponent implements OnInit {
               private changeDetectorRefs: ChangeDetectorRef) {
 
   }
-
+  ngOnInit() {
+    this.updateRowData();
+  }
   openDialog() {
     const ticket = new Trafficticket();
     const dialogRef = this.dialog.open(TrafficTicketBoxComponent, {
@@ -34,36 +36,31 @@ export class TrafficTicketComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.updateRowData(result.data);
-    });
-  }
-
-  updateRowData(obj: any) {
-    this.dataSource = this.dataSource.data.filter((value, key) => {
-      if (value.id === obj.id) {
-        value.subjects = obj.subjects;
+      if (result.data === true) {
+        this.updateRowData();
       }
-      return true;
     });
   }
-
-  ngOnInit() {
-      this.autoescolaservice.getTrafficTicketList().subscribe(data => {
-          this.tickets = data;
-          for (const i of this.tickets) {
-              this.autoescolaservice.getStudent(i.student).subscribe(value => {
-                  i.student = value;
-              });
-          }
-          this.dataSource = new MatTableDataSource(this.tickets);
-      });
+  updateRowData() {
+    this.autoescolaservice.getTrafficTicketList().subscribe(data => {
+      this.tickets = data;
+      for (const i of this.tickets) {
+        this.autoescolaservice.getStudent(i.student).subscribe(value => {
+          i.student = value;
+        });
+      }
+      this.dataSource = new MatTableDataSource(this.tickets);
+      this.dataSource.sort = this.sort;
+    });
   }
-
   openDeleteDialog(obj: any) {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '20%',
       data: {data : obj, type : 'multas'}
     });
-  }
 
+    dialogRef.afterClosed().subscribe(result => {
+      this.updateRowData();
+    });
+  }
 }

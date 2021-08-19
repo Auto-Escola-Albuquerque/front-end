@@ -25,7 +25,6 @@ export class AdminFuncionariosComponent implements OnInit {
 
     constructor(private autoescolaService: AutoescolaService, public dialog: MatDialog) {
     }
-
     ngOnInit() {
       this.autoescolaService.getEmployeeList().subscribe(data => {
         this.employees = data;
@@ -36,7 +35,6 @@ export class AdminFuncionariosComponent implements OnInit {
         this.dataSource.sort = this.sort;
       });
     }
-
     doFilter(value: string) {
       this.dataSource.filter = value.trim().toLowerCase();
     }
@@ -47,22 +45,25 @@ export class AdminFuncionariosComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        this.updateRowData(result.data);
+        this.updateRowData();
       });
     }
-    updateRowData(obj: any) {
-      this.dataSource = this.dataSource.data.filter((value, key) => {
-        if (value.id === obj.id) {
-          value.subjects = obj.subjects;
+    updateRowData() {
+      this.autoescolaService.getEmployeeList().subscribe(data => {
+        this.employees = data;
+        for (let i = 0; i < this.employees.length; i++){
+          this.employees[i].seq = i + 1;
         }
-        return true;
+        this.dataSource.data = this.employees;
       });
     }
-
-  openDeleteDialog(obj: any) {
-    const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      width: '20%',
-      data: {data : obj, type : 'admin-funcionarios'}
-    });
-  }
+    openDeleteDialog(obj: any) {
+      const dialogRef = this.dialog.open(DeleteDialogComponent, {
+        width: '20%',
+        data: {data : obj, type : 'admin-funcionarios'}
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.updateRowData();
+      });
+    }
 }

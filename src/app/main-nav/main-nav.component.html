@@ -23,7 +23,6 @@
 
 <mat-sidenav-container style="height: calc(100% - 64px); margin: 0;">
     <mat-sidenav #sidenav mode="side" opened [disableClose]="true" [class.mat-elevation-z4]="true" style="width: 240px">
-        <span class="h4">Leonardo Albuquerque</span>
         <mat-nav-list dense>
             <mat-expansion-panel [class.mat-elevation-z0]="true">
                 <mat-expansion-panel-header>
@@ -36,38 +35,28 @@
                     <a mat-list-item routerLink="#">
                         Tabela Prática
                     </a>
-                    <a mat-list-item routerLink="#">
-                        Multas - Práticas
-                    </a>
                 </mat-nav-list>
             </mat-expansion-panel>
 
-            <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
-                <mat-expansion-panel-header>
-                    Teórico
-                </mat-expansion-panel-header>
-                <mat-nav-list dense>
-                    <a mat-list-item routerLink="/alunos-teoricos">
-                        Tabela Teórica
-                    </a>
-                    <a mat-list-item routerLink="/multas">
-                        Multas - Teóricas
-                    </a>
-                </mat-nav-list>
-            </mat-expansion-panel>
+          <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
+            <mat-expansion-panel-header>
+              Multas
+            </mat-expansion-panel-header>
+            <mat-nav-list dense>
+              <a mat-list-item routerLink="/multas">
+                Todas as multas
+              </a>
+            </mat-nav-list>
+          </mat-expansion-panel>
 
             <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
                 <mat-expansion-panel-header>
-                    Instrutor
+                    Instrutores
                 </mat-expansion-panel-header>
                 <mat-nav-list dense *ngFor="let instructor of this.instructors">
                       <a mat-list-item [routerLink]="['/instrutor', instructor.id]">
                           {{instructor.name}}
                       </a>
-<!--                  <a mat-list-item (click)="changeRoute('/instrutor/' + instructor.id)">-->
-<!--                    {{instructor.name}}-->
-<!--                  </a>-->
-
                 </mat-nav-list>
             </mat-expansion-panel>
 
@@ -90,7 +79,7 @@
                     <a mat-list-item routerLink="/admin-alunos">Alunos</a>
                     <a mat-list-item routerLink="/admin-instrutor">Instrutor</a>
                     <a mat-list-item routerLink="/admin-funcionarios">Funcionários</a>
-                    <a mat-list-item routerLink="/admin-franquias">Franquias</a>
+<!--                    <a mat-list-item routerLink="/admin-franquias">Franquias</a>-->
                     <a mat-list-item routerLink="/admin-classes">Turmas</a>
                 </mat-nav-list>
             </mat-expansion-panel>

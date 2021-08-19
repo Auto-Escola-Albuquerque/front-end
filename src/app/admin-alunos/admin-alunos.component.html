@@ -35,7 +35,7 @@
     <ng-container matColumnDef="update">
       <th mat-header-cell *matHeaderCellDef> Atualizar Dados </th>
       <td mat-cell *matCellDef="let student">
-        <button mat-icon-button>
+        <button mat-icon-button (click)="openDialog(student, 'update')">
           <mat-icon>edit</mat-icon>
         </button>
       </td>
@@ -56,7 +56,7 @@
   </table>
 </div>
 
-<button mat-raised-button color="primary" type="submit" (click)="openDialog()" class="button">Adicionar novo aluno</button>
+<button mat-raised-button color="primary" type="submit" (click)="openDialog('', 'add')" class="button">Adicionar novo aluno</button>
 
 
 

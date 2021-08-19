@@ -6,6 +6,7 @@ import {AutoescolaService} from '../shared/autoescola.service';
 import {Student} from '../shared/student/student.model';
 import * as moment from 'moment';
 import {Trafficticket} from '../shared/traffic-ticket/trafficticket.model';
+import {SnackBarService} from '../shared/snack-bar.service';
 
 @Component({
   selector: 'app-traffic-ticket-box',
@@ -17,6 +18,7 @@ export class TrafficTicketBoxComponent implements OnInit {
     student: new FormControl('', [Validators.required]),
     count: new FormControl('', [Validators.required, Validators.maxLength(11)]),
     date: new FormControl('', [Validators.required]),
+    type: new FormControl('', [Validators.required])
   });
 
   action: string;
@@ -25,18 +27,15 @@ export class TrafficTicketBoxComponent implements OnInit {
   type: string;
   obj: any;
   students = [];
-  studentName: any;
+
 
   constructor(public dialogRef: MatDialogRef<DialogBoxComponent>, @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
-              public autoescolaservice: AutoescolaService) {
+              public autoescolaservice: AutoescolaService, private ns: SnackBarService) {
       this.localData = data;
       this.obj = this.localData.obj;
       this.autoescolaservice.getStudentList().subscribe(data => {
         this.students = data;
       });
-    // this.index = this.localData.index;
-      // this.action = this.localData.action;
-      // this.type = this.localData.type;
   }
 
   closeDialog() {
@@ -48,10 +47,27 @@ export class TrafficTicketBoxComponent implements OnInit {
       ticket.student = this.formTicket.value.student['id'];
       ticket.count = this.formTicket.value.count;
       ticket.date = moment(this.formTicket.value.date).format('MM-DD-YYYY');
-      this.autoescolaservice.postTrafficTicket(ticket);
-      this.dialogRef.close();
+      ticket.type = this.formTicket.value.type;
+      this.autoescolaservice.postTrafficTicket(ticket).subscribe(data => {
+        this.success();
+        this.dialogRef.close({
+          event: this.action,
+          data: true
+        });
+      }, error => {
+        this.error();
+        this.dialogRef.close({
+          event: this.action,
+          data: false
+        });
+      });
   }
-
+  success() {
+    this.ns.success('Multa adicionada com sucesso!');
+  }
+  error() {
+    this.ns.error('Erro ao adicionar multa. Verifique os campos e tente novamente!');
+  }
   ngOnInit() {
   }
 

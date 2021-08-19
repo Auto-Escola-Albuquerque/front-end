@@ -38,22 +38,46 @@ export class AdminAlunosDialogComponent implements OnInit {
   index: number;
   type: string;
   obj: any;
+  selected: any;
   student = new Student();
 
   constructor(public dialogRef: MatDialogRef<DialogBoxComponent>, @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
               public autoescolaservice: AutoescolaService, private ns: SnackBarService) {
 
     this.localData = data;
-    this.obj = this.localData.obj;
+    this.obj = this.data.data;
     this.index = this.localData.index;
     this.action = this.localData.action;
     this.type = this.localData.type;
   }
 
   ngOnInit() {
+    if (this.type === 'update') {
+      this.selected = this.obj.gender;
+      this.updateForm();
+    }
   }
   closeDialog() {
     this.dialogRef.close({ event: 'Cancel' });
+  }
+  updateForm() {
+    this.formStudent.patchValue({
+          name: this.obj.name,
+          cpf: this.obj.cpf,
+          registration: this.obj.registration,
+          gender: this.obj.gender,
+          email: this.obj.email,
+          phone: this.obj.phone,
+          theoreticalFines: this.obj.theoreticalFines,
+          practicalFines: this.obj.practicalFines,
+          dayClasses: this.obj.dayClasses,
+          nightClasses: this.obj.nightClasses,
+          defensiveDriving: this.obj.defensiveDriving,
+          firstAid: this.obj.firstAid,
+          environment: this.obj.environment,
+          legislation: this.obj.legislation,
+          mechanics: this.obj.mechanics,
+    });
   }
 
   onSubmit() {

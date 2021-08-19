@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { Class } from '../shared/class/class.model';
 import { AutoescolaService } from '../shared/autoescola.service';
 import {AdminClassesDialogComponent} from '../admin-classes-dialog/admin-classes-dialog.component';
+import {DeleteDialogComponent} from '../delete-dialog/delete-dialog.component';
 
 @Component({
     selector: 'app-admin-classes',
@@ -16,7 +17,7 @@ export class AdminClassesComponent implements OnInit {
     @ViewChild(MatSort, { static: false }) sort: MatSort;
 
     classes: any;
-    displayedColumns = ['N°', 'name', 'shift', 'size', 'update', 'delete'];
+    displayedColumns = ['N°', 'name', 'shift', 'update', 'delete'];
     dataSource: any;
 
     constructor(private autoescolaService: AutoescolaService, public dialog: MatDialog) { }
@@ -31,6 +32,15 @@ export class AdminClassesComponent implements OnInit {
       const dialogRef = this.dialog.open(AdminClassesDialogComponent, {
         width: '50%',
         data: {data: obj}
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.updateRowData();
+      });
+    }
+    openDeleteDialog(obj: any) {
+      const dialogRef = this.dialog.open(DeleteDialogComponent, {
+        width: '20%',
+        data: {data : obj, type : 'admin-classes'}
       });
       dialogRef.afterClosed().subscribe(result => {
         this.updateRowData();

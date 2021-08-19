@@ -25,15 +25,22 @@ export class AdminAlunosComponent implements OnInit {
     }
 
     ngOnInit() {
-      this.updateRowData();
+      this.autoescolaservice.getStudentList().subscribe(data => {
+        this.students = data;
+        for (let i = 0; i < this.students.length; i++){
+          this.students[i].seqNo = i + 1;
+        }
+        this.dataSource = new MatTableDataSource(this.students);
+        this.dataSource.sort = this.sort;
+      });
     }
     doFilter(value: string) {
       this.dataSource.filter = value.trim().toLowerCase();
     }
-    openDialog(obj: any) {
+    openDialog(obj: any, type: string) {
       const dialogRef = this.dialog.open(AdminAlunosDialogComponent, {
         width: '50%',
-        data: {data: obj}
+        data: {data: obj, type: type === 'add' ? 'add' : 'update'},
       });
 
       dialogRef.afterClosed().subscribe(result => {
@@ -46,8 +53,7 @@ export class AdminAlunosComponent implements OnInit {
         for (let i = 0; i < this.students.length; i++){
           this.students[i].seqNo = i + 1;
         }
-        this.dataSource = new MatTableDataSource(this.students);
-        this.dataSource.sort = this.sort;
+        this.dataSource.data = this.students;
       });
     }
 
@@ -55,6 +61,10 @@ export class AdminAlunosComponent implements OnInit {
       const dialogRef = this.dialog.open(DeleteDialogComponent, {
         width: '20%',
         data: {data: obj, type : 'admin-alunos'}
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.updateRowData();
       });
     }
 }

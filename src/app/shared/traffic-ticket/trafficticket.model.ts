@@ -5,7 +5,7 @@ export class Trafficticket {
     student: Student;
     count: number;
     date: string;
-    type: boolean;
+    type: string;
     constructor() {
       this.student = new Student();
     }
