@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Student } from './student/student.model';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { Employee } from './employee/employee.model';
 import { Class } from './class/class.model';
 import {from, Observable} from 'rxjs';
@@ -36,7 +36,10 @@ export class AutoescolaService {
     getEmployee(id: string) {
         return this.authHttp.get(`${this.url}/usuario/${id}`);
     }
-
+    getEmployeeName(email: string) {
+        let params = new HttpParams().set('email', email);
+        return this.authHttp.get(`${this.url}/usuario-email/`, { params: params});
+    }
     getEmployeeList(): Observable <Employee[]> {
       return this.authHttp.get<Employee[]>(`${this.url}/usuario/`);
     }
@@ -79,18 +82,12 @@ export class AutoescolaService {
     getClassList() {
       return this.authHttp.get(`${this.url}/turma/`);
     }
-    getDrivingSchool(id: string) {
-        this.authHttp.get(`${this.url}/driving-school/${id}`).subscribe(data => {
-            return data;
-        });
+    getCity(id: string) {
+        return this.authHttp.get(`${this.url}/franquia/${id}`);
     }
 
-    getDrivingSchoolList() {
-        let returnValue;
-        this.authHttp.get(`${this.url}/driving-school/list/`).subscribe(data => {
-            returnValue = data;
-        });
-        return returnValue;
+    getCityList() {
+        return this.authHttp.get(`${this.url}/franquia/`);
     }
 
     getSubjects(id: string) {
@@ -101,6 +98,9 @@ export class AutoescolaService {
 
     getSubjectsList(): Observable<Subjects[]> {
       return this.authHttp.get<Subjects[]>(`${this.url}/subject/`);
+    }
+    login(username: string, password: string) {
+      return this.authHttp.post(`${this.url}/api-token-auth/`, {username: username, password: password});
     }
     postStudent(student: Student) {
         return this.authHttp.post(`${this.url}/estudante/`, student);
@@ -115,9 +115,7 @@ export class AutoescolaService {
     }
 
     postDrivingSchool(school: DrivingSchool) {
-        this.authHttp.post(`${this.url}/driving-school/`, school).subscribe(data => {
-            console.log(data)
-        });
+       return this.authHttp.post(`${this.url}/franquia/`, school);
     }
 
     postsSubjects(Subject: Subjects) {
@@ -193,9 +191,10 @@ export class AutoescolaService {
     deleteClasses(cls: Class) {
       return this.authHttp.delete(`${this.url}/turma/${cls.id}`).subscribe();
     }
-
+    deleteDrivingSchool(franchise: DrivingSchool) {
+      return this.authHttp.delete(`${this.url}/franquia/${franchise.id}`).subscribe();
+    }
     deleteAllInstructorClass() {
         return this.authHttp.delete(`${this.url}/aula-instrutor/`).subscribe();
     }
-
 }
