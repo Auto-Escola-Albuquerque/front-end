@@ -33,9 +33,7 @@ export class AdminAlunosDialogComponent implements OnInit {
   });
 
 
-  action: string;
   localData: any;
-  index: number;
   type: string;
   obj: any;
   selected: any;
@@ -46,14 +44,13 @@ export class AdminAlunosDialogComponent implements OnInit {
 
     this.localData = data;
     this.obj = this.data.data;
-    this.index = this.localData.index;
-    this.action = this.localData.action;
     this.type = this.localData.type;
   }
 
   ngOnInit() {
     if (this.type === 'update') {
       this.selected = this.obj.gender;
+      console.log(this.selected)
       this.updateForm();
     }
   }

@@ -38,23 +38,21 @@ td{
 }
 
 .button-table {
-  padding-left: 10%;
+  margin-left: 9%;
   padding-top: 20px;
-}
-
-.mat-flat-button {
-  transition: transform .4s;
 }
 
 .mat-flat-button:hover {
   transform: scale(1.1);
 }
 
-.mat-raised-button {
+.mat-flat-button {
   background-color: #FFD700;
   color: #000;
-  margin-left: 15%;
+  margin-left: 10%;
   margin-top: 3%;
+  transition: transform .4s;
+
 }
 
 .gray-element{

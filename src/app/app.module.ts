@@ -52,6 +52,12 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { AdminClassesDialogComponent } from './admin-classes-dialog/admin-classes-dialog.component';
 import { AddRelationshipDialogComponent } from './add-relationship-dialog/add-relationship-dialog.component';
+import {MatRadioModule} from '@angular/material/radio';
+import { AdminFranquiasDialogComponent } from './admin-franquias-dialog/admin-franquias-dialog.component';
+import {StorageService} from './shared/storage.service';
+import {AuthGuardService} from './shared/auth-guard.service';
+import {HttpInterceptorService} from './shared/http-interceptor.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -79,6 +85,7 @@ import { AddRelationshipDialogComponent } from './add-relationship-dialog/add-re
     InstructorClassDialogComponent,
     AdminClassesDialogComponent,
     AddRelationshipDialogComponent,
+    AdminFranquiasDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -110,11 +117,18 @@ import { AddRelationshipDialogComponent } from './add-relationship-dialog/add-re
     MatDialogModule,
     MatCheckboxModule,
     MatSnackBarModule,
-    MatCardModule
+    MatCardModule,
+    MatRadioModule
   ],
   entryComponents: [DialogBoxComponent, AdminAlunosDialogComponent, AdminInstrutorDialogComponent, DeleteDialogComponent,
-      TrafficTicketBoxComponent, InstructorClassDialogComponent, AdminFuncionariosDialogComponent, AdminClassesDialogComponent, AddRelationshipDialogComponent],
-  providers: [AutoescolaService, SnackBarService],
+      TrafficTicketBoxComponent, InstructorClassDialogComponent, AdminFuncionariosDialogComponent, AdminClassesDialogComponent, AddRelationshipDialogComponent,
+      AdminFranquiasDialogComponent],
+  providers: [AutoescolaService, SnackBarService, StorageService, AuthGuardService, HttpInterceptorService, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

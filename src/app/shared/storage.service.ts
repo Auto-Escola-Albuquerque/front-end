@@ -13,6 +13,7 @@ export class StorageService {
     localStorage.setItem(key, JSON.stringify(data));
   }
   clearData() {
-    localStorage.clear();
+    localStorage.removeItem('token');
+    localStorage.removeItem('name');
   }
 }

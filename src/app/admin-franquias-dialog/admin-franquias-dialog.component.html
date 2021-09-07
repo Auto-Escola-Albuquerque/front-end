@@ -1,0 +1,18 @@
+<div>
+  <h1 mat-dialog-title>Adicionar Nova Franquia</h1>
+  <div mat-dialog-content>
+    <div class="content">
+      <form [formGroup]="formFranchise" class="my-form" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="legacy" class="col-lg-5">
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="name" required>
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
+  <div mat-dialog-actions class="buttons">
+    <button mat-button (click)="onSubmit()" mat-flat-button color="warn">Salvar</button>
+    <button mat-button (click)="closeDialog()">Cancelar</button>
+  </div>
+</div>
+

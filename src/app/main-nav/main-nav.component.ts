@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import {AutoescolaService} from '../shared/autoescola.service';
 import {Router} from '@angular/router';
+import {StorageService} from '../shared/storage.service';
 
 @Component({
     selector: 'app-main-nav',
@@ -11,22 +12,19 @@ import {Router} from '@angular/router';
     styleUrls: ['./main-nav.component.scss']
 })
 export class MainNavComponent {
-
-    panelOpenState = false;
-    isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-        .pipe(
-            map(result => result.matches),
-            shareReplay()
-        );
     instructors: any;
     classes: any;
     constructor(private breakpointObserver: BreakpointObserver, private autoescolaservice: AutoescolaService,
-                private router: Router) {
+                private router: Router, private storage: StorageService) {
         this.autoescolaservice.getInstructorList().subscribe(data => {
             this.instructors = data;
         });
         this.autoescolaservice.getClassList().subscribe(data => {
             this.classes = data;
         });
+    }
+    logout() {
+      this.storage.clearData();
+      this.router.navigateByUrl('');
     }
 }

@@ -53,9 +53,7 @@ export class AdminFuncionariosDialogComponent implements OnInit {
       this.error();
     });
 
-    this.dialogRef.close({
-      event: this.action
-    });
+    this.dialogRef.close();
   }
   success() {
     this.ns.success('O funcionário foi adicionado com sucesso!');

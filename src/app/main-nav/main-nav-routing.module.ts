@@ -13,26 +13,27 @@ import { MainNavComponent } from './main-nav.component';
 import { AdminClassesComponent } from '../admin-classes/admin-classes.component';
 import {TrafficTicketComponent} from '../traffic-ticket/traffic-ticket.component';
 import {InstrutorTeoricoComponent} from '../instrutor-teorico/instrutor-teorico.component';
+import {AuthGuardService} from '../shared/auth-guard.service';
 
 const routes: Routes = [
-    {
-        path: '',
-        component: MainNavComponent,
-        children: [
-            {path: 'admin-alunos', component: AdminAlunosComponent},
-            {path: 'admin-instrutor', component: AdminInstrutorComponent},
-            {path: 'admin-funcionarios', component: AdminFuncionariosComponent},
-            {path: 'admin-franquias', component: AdminFranquiasComponent},
-            {path: 'admin-classes', component: AdminClassesComponent},
-            // {path: 'alunos-teoricos', component: AlunosTeoricosComponent},
-            {path: 'alunos-praticos', component: AlunosPraticosComponent},
-            {path: 'turmas', component: TurmasComponent},
-            {path: 'tabela-pratica', component: TabelaPraticaComponent},
-            {path: 'turma/:id', component: AlunosTeoricosComponent},
-            {path: 'multas', component: TrafficTicketComponent},
-            {path: 'instrutor/:id', component: InstrutorTeoricoComponent}
-        ]
-    }
+    // {
+    //     path: 'home',
+    //     component: MainNavComponent,
+    //     canActivateChild: [AuthGuardService],
+    //     children: [
+    //         {path: 'admin-alunos', component: AdminAlunosComponent},
+    //         {path: 'admin-instrutor', component: AdminInstrutorComponent},
+    //         {path: 'admin-funcionarios', component: AdminFuncionariosComponent},
+    //         {path: 'admin-franquias', component: AdminFranquiasComponent},
+    //         {path: 'admin-classes', component: AdminClassesComponent},
+    //         {path: 'alunos-praticos', component: AlunosPraticosComponent},
+    //         {path: 'turmas', component: TurmasComponent},
+    //         {path: 'tabela-pratica', component: TabelaPraticaComponent},
+    //         {path: 'turma/:id', component: AlunosTeoricosComponent},
+    //         {path: 'multas', component: TrafficTicketComponent},
+    //         {path: 'instrutor/:id', component: InstrutorTeoricoComponent}
+    //     ]
+    // }
 ];
 
 @NgModule({

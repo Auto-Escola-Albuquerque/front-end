@@ -3,21 +3,9 @@
     <span style="flex: 1 1 auto;"></span>
     <div>
         <mat-card-title class="logout">Sair</mat-card-title>
-        <button mat-icon-button>
+        <button mat-icon-button (click)="this.logout()">
             <mat-icon>exit_to_app</mat-icon>
         </button>
-        <!-- <button mat-icon-button matTooltip="My Account" [matMenuTriggerFor]="accountMenu">
-            <mat-icon>exit_to_app</mat-icon>
-        </button> -->
-        <!-- <mat-menu #accountMenu [overlapTrigger]="false" yPosition="below">
-            <button mat-menu-item routerLink="#">
-                <mat-icon>person</mat-icon><span>Minha Conta</span>
-            </button>
-            <mat-divider></mat-divider>
-            <button mat-menu-item>
-                <mat-icon>exit_to_app</mat-icon>Sair
-            </button>
-        </mat-menu> -->
     </div>
 </mat-toolbar>
 
@@ -79,7 +67,7 @@
                     <a mat-list-item routerLink="/admin-alunos">Alunos</a>
                     <a mat-list-item routerLink="/admin-instrutor">Instrutor</a>
                     <a mat-list-item routerLink="/admin-funcionarios">Funcionários</a>
-<!--                    <a mat-list-item routerLink="/admin-franquias">Franquias</a>-->
+                    <a mat-list-item routerLink="/admin-franquias">Franquias</a>
                     <a mat-list-item routerLink="/admin-classes">Turmas</a>
                 </mat-nav-list>
             </mat-expansion-panel>
@@ -88,5 +76,4 @@
 
     </mat-sidenav>
     <router-outlet></router-outlet>
-
 </mat-sidenav-container>
