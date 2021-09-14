@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Student } from './student/student.model';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpParams, HttpBackend} from '@angular/common/http';
 import { Employee } from './employee/employee.model';
 import { Class } from './class/class.model';
 import {from, Observable} from 'rxjs';
@@ -15,11 +15,13 @@ import {Relationship} from './relationship/relationship.model';
 @Injectable()
 export class AutoescolaService {
     private url = 'http://127.0.0.1:8000';
-
-    constructor(private authHttp: HttpClient) {
-
+    client: any;
+    constructor(private authHttp: HttpClient, private httpBackend: HttpBackend) {
+      this.client = new HttpClient(httpBackend);
     }
-
+    login(username: string, password: string) {
+      return this.client.post(`${this.url}/api-token-auth/`, {username: username, password: password});
+    }
 
     getStudent(id: string) {
         return this.authHttp.get(`${this.url}/estudante/${id}`);
@@ -99,9 +101,7 @@ export class AutoescolaService {
     getSubjectsList(): Observable<Subjects[]> {
       return this.authHttp.get<Subjects[]>(`${this.url}/subject/`);
     }
-    login(username: string, password: string) {
-      return this.authHttp.post(`${this.url}/api-token-auth/`, {username: username, password: password});
-    }
+
     postStudent(student: Student) {
         return this.authHttp.post(`${this.url}/estudante/`, student);
     }

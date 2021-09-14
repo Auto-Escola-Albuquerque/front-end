@@ -51,6 +51,6 @@ export class LoginComponent implements OnInit {
     this.storageService.clearData();
   }
   redirect() {
-    this.router.navigateByUrl('home');
+    this.router.navigateByUrl('franquia');
   }
 }

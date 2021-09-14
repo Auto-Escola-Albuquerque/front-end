@@ -25,7 +25,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MomentDateModule } from '@angular/material-moment-adapter';
 import {MatIconModule} from '@angular/material/icon'
 import {MatSidenavModule} from '@angular/material/sidenav';
-import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
@@ -58,6 +57,10 @@ import {StorageService} from './shared/storage.service';
 import {AuthGuardService} from './shared/auth-guard.service';
 import {HttpInterceptorService} from './shared/http-interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import {MainNavComponent} from './main-nav/main-nav.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { CheckFranchiseComponent } from './check-franchise/check-franchise.component';
+
 
 @NgModule({
   declarations: [
@@ -72,7 +75,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     TabelaPraticaComponent,
     ModuloInstrutorComponent,
     LoginComponent,
-    MainNavComponent,
     AdminClassesComponent,
     DialogBoxComponent,
     AdminAlunosDialogComponent,
@@ -86,6 +88,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     AdminClassesDialogComponent,
     AddRelationshipDialogComponent,
     AdminFranquiasDialogComponent,
+    MainNavComponent,
+    NotFoundComponent,
+    CheckFranchiseComponent
   ],
   imports: [
     BrowserModule,
@@ -118,11 +123,12 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     MatCheckboxModule,
     MatSnackBarModule,
     MatCardModule,
-    MatRadioModule
+    MatRadioModule,
+    MainNavRoutingModule
   ],
   entryComponents: [DialogBoxComponent, AdminAlunosDialogComponent, AdminInstrutorDialogComponent, DeleteDialogComponent,
       TrafficTicketBoxComponent, InstructorClassDialogComponent, AdminFuncionariosDialogComponent, AdminClassesDialogComponent, AddRelationshipDialogComponent,
-      AdminFranquiasDialogComponent],
+      AdminFranquiasDialogComponent, MainNavComponent],
   providers: [AutoescolaService, SnackBarService, StorageService, AuthGuardService, HttpInterceptorService, {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,

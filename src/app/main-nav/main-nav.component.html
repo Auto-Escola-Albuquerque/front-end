@@ -31,7 +31,7 @@
               Multas
             </mat-expansion-panel-header>
             <mat-nav-list dense>
-              <a mat-list-item routerLink="/multas">
+              <a mat-list-item routerLink="/home/multas">
                 Todas as multas
               </a>
             </mat-nav-list>
@@ -42,7 +42,7 @@
                     Instrutores
                 </mat-expansion-panel-header>
                 <mat-nav-list dense *ngFor="let instructor of this.instructors">
-                      <a mat-list-item [routerLink]="['/instrutor', instructor.id]">
+                      <a mat-list-item [routerLink]="['/home/instrutor', instructor.id]">
                           {{instructor.name}}
                       </a>
                 </mat-nav-list>
@@ -53,7 +53,7 @@
                     Turmas
                 </mat-expansion-panel-header>
                 <mat-nav-list dense *ngFor="let classes of this.classes">
-                    <a mat-list-item [routerLink]="['/turma', classes.id]">
+                    <a mat-list-item [routerLink]="['/home/turma', classes.id]">
                         {{classes.name}}
                     </a>
                 </mat-nav-list>
@@ -64,11 +64,11 @@
                     Administração
                 </mat-expansion-panel-header>
                 <mat-nav-list dense>
-                    <a mat-list-item routerLink="/admin-alunos">Alunos</a>
-                    <a mat-list-item routerLink="/admin-instrutor">Instrutor</a>
-                    <a mat-list-item routerLink="/admin-funcionarios">Funcionários</a>
-                    <a mat-list-item routerLink="/admin-franquias">Franquias</a>
-                    <a mat-list-item routerLink="/admin-classes">Turmas</a>
+                    <a mat-list-item routerLink="/home/admin-alunos">Alunos</a>
+                    <a mat-list-item routerLink="/home/admin-instrutor">Instrutor</a>
+                    <a mat-list-item routerLink="/home/admin-funcionarios">Funcionários</a>
+                    <a mat-list-item routerLink="/home/admin-franquias">Franquias</a>
+                    <a mat-list-item routerLink="/home/admin-classes">Turmas</a>
                 </mat-nav-list>
             </mat-expansion-panel>
 

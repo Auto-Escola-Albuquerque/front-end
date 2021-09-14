@@ -10,7 +10,12 @@ export class AuthGuardService implements CanActivate {
   constructor(private storageService: StorageService, private router: Router) {
   }
   canActivate() {
-    return true;
+    if (this.storageService.getData('name')) {
+      return true;
+    } else {
+      window.alert('Ops! Página em branco');
+      return false;
+    }
   }
   canActivateChild() {
     if (this.storageService.getData('name')) {

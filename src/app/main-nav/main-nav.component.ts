@@ -25,6 +25,6 @@ export class MainNavComponent {
     }
     logout() {
       this.storage.clearData();
-      this.router.navigateByUrl('');
+      this.router.navigateByUrl('login');
     }
 }
