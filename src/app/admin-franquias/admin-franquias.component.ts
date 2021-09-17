@@ -31,7 +31,6 @@ export class AdminFranquiasComponent implements OnInit {
           this.dataSource = new MatTableDataSource(this.franchises);
           this.dataSource.paginator = this.matPaginator;
           this.dataSource.sort = this.sort;
-          console.log(this.franchises);
         });
     }
 

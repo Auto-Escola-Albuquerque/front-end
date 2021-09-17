@@ -20,7 +20,8 @@
 
     </form>
     <div mat-dialog-actions class="buttons">
-      <button mat-button (click)="onSubmit()" mat-flat-button color="warn" [class.spinner]="loading" [disabled]="loading">Salvar</button>
+      <button mat-button *ngIf="this.type === 'add'" (click)="onSubmit()" mat-flat-button color="warn" [class.spinner]="loading" [disabled]="loading">Salvar</button>
+      <button mat-button *ngIf="this.type === 'update'" (click)="update()" mat-flat-button color="warn" [class.spinner]="loading" [disabled]="loading">Atualizar</button>
       <button mat-button (click)="closeDialog()">Cancelar</button>
     </div>
   </div>

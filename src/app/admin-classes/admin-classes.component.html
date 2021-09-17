@@ -20,7 +20,7 @@
             <ng-container matColumnDef="update">
                 <th mat-header-cell *matHeaderCellDef> Atualizar Dados </th>
                 <td mat-cell *matCellDef="let classes">
-                   <button mat-icon-button>
+                   <button mat-icon-button (click)="openDialog(classes, 'update')">
                     <mat-icon>edit</mat-icon>
                   </button>
                 </td>
@@ -42,7 +42,7 @@
     </div>
 
     <div class="form-element">
-        <button mat-raised-button color="primary" type="submit" class="button" (click)="openDialog(classes)">Adicionar Turma</button>
+        <button mat-raised-button color="primary" type="submit" class="button" (click)="openDialog(classes, 'add')">Adicionar Turma</button>
     </div>
 </div>
 

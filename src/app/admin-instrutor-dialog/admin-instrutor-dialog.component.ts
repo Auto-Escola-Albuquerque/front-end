@@ -5,6 +5,8 @@ import * as moment from 'moment';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { AutoescolaService } from '../shared/autoescola.service';
 import {Instructor} from '../shared/instructor/instructor.model';
+import {StorageService} from '../shared/storage.service';
+import {SnackBarService} from '../shared/snack-bar.service';
 
 @Component({
   selector: 'app-admin-funcionario-dialog',
@@ -26,7 +28,7 @@ export class AdminInstrutorDialogComponent implements OnInit {
   obj: any;
   constructor(public autoescolaservice: AutoescolaService,
               @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
-              public dialogRef: MatDialogRef<DialogBoxComponent>) {
+              public dialogRef: MatDialogRef<DialogBoxComponent>, private storageService: StorageService, private snackBar: SnackBarService) {
       this.localData = data;
       this.obj = this.localData.obj;
       this.index = this.localData.index;
@@ -43,10 +45,20 @@ export class AdminInstrutorDialogComponent implements OnInit {
       instructor.name = this.formInstructor.value.name;
       instructor.cpf = this.formInstructor.value.cpf;
       instructor.type = this.formInstructor.value.type;
-      instructor.city = null;
+      instructor.city = this.storageService.getData('franchise');
 
       let response;
-      this.autoescolaservice.postInstructor(instructor);
+      this.autoescolaservice.postInstructor(instructor).subscribe(data => {
+        this.succes();
+      }, error => {
+        this.error();
+      });
       this.dialogRef.close();
+  }
+  succes() {
+    this.snackBar.success('Instrutor Adicionado com sucesso');
+  }
+  error() {
+    this.snackBar.error('Erro ao adicionar instrutor. Verifique os campos e tente novamente');
   }
 }

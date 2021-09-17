@@ -11,7 +11,9 @@
 
 <mat-sidenav-container style="height: calc(100% - 64px); margin: 0;">
     <mat-sidenav #sidenav mode="side" opened [disableClose]="true" [class.mat-elevation-z4]="true" style="width: 240px">
-        <mat-nav-list dense>
+      <h4>{{this.employee}}</h4>
+
+      <mat-nav-list dense>
             <mat-expansion-panel [class.mat-elevation-z0]="true">
                 <mat-expansion-panel-header>
                     Prático

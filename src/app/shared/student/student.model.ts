@@ -3,6 +3,7 @@ export class Student {
     seqNo: number;
     name: string;
     cpf: string;
+    city: number;
     registrationDate: string;
     gender: boolean;
     email: string;

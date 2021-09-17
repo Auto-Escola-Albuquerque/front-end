@@ -28,10 +28,10 @@ export class AdminClassesComponent implements OnInit {
     doFilter(value: string) {
         this.dataSource.filter = value.trim().toLowerCase();
     }
-    openDialog(obj: any) {
+    openDialog(obj: any, type: string) {
       const dialogRef = this.dialog.open(AdminClassesDialogComponent, {
         width: '50%',
-        data: {data: obj}
+        data: {data: obj, type: type === 'add' ? 'add' : 'update'}
       });
       dialogRef.afterClosed().subscribe(result => {
         this.updateRowData();

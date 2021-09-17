@@ -3,6 +3,6 @@ export class Instructor {
     seq: number;
     name: string;
     cpf: string;
-    city: string;
+    city: number;
     type: string;
 }

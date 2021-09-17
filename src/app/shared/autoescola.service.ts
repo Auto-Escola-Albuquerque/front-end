@@ -135,9 +135,7 @@ export class AutoescolaService {
     }
 
     postInstructor(instructor: Instructor) {
-        return this.authHttp.post(`${this.url}/instrutor/`, instructor).subscribe(data => {
-          console.log(data);
-        });
+        return this.authHttp.post(`${this.url}/instrutor/`, instructor);
     }
 
     postInstructorClass(instructorClass: InstructorClass) {
@@ -155,7 +153,7 @@ export class AutoescolaService {
     }
 
     putStudent(student: Student) {
-        return this.authHttp.put(`${this.url}/estudante/${student.id}`, student).subscribe();
+        return this.authHttp.put(`${this.url}/estudante/${student.id}`, student);
     }
 
     putEmployee(employee: Employee) {
@@ -163,7 +161,7 @@ export class AutoescolaService {
     }
 
     putClass(cls: Class) {
-        return this.authHttp.put(`${this.url}/turma/`, cls);
+        return this.authHttp.put(`${this.url}/turma/${cls.id}`, cls);
     }
 
     deleteStudent(student: Student) {

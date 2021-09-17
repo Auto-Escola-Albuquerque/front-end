@@ -100,7 +100,8 @@
     </div>
   </div>
   <div mat-dialog-actions class="buttons">
-    <button mat-button (click)="onSubmit()" mat-flat-button color="warn">Salvar</button>
+    <button *ngIf="this.type === 'add'" mat-button (click)="onSubmit()" mat-flat-button color="warn">Salvar</button>
+    <button *ngIf="this.type === 'update'" mat-button (click)="update()" mat-flat-button color="warn">Atualizar</button>
     <button mat-button (click)="closeDialog()">Cancelar</button>
   </div>
 </div>

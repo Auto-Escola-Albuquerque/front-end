@@ -3,4 +3,5 @@ export class Class {
     seq: number;
     name: string;
     shift: number;
+    city: number;
 }

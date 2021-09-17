@@ -14,6 +14,8 @@ import {StorageService} from '../shared/storage.service';
 export class MainNavComponent {
     instructors: any;
     classes: any;
+    employee: any;
+
     constructor(private breakpointObserver: BreakpointObserver, private autoescolaservice: AutoescolaService,
                 private router: Router, private storage: StorageService) {
         this.autoescolaservice.getInstructorList().subscribe(data => {
@@ -22,6 +24,7 @@ export class MainNavComponent {
         this.autoescolaservice.getClassList().subscribe(data => {
             this.classes = data;
         });
+        this.employee = this.storage.getData('name');
     }
     logout() {
       this.storage.clearData();
