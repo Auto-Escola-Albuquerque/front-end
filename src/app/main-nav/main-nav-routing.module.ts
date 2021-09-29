@@ -6,14 +6,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminFuncionariosComponent } from '../admin-funcionarios/admin-funcionarios.component';
 import { AdminFranquiasComponent } from '../admin-franquias/admin-franquias.component';
 import { AlunosTeoricosComponent } from '../alunos-teoricos/alunos-teoricos.component';
-import { AlunosPraticosComponent } from '../alunos-praticos/alunos-praticos.component';
-import { TurmasComponent } from '../turmas/turmas.component';
 import { TabelaPraticaComponent } from '../tabela-pratica/tabela-pratica.component';
 import { AdminClassesComponent } from '../admin-classes/admin-classes.component';
 import {TrafficTicketComponent} from '../traffic-ticket/traffic-ticket.component';
 import {InstrutorTeoricoComponent} from '../instrutor-teorico/instrutor-teorico.component';
 import {AuthGuardService} from '../shared/auth-guard.service';
 import {MainNavComponent} from './main-nav.component';
+import {AdminTabelasPraticasComponent} from '../admin-tabelas-praticas/admin-tabelas-praticas.component';
+import {AlunosComponent} from '../alunos/alunos.component';
 
 const routes: Routes = [
   {
@@ -26,12 +26,13 @@ const routes: Routes = [
             {path: 'admin-funcionarios', component: AdminFuncionariosComponent},
             {path: 'admin-franquias', component: AdminFranquiasComponent},
             {path: 'admin-classes', component: AdminClassesComponent},
-            {path: 'alunos-praticos', component: AlunosPraticosComponent},
-            {path: 'turmas', component: TurmasComponent},
+            {path: 'admin-tabelas-praticas', component: AdminTabelasPraticasComponent},
             {path: 'tabela-pratica', component: TabelaPraticaComponent},
+            {path: 'tabela-pratica/:id', component: TabelaPraticaComponent},
             {path: 'turma/:id', component: AlunosTeoricosComponent},
             {path: 'multas', component: TrafficTicketComponent},
-            {path: 'instrutor/:id', component: InstrutorTeoricoComponent}
+            {path: 'instrutor/:id', component: InstrutorTeoricoComponent},
+            {path: 'alunos', component: AlunosComponent}
         ]
     }
 ];

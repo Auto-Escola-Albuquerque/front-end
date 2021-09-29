@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Atualizar valor</h1>
+  <div mat-dialog-content>
+    <mat-form-field *ngIf="action != 'Delete'; else elseTemplate">
+      <input *ngIf="this.type == 'student'" placeholder="Aluno" matInput [(ngModel)]="obj">
+      <input *ngIf="this.type == 'km'" placeholder="Quilometragem" matInput [(ngModel)]="obj">
+      <input *ngIf="this.type == 'hour'" placeholder="Hora da Aula" matInput [(ngModel)]="obj">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onSubmit()" mat-flat-button color="warn">Atualizar</button>
+    <button mat-button (click)="closeDialog()">Cancelar</button>
+  </div>

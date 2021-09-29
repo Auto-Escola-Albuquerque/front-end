@@ -49,6 +49,8 @@ export class DeleteDialogComponent implements OnInit {
       this.autoescolaservice.deleteClasses(this.localData);
     } else if (this.type === 'admin-franquia') {
       this.autoescolaservice.deleteDrivingSchool(this.localData);
+    } else if (this.type === 'linhas-pratica') {
+      this.autoescolaservice.deleteLine(this.localData).subscribe();
     }
     this.dialogRef.close({
       event: this.action, data: this.localData

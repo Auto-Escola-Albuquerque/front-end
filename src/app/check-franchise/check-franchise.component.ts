@@ -24,7 +24,7 @@ export class CheckFranchiseComponent implements OnInit {
     });
   }
   onSubmit() {
-    this.storageService.setData('franchise', this.form.value.franchise.id);
+    this.storageService.setData('franchise', this.form.value.franchise);
     this.redirect();
   }
   redirect() {

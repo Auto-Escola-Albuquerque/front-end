@@ -3,15 +3,12 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TurmasComponent } from './turmas/turmas.component';
 import { AdminAlunosComponent } from './admin-alunos/admin-alunos.component';
 import { AdminInstrutorComponent } from './admin-instrutor/admin-instrutor.component';
 import { AdminFranquiasComponent } from './admin-franquias/admin-franquias.component';
 import { AdminFuncionariosComponent } from './admin-funcionarios/admin-funcionarios.component';
-import { AlunosPraticosComponent } from './alunos-praticos/alunos-praticos.component';
 import { AlunosTeoricosComponent } from './alunos-teoricos/alunos-teoricos.component';
 import { TabelaPraticaComponent } from './tabela-pratica/tabela-pratica.component';
-import { ModuloInstrutorComponent } from './modulo-instrutor/modulo-instrutor.component';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -60,20 +57,21 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {MainNavComponent} from './main-nav/main-nav.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CheckFranchiseComponent } from './check-franchise/check-franchise.component';
-
+import { AdminTabelasPraticasComponent } from './admin-tabelas-praticas/admin-tabelas-praticas.component';
+import { AdminTabelasPraticasDialogComponent } from './admin-tabelas-praticas-dialog/admin-tabelas-praticas-dialog.component';
+import { LinesDialogComponent } from './lines-dialog/lines-dialog.component';
+import {MatSlideToggleModule} from '@angular/material';
+import { AlunosComponent } from './alunos/alunos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TurmasComponent,
     AdminAlunosComponent,
     AdminInstrutorComponent,
     AdminFranquiasComponent,
     AdminFuncionariosComponent,
-    AlunosPraticosComponent,
     AlunosTeoricosComponent,
     TabelaPraticaComponent,
-    ModuloInstrutorComponent,
     LoginComponent,
     AdminClassesComponent,
     DialogBoxComponent,
@@ -90,7 +88,11 @@ import { CheckFranchiseComponent } from './check-franchise/check-franchise.compo
     AdminFranquiasDialogComponent,
     MainNavComponent,
     NotFoundComponent,
-    CheckFranchiseComponent
+    CheckFranchiseComponent,
+    AdminTabelasPraticasComponent,
+    AdminTabelasPraticasDialogComponent,
+    LinesDialogComponent,
+    AlunosComponent,
   ],
   imports: [
     BrowserModule,
@@ -124,11 +126,12 @@ import { CheckFranchiseComponent } from './check-franchise/check-franchise.compo
     MatSnackBarModule,
     MatCardModule,
     MatRadioModule,
-    MainNavRoutingModule
+    MainNavRoutingModule,
+    MatSlideToggleModule
   ],
   entryComponents: [DialogBoxComponent, AdminAlunosDialogComponent, AdminInstrutorDialogComponent, DeleteDialogComponent,
       TrafficTicketBoxComponent, InstructorClassDialogComponent, AdminFuncionariosDialogComponent, AdminClassesDialogComponent, AddRelationshipDialogComponent,
-      AdminFranquiasDialogComponent, MainNavComponent],
+      AdminFranquiasDialogComponent, MainNavComponent, AdminTabelasPraticasDialogComponent, LinesDialogComponent],
   providers: [AutoescolaService, SnackBarService, StorageService, AuthGuardService, HttpInterceptorService, {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,

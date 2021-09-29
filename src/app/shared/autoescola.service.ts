@@ -11,6 +11,8 @@ import {Subjects} from './subjects/subjects.model';
 import {Trafficticket} from './traffic-ticket/trafficticket.model';
 import {InstructorClass} from './instructor-class/instructor-class.model';
 import {Relationship} from './relationship/relationship.model';
+import {PracticalTable} from './practical-table/practical-table.model';
+import {PracticalLines} from './practical-lines/practical-lines.model';
 
 @Injectable()
 export class AutoescolaService {
@@ -74,6 +76,14 @@ export class AutoescolaService {
         return this.authHttp.get(`${this.url}/multas/${id}`);
     }
 
+    getTable(id: string) {
+      return this.authHttp.get(`${this.url}/tabela-pratica/${id}`);
+    }
+
+    getLines(id: string) {
+      return this.authHttp.get(`${this.url}/linha-pratica/${id}`);
+    }
+
     getTrafficTicketList() {
         return this.authHttp.get(`${this.url}/multas/`);
     }
@@ -90,6 +100,18 @@ export class AutoescolaService {
 
     getCityList() {
         return this.authHttp.get(`${this.url}/franquia/`);
+    }
+
+    getTableList() {
+      return this.authHttp.get(`${this.url}/tabela-pratica/`);
+    }
+
+    getLineByTable(id: string) {
+      return this.authHttp.get(`${this.url}/linha-pratica-tabela/${id}`);
+    }
+
+    getLinesList() {
+      return this.authHttp.get(`${this.url}/linha-pratica/`);
     }
 
     getSubjects(id: string) {
@@ -134,6 +156,18 @@ export class AutoescolaService {
       return this.authHttp.post(`${this.url}/relacao/`, relation);
     }
 
+    postTable(table: PracticalTable) {
+      return this.authHttp.post(`${this.url}/tabela-pratica/`, table);
+    }
+
+    patchTable(table: PracticalTable) {
+      return this.authHttp.patch(`${this.url}/tabela-pratica/${table.id}`, table);
+    }
+
+    postLine(line: PracticalLines) {
+      return this.authHttp.post(`${this.url}/linha-pratica/`, line);
+    }
+
     postInstructor(instructor: Instructor) {
         return this.authHttp.post(`${this.url}/instrutor/`, instructor);
     }
@@ -154,6 +188,10 @@ export class AutoescolaService {
 
     putStudent(student: Student) {
         return this.authHttp.put(`${this.url}/estudante/${student.id}`, student);
+    }
+
+    patchLine(index: number, line: PracticalLines) {
+      return this.authHttp.patch(`${this.url}/linha-pratica/${index}`, line);
     }
 
     putEmployee(employee: Employee) {
@@ -194,5 +232,11 @@ export class AutoescolaService {
     }
     deleteAllInstructorClass() {
         return this.authHttp.delete(`${this.url}/aula-instrutor/`).subscribe();
+    }
+    deleteTable(table: PracticalTable) {
+      return this.authHttp.delete(`${this.url}/tabela-pratica/${table.id}`);
+    }
+    deleteLine(line: PracticalLines) {
+      return this.authHttp.delete(`${this.url}/linha-pratica/${line.id}`);
     }
 }

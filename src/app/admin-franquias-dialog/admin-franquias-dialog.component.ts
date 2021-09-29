@@ -23,6 +23,7 @@ export class AdminFranquiasDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
   onSubmit() {
     const franchise = new DrivingSchool();

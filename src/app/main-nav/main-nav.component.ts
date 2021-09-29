@@ -15,6 +15,7 @@ export class MainNavComponent {
     instructors: any;
     classes: any;
     employee: any;
+    tables: any;
 
     constructor(private breakpointObserver: BreakpointObserver, private autoescolaservice: AutoescolaService,
                 private router: Router, private storage: StorageService) {
@@ -23,6 +24,9 @@ export class MainNavComponent {
         });
         this.autoescolaservice.getClassList().subscribe(data => {
             this.classes = data;
+        });
+        this.autoescolaservice.getTableList().subscribe(data =>{
+          this.tables = data;
         });
         this.employee = this.storage.getData('name');
     }

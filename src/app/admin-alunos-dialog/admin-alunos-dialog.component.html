@@ -39,7 +39,10 @@
           </mat-select>
         </mat-form-field>
 
-<!---->
+        <mat-form-field appearance="legacy" class="col-lg-5">
+          <mat-checkbox formControlName="isPractical" [checked]="this.student.isPractical" (change)="this.updateCheck()">Aluno Prático</mat-checkbox>
+          <textarea matInput hidden></textarea>
+        </mat-form-field>
 
         <mat-form-field appearance="legacy" class="col-lg-5">
           <mat-label>Email</mat-label>

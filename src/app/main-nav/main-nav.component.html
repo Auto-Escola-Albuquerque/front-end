@@ -16,17 +16,28 @@
       <mat-nav-list dense>
             <mat-expansion-panel [class.mat-elevation-z0]="true">
                 <mat-expansion-panel-header>
-                    Prático
+                    Alunos
                 </mat-expansion-panel-header>
                 <mat-nav-list dense>
-                    <a mat-list-item routerLink="#">
-                        Alunos
+                    <a mat-list-item routerLink="/home/alunos">
+                        Alunos Teóricos
                     </a>
                     <a mat-list-item routerLink="#">
-                        Tabela Prática
+                        Alunos Práticos
                     </a>
                 </mat-nav-list>
             </mat-expansion-panel>
+
+          <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
+            <mat-expansion-panel-header>
+              Tabelas Práticas
+            </mat-expansion-panel-header>
+            <mat-nav-list dense *ngFor="let table of this.tables">
+              <a mat-list-item [routerLink]="['/home/tabela-pratica', table.id]">
+                {{table.name}}
+              </a>
+            </mat-nav-list>
+          </mat-expansion-panel>
 
           <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
             <mat-expansion-panel-header>
@@ -71,6 +82,7 @@
                     <a mat-list-item routerLink="/home/admin-funcionarios">Funcionários</a>
                     <a mat-list-item routerLink="/home/admin-franquias">Franquias</a>
                     <a mat-list-item routerLink="/home/admin-classes">Turmas</a>
+                    <a mat-list-item routerLink="/home/admin-tabelas-praticas">Tabelas Práticas</a>
                 </mat-nav-list>
             </mat-expansion-panel>
 

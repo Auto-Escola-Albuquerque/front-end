@@ -20,6 +20,7 @@ export class AdminAlunosDialogComponent implements OnInit {
     cpf: new FormControl('', [Validators.required, Validators.maxLength(11)]),
     registration: new FormControl('', [Validators.required]),
     gender: new FormControl('', [Validators.required]),
+    isPractical: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required]),
     phone: new FormControl('', [Validators.required]),
     city: new FormControl('', [Validators.required]),
@@ -34,11 +35,11 @@ export class AdminAlunosDialogComponent implements OnInit {
     mechanics: new FormControl(0),
   });
 
-
   localData: any;
   type: string;
   obj: any;
   selected: any;
+  isPractical: any;
   student = new Student();
 
   constructor(public dialogRef: MatDialogRef<DialogBoxComponent>, @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
@@ -47,6 +48,7 @@ export class AdminAlunosDialogComponent implements OnInit {
     this.localData = data;
     this.obj = this.data.data;
     this.type = this.localData.type;
+
   }
 
   ngOnInit() {
@@ -75,6 +77,7 @@ export class AdminAlunosDialogComponent implements OnInit {
           environment: this.obj.environment,
           legislation: this.obj.legislation,
           mechanics: this.obj.mechanics,
+          isPractical: this.obj.isPractical
     });
   }
   update() {
@@ -93,6 +96,7 @@ export class AdminAlunosDialogComponent implements OnInit {
     this.obj.environment = this.formStudent.value.environment;
     this.obj.legislation = this.formStudent.value.legislation;
     this.obj.mechanics = this.formStudent.value.mechanics;
+    this.obj.isPractical = this.formStudent.value.isPractical;
 
     this.autoescolaservice.putStudent(this.obj).subscribe(data => {
       this.success();
@@ -100,6 +104,9 @@ export class AdminAlunosDialogComponent implements OnInit {
       this.error();
     });
     this.dialogRef.close();
+  }
+  updateCheck() {
+    this.isPractical = this.isPractical === false;
   }
   onSubmit() {
       const student = new Student();
@@ -114,6 +121,7 @@ export class AdminAlunosDialogComponent implements OnInit {
       student.dayClasses = this.formStudent.value.dayClasses;
       student.nightClasses = this.formStudent.value.nightClasses;
       student.city = this.storageService.getData('franchise');
+      student.isPractical = this.formStudent.value.isPractical;
       this.autoescolaservice.postStudent(student).subscribe(
         data =>{
           this.success();

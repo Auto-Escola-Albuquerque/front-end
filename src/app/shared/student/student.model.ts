@@ -2,6 +2,7 @@ export class Student {
     id: string;
     seqNo: number;
     name: string;
+    isPractical: boolean;
     cpf: string;
     city: number;
     registrationDate: string;
@@ -30,5 +31,6 @@ export class Student {
         this.legislation = 0;
         this.mechanics = 0;
         this.firstAid = 0;
+        this.isPractical = false;
     }
 }
