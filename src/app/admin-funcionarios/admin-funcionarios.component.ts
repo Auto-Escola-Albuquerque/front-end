@@ -26,14 +26,7 @@ export class AdminFuncionariosComponent implements OnInit {
     constructor(private autoescolaService: AutoescolaService, public dialog: MatDialog) {
     }
     ngOnInit() {
-      this.autoescolaService.getEmployeeList().subscribe(data => {
-        this.employees = data;
-        for (let i = 0; i < this.employees.length; i++){
-          this.employees[i].seq = i + 1;
-        }
-        this.dataSource = new MatTableDataSource(this.employees);
-        this.dataSource.sort = this.sort;
-      });
+      this.updateRowData();
     }
     doFilter(value: string) {
       this.dataSource.filter = value.trim().toLowerCase();
@@ -54,7 +47,8 @@ export class AdminFuncionariosComponent implements OnInit {
         for (let i = 0; i < this.employees.length; i++){
           this.employees[i].seq = i + 1;
         }
-        this.dataSource.data = this.employees;
+        this.dataSource = new MatTableDataSource(this.employees);
+        this.dataSource.sort = this.sort;
       });
     }
     openDeleteDialog(obj: any) {

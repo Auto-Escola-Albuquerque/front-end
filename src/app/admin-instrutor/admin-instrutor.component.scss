@@ -35,19 +35,9 @@
 }
 
 .col-lg-5 {
-  // display: flex;
-  // flex-wrap: wrap;
   margin-right: 15px;
   margin-left: 15px;
 }
-
-// .col-float {
-//     display: flex;
-//     flex-wrap: wrap;
-//     margin-right: -15px;
-//     margin-left: -15px;
-//     float: left;
-// }
 
 .mat-raised-button {
   background-color: #FFD700;
@@ -60,6 +50,11 @@ h2 {
   padding-left: 10%;
 }
 
+a{
+  padding-left: 10%;
+  font-size: 12px;
+}
+
 .mat-form-field {
   padding-left: 10%;
 }
@@ -67,7 +62,7 @@ h2 {
 
 .table{
   width: 100%;
-  // margin: 15% auto;
+  margin-top: 10px;
 }
 
 .data-table {

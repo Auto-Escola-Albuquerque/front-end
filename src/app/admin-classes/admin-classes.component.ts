@@ -5,11 +5,16 @@ import { Class } from '../shared/class/class.model';
 import { AutoescolaService } from '../shared/autoescola.service';
 import {AdminClassesDialogComponent} from '../admin-classes-dialog/admin-classes-dialog.component';
 import {DeleteDialogComponent} from '../delete-dialog/delete-dialog.component';
+import {DatePipe} from '@angular/common';
+import {StorageService} from '../shared/storage.service';
 
 @Component({
     selector: 'app-admin-classes',
     templateUrl: './admin-classes.component.html',
-    styleUrls: ['./admin-classes.component.scss']
+    styleUrls: ['./admin-classes.component.scss'],
+    providers: [
+      DatePipe
+    ]
 })
 export class AdminClassesComponent implements OnInit {
     @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
@@ -19,11 +24,20 @@ export class AdminClassesComponent implements OnInit {
     classes: any;
     displayedColumns = ['N°', 'name', 'shift', 'update', 'delete'];
     dataSource: any;
+    hourChange: any;
 
-    constructor(private autoescolaService: AutoescolaService, public dialog: MatDialog) { }
+    constructor(private autoescolaService: AutoescolaService, public dialog: MatDialog, private storage: StorageService, private datePipe: DatePipe) { }
 
     ngOnInit() {
+      this.autoescolaService.getHourOfChange().subscribe(data => {
+        this.hourChange = data;
+      });
       this.updateRowData();
+    }
+    updateHourOfChange() {
+      this.hourChange.classesAdminPeople = this.storage.getData('name');
+      this.hourChange.classesAdmin = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+      this.autoescolaService.patchHourOfChange(this.hourChange).subscribe();
     }
     doFilter(value: string) {
         this.dataSource.filter = value.trim().toLowerCase();
@@ -34,7 +48,8 @@ export class AdminClassesComponent implements OnInit {
         data: {data: obj, type: type === 'add' ? 'add' : 'update'}
       });
       dialogRef.afterClosed().subscribe(result => {
-        this.updateRowData();
+          this.updateRowData();
+          this.updateHourOfChange();
       });
     }
     openDeleteDialog(obj: any) {
@@ -44,6 +59,7 @@ export class AdminClassesComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         this.updateRowData();
+        this.updateHourOfChange();
       });
     }
     updateRowData() {

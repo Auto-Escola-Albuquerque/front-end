@@ -15,6 +15,7 @@ import {MainNavComponent} from '../main-nav/main-nav.component';
 export class LoginComponent implements OnInit {
     username: any;
     token: any;
+    isAdmin: any;
 
   form = new FormGroup({
     login: new FormControl('', [Validators.required]),
@@ -29,13 +30,22 @@ export class LoginComponent implements OnInit {
 
    }
   ngOnInit() {
+    console.log(this.storageService.getData('name'), this.storageService.getData('isAdmin'), this.storageService.getData('token'));
+
+    // let em = new Employee();
+    // em.username = 'admin';
+    // em.email = 'admin@gmail.com';
+    // em.password = '123';
+    // em.isAdmin = true;
+    // this.autoescolaservice.postEmployee(em).subscribe();
   }
   onSubmit() {
     this.autoescolaservice.login(this.form.value.login, this.form.value.password).subscribe(data => {
       this.token = data;
       this.addTokenInStorage();
       this.autoescolaservice.getEmployeeName(this.form.value.login).subscribe(result => {
-        this.username = result;
+        this.username = result['username'];
+        this.isAdmin = result['isAdmin'];
         this.addUserInStorage();
       });
       this.redirect();
@@ -46,8 +56,9 @@ export class LoginComponent implements OnInit {
   }
   addUserInStorage() {
     this.storageService.setData('name', this.username);
+    this.storageService.setData('isAdmin', this.isAdmin);
   }
-  deleteUserStorage() {
+  clearData() {
     this.storageService.clearData();
   }
   redirect() {

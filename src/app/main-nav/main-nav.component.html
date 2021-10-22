@@ -1,28 +1,31 @@
 <mat-toolbar color="accent">
-    <img src="././assets/logo.svg" class="logo">
+    <img src="././assets/logofinal.png" class="logo">
     <span style="flex: 1 1 auto;"></span>
     <div>
-        <mat-card-title class="logout">Sair</mat-card-title>
-        <button mat-icon-button (click)="this.logout()">
-            <mat-icon>exit_to_app</mat-icon>
-        </button>
+      <mat-card-title class="change-franchise" (click)="this.changeFranchise()">Mudar Franquia</mat-card-title>
+    </div>
+    <div>
+        <mat-card-title class="logout" (click)="this.logout()">Sair</mat-card-title>
+<!--        <button mat-icon-button (click)="this.logout()">-->
+<!--            <mat-icon>exit_to_app</mat-icon>-->
+<!--        </button>-->
     </div>
 </mat-toolbar>
 
 <mat-sidenav-container style="height: calc(100% - 64px); margin: 0;">
     <mat-sidenav #sidenav mode="side" opened [disableClose]="true" [class.mat-elevation-z4]="true" style="width: 240px">
       <h4>{{this.employee}}</h4>
-
+      <h5>Franquia: {{this.franchise?.name}}</h5>
       <mat-nav-list dense>
             <mat-expansion-panel [class.mat-elevation-z0]="true">
                 <mat-expansion-panel-header>
                     Alunos
                 </mat-expansion-panel-header>
                 <mat-nav-list dense>
-                    <a mat-list-item routerLink="/home/alunos">
+                    <a mat-list-item [routerLink]="['/home/alunos', 0]">
                         Alunos Teóricos
                     </a>
-                    <a mat-list-item routerLink="#">
+                    <a mat-list-item [routerLink]="['/home/alunos', 1]">
                         Alunos Práticos
                     </a>
                 </mat-nav-list>
@@ -79,8 +82,8 @@
                 <mat-nav-list dense>
                     <a mat-list-item routerLink="/home/admin-alunos">Alunos</a>
                     <a mat-list-item routerLink="/home/admin-instrutor">Instrutor</a>
-                    <a mat-list-item routerLink="/home/admin-funcionarios">Funcionários</a>
-                    <a mat-list-item routerLink="/home/admin-franquias">Franquias</a>
+                    <a *ngIf="this.isAdmin === true" mat-list-item routerLink="/home/admin-funcionarios">Funcionários</a>
+                    <a *ngIf="this.isAdmin === true" mat-list-item routerLink="/home/admin-franquias">Franquias</a>
                     <a mat-list-item routerLink="/home/admin-classes">Turmas</a>
                     <a mat-list-item routerLink="/home/admin-tabelas-praticas">Tabelas Práticas</a>
                 </mat-nav-list>

@@ -1,34 +1,46 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatDialog, MatPaginator, MatTable} from '@angular/material';
+import {MatDialog, MatPaginator, MatTable, MatTableDataSource} from '@angular/material';
 import {MatSort} from '@angular/material/sort';
 import {AdminFranquiasDialogComponent} from '../admin-franquias-dialog/admin-franquias-dialog.component';
 import {DeleteDialogComponent} from '../delete-dialog/delete-dialog.component';
 import {AutoescolaService} from '../shared/autoescola.service';
 import {AdminTabelasPraticasDialogComponent} from '../admin-tabelas-praticas-dialog/admin-tabelas-praticas-dialog.component';
+import {DatePipe} from '@angular/common';
+import {StorageService} from '../shared/storage.service';
 
 @Component({
   selector: 'app-admin-tabelas-praticas',
   templateUrl: './admin-tabelas-praticas.component.html',
-  styleUrls: ['./admin-tabelas-praticas.component.scss']
+  styleUrls: ['./admin-tabelas-praticas.component.scss'],
+  providers: [
+    DatePipe
+  ]
 })
 export class AdminTabelasPraticasComponent implements OnInit {
   practicalTable: any;
-  displayedColumns = ['id', 'name', 'instructor', 'update', 'delete'];
+  displayedColumns = ['name', 'instructor', 'delete'];
   dataSource: any;
+  hourChange: any;
 
   @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
-  // @ViewChild(MatPaginator, { static: false }) matPaginator: MatPaginator;
-  // @ViewChild(MatSort, { static: false }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) matPaginator: MatPaginator;
 
-  constructor(public dialog: MatDialog, private autoescolaService: AutoescolaService) { }
+  constructor(public dialog: MatDialog, private autoescolaService: AutoescolaService,  private storage: StorageService, private datePipe: DatePipe) { }
 
   ngOnInit() {
+    this.autoescolaService.getHourOfChange().subscribe(data => {
+      this.hourChange = data;
+    });
     this.autoescolaService.getTableList().subscribe(data => {
       this.practicalTable = data;
       this.dataSource = this.practicalTable;
     });
   }
-
+  updateHourOfChange() {
+    this.hourChange.practicalAdminPeople = this.storage.getData('name');
+    this.hourChange.practicalAdmin = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    this.autoescolaService.patchHourOfChange(this.hourChange).subscribe();
+  }
   openDialog() {
     const dialogRef = this.dialog.open(AdminTabelasPraticasDialogComponent, {
       width: '400px',
@@ -37,6 +49,7 @@ export class AdminTabelasPraticasComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.updateRowData();
+      this.updateHourOfChange();
     });
   }
   openDeleteDialog(obj: any) {
@@ -46,14 +59,20 @@ export class AdminTabelasPraticasComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.updateRowData();
+        this.updateRowData();
+        this.updateHourOfChange();
     });
   }
 
   updateRowData() {
     this.autoescolaService.getTableList().subscribe(data => {
       this.practicalTable = data;
-      this.dataSource.data = this.practicalTable;
+      for (let i of this.practicalTable) {
+        this.autoescolaService.getInstructor(i.instructor).subscribe(result => {
+          i.instructor = result['name'];
+        });
+      }
+      this.dataSource = new MatTableDataSource(this.practicalTable);
     });
   }
 }

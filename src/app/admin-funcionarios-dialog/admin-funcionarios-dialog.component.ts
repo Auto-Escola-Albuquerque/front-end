@@ -47,13 +47,14 @@ export class AdminFuncionariosDialogComponent implements OnInit {
     employee.email = this.formEmployee.value.email;
     employee.isAdmin = this.formEmployee.value.isAdmin;
     employee.password = this.formEmployee.value.password;
+    console.log(employee.isAdmin);
     this.autoescolaservice.postEmployee(employee).subscribe(data => {
       this.success();
     }, error => {
       this.error();
     });
 
-    this.dialogRef.close();
+    this.closeDialog();
   }
   success() {
     this.ns.success('O funcionário foi adicionado com sucesso!');

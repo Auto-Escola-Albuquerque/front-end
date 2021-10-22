@@ -7,11 +7,16 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {SnackBarService} from '../shared/snack-bar.service';
 import {InstructorClass} from '../shared/instructor-class/instructor-class.model';
 import {MatSort} from '@angular/material/sort';
+import {DatePipe} from '@angular/common';
+import {StorageService} from '../shared/storage.service';
 
 @Component({
   selector: 'app-instrutor-teorico',
   templateUrl: './instrutor-teorico.component.html',
-  styleUrls: ['./instrutor-teorico.component.scss']
+  styleUrls: ['./instrutor-teorico.component.scss'],
+  providers: [
+    DatePipe
+  ]
 })
 export class InstrutorTeoricoComponent implements OnInit {
   instructorClass = [];
@@ -26,15 +31,20 @@ export class InstrutorTeoricoComponent implements OnInit {
   id: any;
   deleteItems = [];
   checkList = [];
+  hourChange: any;
+
 
   @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(private autoescolaservice: AutoescolaService, public dialog: MatDialog,  private route: ActivatedRoute,
-              private ns: SnackBarService, private activeRoute: ActivatedRoute) {
+              private ns: SnackBarService, private activeRoute: ActivatedRoute, private storage: StorageService, private datePipe: DatePipe) {
   }
 
     ngOnInit() {
+      this.autoescolaservice.getHourOfChange().subscribe(data => {
+        this.hourChange = data;
+      });
       this.route.params.subscribe(routeParams => {
         this.tSum = 0;
         this.pSum = 0;
@@ -64,8 +74,16 @@ export class InstrutorTeoricoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      if (result.data) {
+        this.updateHourOfChange();
+      }
       this.updateRowData();
     });
+  }
+  updateHourOfChange() {
+    this.hourChange.instructorPeople = this.storage.getData('name');
+    this.hourChange.instructor = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    this.autoescolaservice.patchHourOfChange(this.hourChange).subscribe();
   }
   changeCheck(instructorClass: InstructorClass) {
     if (this.checkList.includes(instructorClass)) {
@@ -78,6 +96,7 @@ export class InstrutorTeoricoComponent implements OnInit {
     for (const i of this.checkList) {
       this.autoescolaservice.patchInstructorClassCheck(i);
     }
+    this.updateHourOfChange();
   }
   updateTSum() {
     this.tSum = 0;
@@ -109,6 +128,7 @@ export class InstrutorTeoricoComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.updateRowData();
+      this.updateHourOfChange();
     });
   }
   updateRowData() {

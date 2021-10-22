@@ -15,5 +15,7 @@ export class StorageService {
   clearData() {
     localStorage.removeItem('token');
     localStorage.removeItem('name');
+    localStorage.removeItem('franchise');
+    localStorage.removeItem('isAdmin');
   }
 }

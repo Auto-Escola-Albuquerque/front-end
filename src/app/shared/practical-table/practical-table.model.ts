@@ -7,4 +7,5 @@ export class PracticalTable {
   sum3: number;
   sum4: number;
   sum5: number;
+  city: any;
 }

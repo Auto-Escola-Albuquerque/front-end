@@ -11,28 +11,22 @@ import {AddRelationshipDialogComponent} from '../add-relationship-dialog/add-rel
 import {Class} from '../shared/class/class.model';
 import {SnackBarService} from '../shared/snack-bar.service';
 import {DeleteDialogComponent} from '../delete-dialog/delete-dialog.component';
-
-export const MY_DATE_FORMATS = {
-    parse: {
-        dateInput: 'DD/MM/YYYY',
-    },
-    display: {
-        dateInput: 'DD/MM/YYYY',
-        monthYearLabel: 'MMMM YYYY',
-        dateA11yLabel: 'LL',
-        monthYearA11yLabel: 'MMMM YYYY'
-    },
-};
+import {DatePipe} from '@angular/common';
+import {StorageService} from '../shared/storage.service';
 
 @Component({
     selector: 'app-alunos-teoricos',
     templateUrl: './alunos-teoricos.component.html',
-    styleUrls: ['./alunos-teoricos.component.scss']
+    styleUrls: ['./alunos-teoricos.component.scss'],
+    providers: [
+      DatePipe
+    ]
 })
 export class AlunosTeoricosComponent implements OnInit {
     students: any;
     class: any;
     value: any;
+    hourChange: any;
 
     displayedColumns = ['N°', 'name', 'mat1', 'mat2',
         'mat3', 'mat4', 'mat5', 'c1', 'c2', 'c3', 'delete'];
@@ -42,10 +36,14 @@ export class AlunosTeoricosComponent implements OnInit {
     @ViewChild(MatSort, { static: false }) sort: MatSort;
 
     constructor(public dialog: MatDialog, public addDialog: MatDialog, private autoescolaservice: AutoescolaService,
-      private changeDetectorRefs: ChangeDetectorRef, private route: ActivatedRoute, private ns: SnackBarService) {
+      private changeDetectorRefs: ChangeDetectorRef, private route: ActivatedRoute, private ns: SnackBarService,
+                private storage: StorageService, private datePipe: DatePipe) {
     }
 
     ngOnInit() {
+      this.autoescolaservice.getHourOfChange().subscribe(data => {
+        this.hourChange = data;
+      });
       this.route.params.subscribe(routeParams => {
         this.autoescolaservice.getClass(routeParams.id).subscribe(data => {
           this.class = data;
@@ -63,6 +61,11 @@ export class AlunosTeoricosComponent implements OnInit {
     doFilter(value: string) {
         this.dataSource.filter = value.trim().toLowerCase();
     }
+    updateHourOfChange() {
+      this.hourChange.classesPeople = this.storage.getData('name');
+      this.hourChange.classes = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+      this.autoescolaservice.patchHourOfChange(this.hourChange).subscribe();
+    }
     openDialog(obj: Student, index: number) {
         const dialogRef = this.dialog.open(DialogBoxComponent, {
             width: '400px',
@@ -71,6 +74,7 @@ export class AlunosTeoricosComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             this.updateRowData2(result.data);
+            this.updateHourOfChange();
         });
     }
     openAddDialog() {
@@ -81,6 +85,7 @@ export class AlunosTeoricosComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         this.updateRowData();
+        this.updateHourOfChange();
       });
     }
     openDeleteDialog(obj: any) {
@@ -91,6 +96,7 @@ export class AlunosTeoricosComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         this.updateRowData();
+        this.updateHourOfChange();
       });
     }
 
@@ -132,6 +138,7 @@ export class AlunosTeoricosComponent implements OnInit {
             this.error();
           });
         }
+        this.updateHourOfChange();
     }
 
     success() {

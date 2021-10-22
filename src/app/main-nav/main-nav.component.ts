@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
 import {AutoescolaService} from '../shared/autoescola.service';
 import {Router} from '@angular/router';
 import {StorageService} from '../shared/storage.service';
+import {HourChange} from '../shared/hour-change/hour-change.model';
 
 @Component({
     selector: 'app-main-nav',
@@ -16,22 +15,39 @@ export class MainNavComponent {
     classes: any;
     employee: any;
     tables: any;
+    franchise: any;
+    isAdmin: any;
 
     constructor(private breakpointObserver: BreakpointObserver, private autoescolaservice: AutoescolaService,
                 private router: Router, private storage: StorageService) {
+        this.isAdmin = this.storage.getData('isAdmin');
+        console.log(this.storage.getData('name'), this.storage.getData('isAdmin'), this.storage.getData('token'));
         this.autoescolaservice.getInstructorList().subscribe(data => {
-            this.instructors = data;
-        });
+              this.instructors = data;
+          });
         this.autoescolaservice.getClassList().subscribe(data => {
             this.classes = data;
         });
-        this.autoescolaservice.getTableList().subscribe(data =>{
+        this.autoescolaservice.getTableList().subscribe(data => {
           this.tables = data;
         });
         this.employee = this.storage.getData('name');
+        this.autoescolaservice.getCity(this.storage.getData('franchise')).subscribe(data => {
+          this.franchise = data;
+        });
+
+        this.autoescolaservice.getHourChangeSize().subscribe(data => {
+          if (data === 0) {
+            this.autoescolaservice.postHourOfChange(new HourChange()).subscribe();
+          }
+        });
     }
+
     logout() {
       this.storage.clearData();
       this.router.navigateByUrl('login');
+    }
+    changeFranchise() {
+      this.router.navigateByUrl('franquia');
     }
 }

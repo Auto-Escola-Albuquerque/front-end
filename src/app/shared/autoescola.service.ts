@@ -13,6 +13,7 @@ import {InstructorClass} from './instructor-class/instructor-class.model';
 import {Relationship} from './relationship/relationship.model';
 import {PracticalTable} from './practical-table/practical-table.model';
 import {PracticalLines} from './practical-lines/practical-lines.model';
+import {HourChange} from './hour-change/hour-change.model';
 
 @Injectable()
 export class AutoescolaService {
@@ -26,7 +27,7 @@ export class AutoescolaService {
     }
 
     getStudent(id: string) {
-        return this.authHttp.get(`${this.url}/estudante/${id}`);
+      return this.authHttp.get(`${this.url}/estudante/${id}`);
     }
 
     getStudentRelationship(id: string) {
@@ -35,6 +36,30 @@ export class AutoescolaService {
 
     getStudentList(): Observable <Student[]> {
         return this.authHttp.get<Student[]>(`${this.url}/estudante/`);
+    }
+
+    getStudentByType(id: number) {
+      return this.authHttp.get(`${this.url}/estudante-tipo/${id}`);
+    }
+
+    getHourOfChange() {
+      return this.authHttp.get(`${this.url}/hora-mudanca/`);
+    }
+
+    getHourChangeSize() {
+      return this.authHttp.get(`${this.url}/hora-mudanca-size/`);
+    }
+
+    postHourOfChange(obj: any) {
+      return this.authHttp.post(`${this.url}/hora-mudanca/`, obj);
+    }
+
+    patchHourOfChange(obj: any) {
+      return this.authHttp.patch(`${this.url}/hora-mudanca/`, obj);
+    }
+
+    deleteHourOfChange() {
+      return this.authHttp.delete(`${this.url}/hora-mudanca/`);
     }
 
     getEmployee(id: string) {

@@ -1,5 +1,6 @@
 <div>
-  <h2>Todos os Alunos</h2>
+  <h2 *ngIf="studentType==false">Todos os Alunos Teóricos</h2>
+  <h2 *ngIf="studentType==true">Todos os Alunos Práticos</h2>
 
   <div fxLayout fxLayoutAlign="center center">
     <mat-form-field fxFlex="40%">

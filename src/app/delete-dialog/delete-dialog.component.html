@@ -31,6 +31,10 @@
     <h1 mat-dialog-title>Deseja excluir linha da tabela prática?</h1>
     <!--    <p mat-dialog-content >{{this.localData.name}}</p>-->
   </div>
+  <div *ngIf="this.type == 'admin-tabelas-praticas'">
+    <h1 mat-dialog-title>Deseja excluir a tabela prática?</h1>
+    <!--    <p mat-dialog-content >{{this.localData.name}}</p>-->
+  </div>
   <div *ngIf="this.type == 'admin-franquia'">
     <h1 mat-dialog-title>ATENÇÃO: Deseja excluir essa franquia ? Isso deletará todos os dados relacionados à franquia.
       Dados como alunos, funcionários, instrutores, aulas e turmas serão permanentemente apagados do sistema.</h1>

@@ -1,7 +1,6 @@
-<!--<div class="card">-->
-<!--     <h2>Administração de Alunos</h2>-->
-<!--</div>-->
+
 <h2>Administração de Alunos</h2>
+<a>Última Atualização feita por: {{this.hourChange?.studentAdminPeople}} em {{this.hourChange?.studentAdmin | date:"dd-MM-yyyy"}}</a>
 <div fxLayout fxLayoutAlign="center center">
   <mat-form-field fxFlex="40%">
     <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filtrar Aluno">

@@ -1,4 +1,4 @@
-h3 {
+h2 {
   padding-left: 10%;
 }
 
@@ -20,7 +20,10 @@ td{
   padding-top: 20px;
   position: relative;
 }
-
+a {
+  padding-left: 10%;
+  font-size: 12px;
+}
 .col-lg-5 {
   margin-right: 15px;
   margin-left: 15px;
@@ -36,6 +39,7 @@ td{
   padding-left: 10%;
 }
 .table{
+  margin-top: 10px;
   width: 100%;
   // margin: 15% auto;
 }

@@ -1,20 +1,23 @@
 h2 {
-  padding-left: 15%;
+  padding-left: 10%;
 }
-
+a {
+  margin-left: 10%;
+  font-size: 12px;
+}
 .mat-form-field {
-  padding-left: 15%;
+  padding-left: 10%;
 }
 
 
 .table{
   width: 100%;
-  // margin: 15% auto;
+  margin-top: 10px;
 }
 
 .data-table {
   width: 30%;
-  margin-left: 15%;
+  margin-left: 10%;
 }
 
 button {
@@ -42,7 +45,7 @@ button {
 .mat-flat-button {
   background-color: #FFD700;
   color: #000;
-  margin-left: 15%;
+  margin-left: 10%;
   margin-top: 2%;
   transition: transform .4s;
 }

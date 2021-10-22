@@ -1,6 +1,7 @@
 <div>
-    <h2>{{this.table.name}}</h2>
-    <h4>Instrutor Relacionado: {{this.instructor.name}}</h4>
+    <h2>{{this.table?.name}}</h2>
+    <h4>Instrutor Relacionado: {{this.instructor?.name}}</h4>
+    <a>Última Atualização feita por: {{this.hourChange?.practicalTablePeople}} em {{this.hourChange?.practicalTable | date:"dd-MM-yyyy"}}</a>
   <div class="mat-elevation-z8 data-table">
     <table mat-table matSort class="table" [dataSource]="dataSource">
 
@@ -61,7 +62,7 @@
           <td mat-cell *matCellDef="let line ; let i = index" class="gray-element" (click)="openDialog(line.km1, i,'km1', 'km')">
             {{line.km1}}
           </td>
-          <td mat-footer-cell *matFooterCellDef>Soma: {{this.table.sum1}}</td>
+          <td mat-footer-cell *matFooterCellDef>Soma: {{this.table?.sum1}}</td>
         </ng-container>
 
       <ng-container matColumnDef="name2">
@@ -85,7 +86,7 @@
         <td mat-cell *matCellDef="let line ; let i = index" class="gray-element" (click)="openDialog(line.km2, i,'km2', 'km')">
           {{line.km2}}
         </td>
-        <td mat-footer-cell *matFooterCellDef>Soma: {{this.table.sum2}}</td>
+        <td mat-footer-cell *matFooterCellDef>Soma: {{this.table?.sum2}}</td>
       </ng-container>
 
       <ng-container matColumnDef="name3">
@@ -109,7 +110,7 @@
         <td mat-cell *matCellDef="let line ; let i = index" class="gray-element" (click)="openDialog(line.km3, i,'km3', 'km')">
           {{line.km3}}
         </td>
-        <td mat-footer-cell *matFooterCellDef>Soma: {{this.table.sum3}}</td>
+        <td mat-footer-cell *matFooterCellDef>Soma: {{this.table?.sum3}}</td>
       </ng-container>
 
       <ng-container matColumnDef="name4">
@@ -133,7 +134,7 @@
         <td mat-cell *matCellDef="let line ; let i = index" class="gray-element" (click)="openDialog(line.km4, i,'km4', 'km')">
           {{line.km4}}
         </td>
-        <td mat-footer-cell *matFooterCellDef>Soma: {{this.table.sum4}}</td>
+        <td mat-footer-cell *matFooterCellDef>Soma: {{this.table?.sum4}}</td>
       </ng-container>
 
       <ng-container matColumnDef="name5">
@@ -157,7 +158,7 @@
         <td mat-cell *matCellDef="let line ; let i = index" class="gray-element" (click)="openDialog(line.km5, i,'km5', 'km')">
           {{line.km5}}
         </td>
-        <td mat-footer-cell *matFooterCellDef>Soma: {{this.table.sum5}}</td>
+        <td mat-footer-cell *matFooterCellDef>Soma: {{this.table?.sum5}}</td>
       </ng-container>
 
       <ng-container matColumnDef="delete">

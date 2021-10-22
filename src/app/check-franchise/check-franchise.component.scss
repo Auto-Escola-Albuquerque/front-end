@@ -3,15 +3,24 @@ mat-card {
   margin: 2em auto;
   text-align: center;
 }
-
+.bg {
+  width: 100%;
+  height: 100%;
+}
 .container {
-  //display: flex;
-  //flex-direction: row;
-  //justify-content: center;
-  //align-items: center;
-  //width: 400px
+  padding-top: 10%;
+
+}
+
+mat-select {
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 mat-form-field {
   display: block;
+}
+button {
+  background-color: transparent;
+  box-shadow: none;
 }

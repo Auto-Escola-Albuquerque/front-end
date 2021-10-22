@@ -121,7 +121,7 @@ export class AdminAlunosDialogComponent implements OnInit {
       student.dayClasses = this.formStudent.value.dayClasses;
       student.nightClasses = this.formStudent.value.nightClasses;
       student.city = this.storageService.getData('franchise');
-      student.isPractical = this.formStudent.value.isPractical;
+      student.isPractical = false;
       this.autoescolaservice.postStudent(student).subscribe(
         data =>{
           this.success();

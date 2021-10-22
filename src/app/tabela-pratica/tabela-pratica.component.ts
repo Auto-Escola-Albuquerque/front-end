@@ -5,16 +5,24 @@ import {ActivatedRoute} from '@angular/router';
 import {SnackBarService} from '../shared/snack-bar.service';
 import {MatSort} from '@angular/material/sort';
 import {PracticalLines} from '../shared/practical-lines/practical-lines.model';
-import {Student} from '../shared/student/student.model';
-import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
 import {LinesDialogComponent} from '../lines-dialog/lines-dialog.component';
 import {DeleteDialogComponent} from '../delete-dialog/delete-dialog.component';
+import {StorageService} from '../shared/storage.service';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+import { DatePipe } from '@angular/common';
+
+registerLocaleData(localePt);
 
 @Component({
   selector: 'app-tabela-pratica',
   templateUrl: './tabela-pratica.component.html',
-  styleUrls: ['./tabela-pratica.component.scss']
+  styleUrls: ['./tabela-pratica.component.scss'],
+  providers: [
+    DatePipe
+  ]
 })
+
 export class TabelaPraticaComponent implements OnInit {
   displayedColumns = ['hour', 'name1', 'check1', 'km1', 'name2', 'check2', 'km2', 'name3', 'check3', 'km3', 'name4', 'check4', 'km4', 'name5', 'check5', 'km5', 'delete'];
   table: any;
@@ -22,14 +30,19 @@ export class TabelaPraticaComponent implements OnInit {
   sum = [0, 0, 0, 0, 0];
   instructor: any;
   dataSource: any;
+  hourChange: any;
 
   @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(public dialog: MatDialog, public addDialog: MatDialog, private autoescolaservice: AutoescolaService,
-              private changeDetectorRefs: ChangeDetectorRef, private route: ActivatedRoute, private ns: SnackBarService) { }
+              private changeDetectorRefs: ChangeDetectorRef, private route: ActivatedRoute, private ns: SnackBarService,
+              private storage: StorageService, private datePipe: DatePipe) { }
 
   ngOnInit() {
+    this.autoescolaservice.getHourOfChange().subscribe(data => {
+      this.hourChange = data;
+    });
     this.route.params.subscribe(routeParams => {
       this.autoescolaservice.getTable(routeParams.id).subscribe(data => {
         this.table = data;
@@ -40,7 +53,6 @@ export class TabelaPraticaComponent implements OnInit {
           this.lines = value;
           this.dataSource = new MatTableDataSource(this.lines);
           this.dataSource.sort = this.sort;
-          this.sumCalculate();
         });
       });
     });
@@ -53,9 +65,6 @@ export class TabelaPraticaComponent implements OnInit {
       this.updateRowData();
     });
   }
-  sumCalculate() {
-
-  }
   openDialog(obj: any, index: number, typeLine: string, type: string) {
     const dialogRef = this.dialog.open(LinesDialogComponent, {
       width: '400px',
@@ -66,9 +75,9 @@ export class TabelaPraticaComponent implements OnInit {
       if (result.event !== 'Cancel') {
         this.lines[index][typeLine] = result.data;
         this.dataSource.data = this.lines;
-        this.sumCalculate();
         this.updateLine(this.lines[index]);
-        this.updateSum(typeLine, result.data);
+        this.updateSum();
+        this.updateHourOfChange();
       }
     });
   }
@@ -76,23 +85,28 @@ export class TabelaPraticaComponent implements OnInit {
     this.autoescolaservice.patchLine(line.id, line).subscribe(data => {
     });
   }
-  updateSum(type: string, value: any) {
-    value = parseInt(value, 10);
-    if (type === 'km1') {
-      this.table.sum1 += value;
-    } else if (type === 'km2') {
-      this.table.sum2 += value;
-    } else if (type === 'km3') {
-      this.table.sum3 += value;
-    } else if (type === 'km4') {
-      this.table.sum4 += value;
-    } else if (type === 'km5') {
-      this.table.sum5 += value;
+  updateHourOfChange() {
+    this.hourChange.practicalTablePeople = this.storage.getData('name');
+    this.hourChange.practicalTable = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    this.autoescolaservice.patchHourOfChange(this.hourChange).subscribe();
+  }
+  updateSum() {
+    this.clearTableSum();
+    for (const i of this.lines) {
+      this.table.sum1 += parseInt(i['km1'], 10);
+      this.table.sum2 += parseInt(i['km2'], 10);
+      this.table.sum3 += parseInt(i['km3'], 10);
+      this.table.sum4 += parseInt(i['km4'], 10);
+      this.table.sum5 += parseInt(i['km5'], 10);
     }
     this.autoescolaservice.patchTable(this.table).subscribe();
   }
-  calculateSum() {
-
+  clearTableSum() {
+    this.table.sum1 = 0;
+    this.table.sum2 = 0;
+    this.table.sum3 = 0;
+    this.table.sum4 = 0;
+    this.table.sum5 = 0;
   }
   changeCheck(line: any) {
     this.autoescolaservice.patchLine(line.id, line).subscribe();
@@ -101,6 +115,7 @@ export class TabelaPraticaComponent implements OnInit {
     this.autoescolaservice.getLineByTable(this.table.id).subscribe(data => {
       this.lines = data;
       this.dataSource.data = this.lines;
+      this.updateSum();
     });
   }
   openDeleteDialog(obj: any) {

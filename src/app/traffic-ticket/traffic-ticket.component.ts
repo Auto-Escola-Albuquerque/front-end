@@ -7,26 +7,40 @@ import {Student} from '../shared/student/student.model';
 import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
 import {TrafficTicketBoxComponent} from '../traffic-ticket-box/traffic-ticket-box.component';
 import {DeleteDialogComponent} from '../delete-dialog/delete-dialog.component';
+import {StorageService} from '../shared/storage.service';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-traffic-ticket',
   templateUrl: './traffic-ticket.component.html',
-  styleUrls: ['./traffic-ticket.component.scss']
+  styleUrls: ['./traffic-ticket.component.scss'],
+  providers: [
+    DatePipe
+  ]
 })
 export class TrafficTicketComponent implements OnInit {
     displayedColumns = ['id', 'student', 'count', 'date', 'type', 'delete'];
     dataSource: any;
     tickets: any;
+    hourChange: any;
 
-    @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
+  @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
     @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(public dialog: MatDialog, private autoescolaservice: AutoescolaService,
-              private changeDetectorRefs: ChangeDetectorRef) {
+              private changeDetectorRefs: ChangeDetectorRef, private storage: StorageService, private datePipe: DatePipe) {
 
   }
   ngOnInit() {
+    this.autoescolaservice.getHourOfChange().subscribe(data => {
+      this.hourChange = data;
+    });
     this.updateRowData();
+  }
+  updateHourOfChange() {
+    this.hourChange.trafficTicketPeople = this.storage.getData('name');
+    this.hourChange.trafficTicket = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    this.autoescolaservice.patchHourOfChange(this.hourChange).subscribe();
   }
   openDialog() {
     const ticket = new Trafficticket();
@@ -38,6 +52,7 @@ export class TrafficTicketComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result.data === true) {
         this.updateRowData();
+        this.updateHourOfChange();
       }
     });
   }

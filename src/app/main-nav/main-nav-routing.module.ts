@@ -32,7 +32,7 @@ const routes: Routes = [
             {path: 'turma/:id', component: AlunosTeoricosComponent},
             {path: 'multas', component: TrafficTicketComponent},
             {path: 'instrutor/:id', component: InstrutorTeoricoComponent},
-            {path: 'alunos', component: AlunosComponent}
+            {path: 'alunos/:id', component: AlunosComponent}
         ]
     }
 ];

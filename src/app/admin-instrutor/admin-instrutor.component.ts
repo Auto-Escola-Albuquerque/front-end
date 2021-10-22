@@ -5,23 +5,38 @@ import {MatDialog, MatTable, MatTableDataSource} from '@angular/material';
 import {MatSort} from '@angular/material/sort';
 import {AdminInstrutorDialogComponent} from '../admin-instrutor-dialog/admin-instrutor-dialog.component';
 import {DeleteDialogComponent} from '../delete-dialog/delete-dialog.component';
+import {DatePipe} from '@angular/common';
+import {StorageService} from '../shared/storage.service';
 
 @Component({
     selector: 'app-admin-instrutor',
     templateUrl: './admin-instrutor.component.html',
-    styleUrls: ['./admin-instrutor.component.scss']
+    styleUrls: ['./admin-instrutor.component.scss'],
+    providers: [
+      DatePipe
+    ]
 })
 export class AdminInstrutorComponent implements OnInit {
     displayedColumns = ['N°', 'name', 'cpf', 'type', 'delete'];
     dataSource: any;
+    hourChange: any;
+
     @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
     @ViewChild(MatSort, { static: false }) sort: MatSort;
     instructors = [];
 
-    constructor(public autoescolaservice: AutoescolaService, public dialog: MatDialog) { }
+    constructor(public autoescolaservice: AutoescolaService, public dialog: MatDialog, private storage: StorageService, private datePipe: DatePipe) { }
 
     ngOnInit() {
+      this.autoescolaservice.getHourOfChange().subscribe(data => {
+        this.hourChange = data;
+      });
       this.updateRowData();
+    }
+    updateHourOfChange() {
+      this.hourChange.instructorAdminPeople = this.storage.getData('name');
+      this.hourChange.instructorAdmin = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+      this.autoescolaservice.patchHourOfChange(this.hourChange).subscribe();
     }
     doFilter(value: string) {
       this.dataSource.filter = value.trim().toLowerCase();
@@ -44,6 +59,7 @@ export class AdminInstrutorComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         this.updateRowData();
+        this.updateHourOfChange();
       });
     }
     openDeleteDialog(obj: any) {
@@ -54,6 +70,7 @@ export class AdminInstrutorComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         this.updateRowData();
+        this.updateHourOfChange();
       });
     }
 }

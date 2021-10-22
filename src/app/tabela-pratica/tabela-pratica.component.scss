@@ -1,5 +1,10 @@
-h2, h4 {
+h2, h4{
   padding-left: 10%;
+}
+
+a {
+  padding-left: 10%;
+  font-size: 12px;
 }
 
 .mat-form-field {
@@ -17,6 +22,7 @@ th.mat-header-cell {
 }
 
 .table{
+  margin-top: 10px;
   width: 100%;
   // margin: 15% auto;
 }
