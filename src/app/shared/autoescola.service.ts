@@ -46,8 +46,8 @@ export class AutoescolaService {
       return this.authHttp.get(`${this.url}/hora-mudanca/`);
     }
 
-    getHourChangeSize() {
-      return this.authHttp.get(`${this.url}/hora-mudanca-size/`);
+    getHourById() {
+      return this.authHttp.get(`${this.url}/hora-mudanca-id/`);
     }
 
     postHourOfChange(obj: any) {
@@ -55,7 +55,8 @@ export class AutoescolaService {
     }
 
     patchHourOfChange(obj: any) {
-      return this.authHttp.patch(`${this.url}/hora-mudanca/`, obj);
+      console.log(obj);
+      return this.authHttp.patch(`${this.url}/hora-mudanca-view/${obj.id}`, obj);
     }
 
     deleteHourOfChange() {

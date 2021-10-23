@@ -4,7 +4,6 @@ import {AutoescolaService} from '../shared/autoescola.service';
 import {Router} from '@angular/router';
 import {StorageService} from '../shared/storage.service';
 import {HourChange} from '../shared/hour-change/hour-change.model';
-
 @Component({
     selector: 'app-main-nav',
     templateUrl: './main-nav.component.html',
@@ -20,8 +19,8 @@ export class MainNavComponent {
 
     constructor(private breakpointObserver: BreakpointObserver, private autoescolaservice: AutoescolaService,
                 private router: Router, private storage: StorageService) {
+
         this.isAdmin = this.storage.getData('isAdmin');
-        console.log(this.storage.getData('name'), this.storage.getData('isAdmin'), this.storage.getData('token'));
         this.autoescolaservice.getInstructorList().subscribe(data => {
               this.instructors = data;
           });
@@ -35,10 +34,15 @@ export class MainNavComponent {
         this.autoescolaservice.getCity(this.storage.getData('franchise')).subscribe(data => {
           this.franchise = data;
         });
-
-        this.autoescolaservice.getHourChangeSize().subscribe(data => {
-          if (data === 0) {
-            this.autoescolaservice.postHourOfChange(new HourChange()).subscribe();
+        // this.autoescolaservice.getHourOfChange().subscribe(data => {
+        //   console.log(data);
+        // })
+        // this.autoescolaservice.deleteHourOfChange().subscribe();
+        this.autoescolaservice.getHourById().subscribe(data => {
+          if (data === 'empty') {
+            const hour = new HourChange();
+            hour.city = this.storage.getData('franchise');
+            this.autoescolaservice.postHourOfChange(hour).subscribe();
           }
         });
     }

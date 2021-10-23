@@ -1,4 +1,5 @@
 export class HourChange {
+  id: number;
   practicalTaable: string;
   practicalTablePeople: string;
   trafficTicket: string;
@@ -15,4 +16,5 @@ export class HourChange {
   instructorAdminPeople: string;
   practicalAdminPeople: string;
   practicalAdmin: string;
+  city: number;
 }

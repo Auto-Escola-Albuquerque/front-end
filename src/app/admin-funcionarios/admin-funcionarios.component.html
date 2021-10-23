@@ -1,7 +1,7 @@
 <h2>Administração de Funcionários</h2>
 <div fxLayout fxLayoutAlign="center center">
   <mat-form-field fxFlex="40%">
-    <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filtrar Instrutor">
+    <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filtrar Funcionário">
   </mat-form-field>
 </div>
 <div class="mat-elevation-z8 data-table">
@@ -37,4 +37,4 @@
   </table>
 </div>
 
-<button mat-raised-button color="primary" (click)="openDialog(employee)" class="button">Adicionar novo funcionário</button>
+<button mat-flat-button color="primary" (click)="openDialog(employee)" class="button">Adicionar novo funcionário</button>

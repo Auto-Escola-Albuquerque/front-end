@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
    }
   ngOnInit() {
-    console.log(this.storageService.getData('name'), this.storageService.getData('isAdmin'), this.storageService.getData('token'));
+    // console.log(this.storageService.getData('name'), this.storageService.getData('isAdmin'), this.storageService.getData('token'));
 
     // let em = new Employee();
     // em.username = 'admin';

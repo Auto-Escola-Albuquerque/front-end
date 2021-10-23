@@ -19,14 +19,14 @@ a {
     width: 40%;
     margin-left: 10%;
 }
-
-.w-25 {
-    width: 25px;
+.mat-flat-button {
+  background-color: #FFD700;
+  color: #000;
+  margin-left: 10%;
+  margin-top: 2%;
+  transition: transform .4s;
+}
+.mat-flat-button:hover {
+  transform: scale(1.1);
 }
 
-.mat-raised-button {
-    background-color: #FFD700;
-    color: #000;
-    margin-left: 10%;
-    margin-top: 2%;
-}

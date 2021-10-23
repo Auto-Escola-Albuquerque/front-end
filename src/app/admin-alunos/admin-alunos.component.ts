@@ -31,8 +31,9 @@ export class AdminAlunosComponent implements OnInit {
     constructor(public autoescolaservice: AutoescolaService, public dialog: MatDialog, private storage: StorageService, private datePipe: DatePipe) {
     }
     ngOnInit() {
-      this.autoescolaservice.getHourOfChange().subscribe(data => {
+      this.autoescolaservice.getHourById().subscribe(data => {
         this.hourChange = data;
+        console.log(data)
       });
       this.autoescolaservice.getStudentList().subscribe(data => {
         this.students = data;

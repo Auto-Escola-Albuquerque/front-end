@@ -5,9 +5,9 @@ import {MainNavComponent} from './main-nav/main-nav.component';
 import {AuthGuardService} from './shared/auth-guard.service';
 import {NotFoundComponent} from './not-found/not-found.component';
 import {CheckFranchiseComponent} from './check-franchise/check-franchise.component';
+import {FirstPageComponent} from './first-page/first-page.component';
 
 const routes: Routes = [
-    // {path: '', redirectTo: 'login', pathMatch: 'full'},
     {path: 'login', component: LoginComponent},
     {path: 'franquia', component: CheckFranchiseComponent},
     // {path: '**', component: NotFoundComponent},

@@ -26,25 +26,15 @@ button {
   background-color: transparent;
   box-shadow: none;
 }
-
-.w-25 {
-  width: 25px;
-}
-
-.mat-cell{
-  font-size:14px;
-  font-family: Verdana,Sans-Serif;
-}
-
-.centralize {
-  text-align: center;
-}
-
-.mat-raised-button {
+.mat-flat-button {
   background-color: #FFD700;
   color: #000;
   margin-left: 10%;
-  margin-top: 3%;
+  margin-top: 2%;
+  transition: transform .4s;
+}
+.mat-flat-button:hover {
+  transform: scale(1.1);
 }
 
 .gray-element{

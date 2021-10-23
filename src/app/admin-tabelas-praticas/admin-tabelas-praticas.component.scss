@@ -41,7 +41,10 @@ button {
 .mat-flat-button:hover {
   transform: scale(1.1);
 }
-
+button {
+  background-color: transparent;
+  box-shadow: none;
+}
 .mat-flat-button {
   background-color: #FFD700;
   color: #000;
