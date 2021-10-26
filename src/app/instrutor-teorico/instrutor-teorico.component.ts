@@ -31,7 +31,7 @@ export class InstrutorTeoricoComponent implements OnInit {
   id: any;
   deleteItems = [];
   checkList = [];
-  hourChange: any;
+  city: any;
 
 
   @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
@@ -42,8 +42,8 @@ export class InstrutorTeoricoComponent implements OnInit {
   }
 
     ngOnInit() {
-      this.autoescolaservice.getHourOfChange().subscribe(data => {
-        this.hourChange = data;
+      this.autoescolaservice.getCity(this.storage.getData('franchise')).subscribe(data => {
+        this.city = data;
       });
       this.route.params.subscribe(routeParams => {
         this.tSum = 0;
@@ -55,14 +55,12 @@ export class InstrutorTeoricoComponent implements OnInit {
           this.instructorClassT = data;
           this.dataSourceT = new MatTableDataSource(this.instructorClassT);
           this.dataSourceT.sort = this.sort;
-          this.checkIsEmpty(this.instructorClassT, 'Teórico');
           this.updateTSum();
         });
         this.autoescolaservice.getPracticalInstructorClassList(routeParams.id).subscribe(data => {
           this.instructorClassP = data;
           this.dataSourceP = new MatTableDataSource(this.instructorClassP);
           this.dataSourceP.sort = this.sort;
-          this.checkIsEmpty(this.instructorClassP, 'Prático');
           this.updatePSum();
         });
       });
@@ -81,9 +79,9 @@ export class InstrutorTeoricoComponent implements OnInit {
     });
   }
   updateHourOfChange() {
-    this.hourChange.instructorPeople = this.storage.getData('name');
-    this.hourChange.instructor = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-    this.autoescolaservice.patchHourOfChange(this.hourChange).subscribe();
+    this.city.instructorPeople = this.storage.getData('name');
+    this.city.instructor = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    this.autoescolaservice.patchCity(this.city).subscribe();
   }
   changeCheck(instructorClass: InstructorClass) {
     if (this.checkList.includes(instructorClass)) {
@@ -113,13 +111,7 @@ export class InstrutorTeoricoComponent implements OnInit {
       this.deleteItems.push(instructorClass);
     }
   }
-  checkIsEmpty(instructorClass: InstructorClass, type: string) {
-      if (type === 'Prático' && this.instructorClass.length === 0) {
-        this.ns.empty('Este instrutor não possui aulas práticas cadastradas');
-      } else if (type === 'Teórico' && this.instructorClass.length === 0) {
-        this.ns.empty('Este instrutor não possui aulas teóricas cadastradas');
-      }
-  }
+
   openDeleteDialog(obj: any) {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '20%',

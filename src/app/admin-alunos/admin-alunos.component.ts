@@ -22,7 +22,7 @@ export class AdminAlunosComponent implements OnInit {
     dataSource: any;
     students = [];
     student = new Student();
-    hourChange: any;
+    city: any;
 
 
     @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
@@ -31,9 +31,8 @@ export class AdminAlunosComponent implements OnInit {
     constructor(public autoescolaservice: AutoescolaService, public dialog: MatDialog, private storage: StorageService, private datePipe: DatePipe) {
     }
     ngOnInit() {
-      this.autoescolaservice.getHourById().subscribe(data => {
-        this.hourChange = data;
-        console.log(data)
+      this.autoescolaservice.getCity(this.storage.getData('franchise')).subscribe(data => {
+        this.city = data;
       });
       this.autoescolaservice.getStudentList().subscribe(data => {
         this.students = data;
@@ -59,9 +58,9 @@ export class AdminAlunosComponent implements OnInit {
       });
     }
     updateHourOfChange() {
-      this.hourChange.studentAdminPeople = this.storage.getData('name');
-      this.hourChange.studentAdmin = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-      this.autoescolaservice.patchHourOfChange(this.hourChange).subscribe();
+      this.city.studentAdminPeople = this.storage.getData('name');
+      this.city.studentAdmin = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+      this.autoescolaservice.patchCity(this.city).subscribe();
     }
     updateRowData() {
       this.autoescolaservice.getStudentList().subscribe(data => {

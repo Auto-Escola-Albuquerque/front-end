@@ -24,20 +24,20 @@ export class AdminClassesComponent implements OnInit {
     classes: any;
     displayedColumns = ['N°', 'name', 'shift', 'update', 'delete'];
     dataSource: any;
-    hourChange: any;
+    city: any;
 
     constructor(private autoescolaService: AutoescolaService, public dialog: MatDialog, private storage: StorageService, private datePipe: DatePipe) { }
 
     ngOnInit() {
-      this.autoescolaService.getHourOfChange().subscribe(data => {
-        this.hourChange = data;
+      this.autoescolaService.getCity(this.storage.getData('franchise')).subscribe(data => {
+        this.city = data;
       });
       this.updateRowData();
     }
     updateHourOfChange() {
-      this.hourChange.classesAdminPeople = this.storage.getData('name');
-      this.hourChange.classesAdmin = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-      this.autoescolaService.patchHourOfChange(this.hourChange).subscribe();
+      this.city.classesAdminPeople = this.storage.getData('name');
+      this.city.classesAdmin = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+      this.autoescolaService.patchCity(this.city).subscribe();
     }
     doFilter(value: string) {
         this.dataSource.filter = value.trim().toLowerCase();

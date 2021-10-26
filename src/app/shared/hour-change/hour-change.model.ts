@@ -1,6 +1,6 @@
 export class HourChange {
-  id: number;
-  practicalTaable: string;
+  id: string;
+  practicalTable: string;
   practicalTablePeople: string;
   trafficTicket: string;
   trafficTicketPeople: string;
@@ -16,5 +16,9 @@ export class HourChange {
   instructorAdminPeople: string;
   practicalAdminPeople: string;
   practicalAdmin: string;
-  city: number;
+  city: string;
+
+  // constructor() {
+  //   this.pract
+  // }
 }

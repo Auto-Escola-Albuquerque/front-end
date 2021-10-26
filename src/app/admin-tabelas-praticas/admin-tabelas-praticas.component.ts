@@ -20,7 +20,7 @@ export class AdminTabelasPraticasComponent implements OnInit {
   practicalTable: any;
   displayedColumns = ['name', 'instructor', 'delete'];
   dataSource: any;
-  hourChange: any;
+  city: any;
 
   @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
   @ViewChild(MatPaginator, { static: false }) matPaginator: MatPaginator;
@@ -28,18 +28,15 @@ export class AdminTabelasPraticasComponent implements OnInit {
   constructor(public dialog: MatDialog, private autoescolaService: AutoescolaService,  private storage: StorageService, private datePipe: DatePipe) { }
 
   ngOnInit() {
-    this.autoescolaService.getHourOfChange().subscribe(data => {
-      this.hourChange = data;
+    this.autoescolaService.getCity(this.storage.getData('franchise')).subscribe(data => {
+      this.city = data;
     });
-    this.autoescolaService.getTableList().subscribe(data => {
-      this.practicalTable = data;
-      this.dataSource = this.practicalTable;
-    });
+    this.updateRowData();
   }
   updateHourOfChange() {
-    this.hourChange.practicalAdminPeople = this.storage.getData('name');
-    this.hourChange.practicalAdmin = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-    this.autoescolaService.patchHourOfChange(this.hourChange).subscribe();
+    this.city.practicalAdminPeople = this.storage.getData('name');
+    this.city.practicalAdmin = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    this.autoescolaService.patchCity(this.city).subscribe();
   }
   openDialog() {
     const dialogRef = this.dialog.open(AdminTabelasPraticasDialogComponent, {

@@ -6,6 +6,7 @@ import {AutoescolaService} from '../shared/autoescola.service';
 import {SnackBarService} from '../shared/snack-bar.service';
 import {DrivingSchool} from '../shared/driving-school/driving-school.model';
 import {error} from 'protractor';
+import {HourChange} from '../shared/hour-change/hour-change.model';
 
 @Component({
   selector: 'app-admin-franquias-dialog',
@@ -35,6 +36,7 @@ export class AdminFranquiasDialogComponent implements OnInit {
     });
     this.dialogRef.close();
   }
+
   closeDialog() {
     this.dialogRef.close({ event: 'Cancel' });
   }

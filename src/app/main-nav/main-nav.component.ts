@@ -34,22 +34,11 @@ export class MainNavComponent {
         this.autoescolaservice.getCity(this.storage.getData('franchise')).subscribe(data => {
           this.franchise = data;
         });
-        // this.autoescolaservice.getHourOfChange().subscribe(data => {
-        //   console.log(data);
-        // })
-        // this.autoescolaservice.deleteHourOfChange().subscribe();
-        this.autoescolaservice.getHourById().subscribe(data => {
-          if (data === 'empty') {
-            const hour = new HourChange();
-            hour.city = this.storage.getData('franchise');
-            this.autoescolaservice.postHourOfChange(hour).subscribe();
-          }
-        });
     }
 
     logout() {
       this.storage.clearData();
-      this.router.navigateByUrl('login');
+      this.router.navigateByUrl('');
     }
     changeFranchise() {
       this.router.navigateByUrl('franquia');

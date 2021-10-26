@@ -26,7 +26,7 @@ export class AlunosTeoricosComponent implements OnInit {
     students: any;
     class: any;
     value: any;
-    hourChange: any;
+    city: any;
 
     displayedColumns = ['N°', 'name', 'mat1', 'mat2',
         'mat3', 'mat4', 'mat5', 'c1', 'c2', 'c3', 'delete'];
@@ -41,8 +41,8 @@ export class AlunosTeoricosComponent implements OnInit {
     }
 
     ngOnInit() {
-      this.autoescolaservice.getHourOfChange().subscribe(data => {
-        this.hourChange = data;
+      this.autoescolaservice.getCity(this.storage.getData('franchise')).subscribe(data => {
+        this.city = data;
       });
       this.route.params.subscribe(routeParams => {
         this.autoescolaservice.getClass(routeParams.id).subscribe(data => {
@@ -62,9 +62,9 @@ export class AlunosTeoricosComponent implements OnInit {
         this.dataSource.filter = value.trim().toLowerCase();
     }
     updateHourOfChange() {
-      this.hourChange.classesPeople = this.storage.getData('name');
-      this.hourChange.classes = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-      this.autoescolaservice.patchHourOfChange(this.hourChange).subscribe();
+      this.city.classesPeople = this.storage.getData('name');
+      this.city.classes = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+      this.autoescolaservice.patchCity(this.city).subscribe();
     }
     openDialog(obj: Student, index: number) {
         const dialogRef = this.dialog.open(DialogBoxComponent, {

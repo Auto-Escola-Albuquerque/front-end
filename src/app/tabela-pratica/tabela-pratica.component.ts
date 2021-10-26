@@ -30,7 +30,7 @@ export class TabelaPraticaComponent implements OnInit {
   sum = [0, 0, 0, 0, 0];
   instructor: any;
   dataSource: any;
-  hourChange: any;
+  city: any;
 
   @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
@@ -40,8 +40,8 @@ export class TabelaPraticaComponent implements OnInit {
               private storage: StorageService, private datePipe: DatePipe) { }
 
   ngOnInit() {
-    this.autoescolaservice.getHourOfChange().subscribe(data => {
-      this.hourChange = data;
+    this.autoescolaservice.getCity(this.storage.getData('franchise')).subscribe(data => {
+      this.city = data;
     });
     this.route.params.subscribe(routeParams => {
       this.autoescolaservice.getTable(routeParams.id).subscribe(data => {
@@ -86,9 +86,9 @@ export class TabelaPraticaComponent implements OnInit {
     });
   }
   updateHourOfChange() {
-    this.hourChange.practicalTablePeople = this.storage.getData('name');
-    this.hourChange.practicalTable = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-    this.autoescolaservice.patchHourOfChange(this.hourChange).subscribe();
+    this.city.practicalTablePeople = this.storage.getData('name');
+    this.city.practicalTable = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    this.autoescolaservice.patchCity(this.city).subscribe();
   }
   updateSum() {
     this.clearTableSum();

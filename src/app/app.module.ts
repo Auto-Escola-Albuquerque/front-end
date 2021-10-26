@@ -62,7 +62,7 @@ import { AdminTabelasPraticasDialogComponent } from './admin-tabelas-praticas-di
 import { LinesDialogComponent } from './lines-dialog/lines-dialog.component';
 import {MatSlideToggleModule} from '@angular/material';
 import { AlunosComponent } from './alunos/alunos.component';
-import { FirstPageComponent } from './first-page/first-page.component';
+import { InitialComponent } from './initial/initial.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +94,7 @@ import { FirstPageComponent } from './first-page/first-page.component';
     AdminTabelasPraticasDialogComponent,
     LinesDialogComponent,
     AlunosComponent,
-    FirstPageComponent,
+    InitialComponent,
   ],
   imports: [
     BrowserModule,

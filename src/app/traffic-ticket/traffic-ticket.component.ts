@@ -22,7 +22,7 @@ export class TrafficTicketComponent implements OnInit {
     displayedColumns = ['id', 'student', 'count', 'date', 'type', 'delete'];
     dataSource: any;
     tickets: any;
-    hourChange: any;
+    city: any;
 
   @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
     @ViewChild(MatSort, { static: false }) sort: MatSort;
@@ -32,15 +32,15 @@ export class TrafficTicketComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.autoescolaservice.getHourOfChange().subscribe(data => {
-      this.hourChange = data;
+    this.autoescolaservice.getCity(this.storage.getData('franchise')).subscribe(data => {
+      this.city = data;
     });
     this.updateRowData();
   }
   updateHourOfChange() {
-    this.hourChange.trafficTicketPeople = this.storage.getData('name');
-    this.hourChange.trafficTicket = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-    this.autoescolaservice.patchHourOfChange(this.hourChange).subscribe();
+    this.city.trafficTicketPeople = this.storage.getData('name');
+    this.city.trafficTicket = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    this.autoescolaservice.patchCity(this.city).subscribe();
   }
   openDialog() {
     const ticket = new Trafficticket();

@@ -13,7 +13,6 @@ import {InstructorClass} from './instructor-class/instructor-class.model';
 import {Relationship} from './relationship/relationship.model';
 import {PracticalTable} from './practical-table/practical-table.model';
 import {PracticalLines} from './practical-lines/practical-lines.model';
-import {HourChange} from './hour-change/hour-change.model';
 
 @Injectable()
 export class AutoescolaService {
@@ -42,25 +41,8 @@ export class AutoescolaService {
       return this.authHttp.get(`${this.url}/estudante-tipo/${id}`);
     }
 
-    getHourOfChange() {
-      return this.authHttp.get(`${this.url}/hora-mudanca/`);
-    }
-
-    getHourById() {
-      return this.authHttp.get(`${this.url}/hora-mudanca-id/`);
-    }
-
-    postHourOfChange(obj: any) {
-      return this.authHttp.post(`${this.url}/hora-mudanca/`, obj);
-    }
-
-    patchHourOfChange(obj: any) {
-      console.log(obj);
-      return this.authHttp.patch(`${this.url}/hora-mudanca-view/${obj.id}`, obj);
-    }
-
-    deleteHourOfChange() {
-      return this.authHttp.delete(`${this.url}/hora-mudanca/`);
+    patchCity(obj: any) {
+        return this.authHttp.patch(`${this.url}/franquia/${obj.id}`, obj);
     }
 
     getEmployee(id: string) {

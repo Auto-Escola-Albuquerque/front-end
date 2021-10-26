@@ -28,6 +28,6 @@ export class CheckFranchiseComponent implements OnInit {
     this.redirect();
   }
   redirect() {
-    this.router.navigateByUrl('home');
+    this.router.navigateByUrl('home/inicio');
   }
 }

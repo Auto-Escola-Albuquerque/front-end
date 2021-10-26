@@ -41,6 +41,9 @@ export class AdminTabelasPraticasDialogComponent implements OnInit {
     });
     this.dialogRef.close({ event: 'Cancel' });
   }
+  closeDialog() {
+    this.dialogRef.close({ event: 'Cancel' });
+  }
   success() {
     this.ns.success('Tabela Prática Adicionada com sucesso!');
   }

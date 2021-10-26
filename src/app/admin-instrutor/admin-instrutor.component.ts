@@ -19,7 +19,7 @@ import {StorageService} from '../shared/storage.service';
 export class AdminInstrutorComponent implements OnInit {
     displayedColumns = ['N°', 'name', 'cpf', 'type', 'delete'];
     dataSource: any;
-    hourChange: any;
+    city: any;
 
     @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
     @ViewChild(MatSort, { static: false }) sort: MatSort;
@@ -28,15 +28,15 @@ export class AdminInstrutorComponent implements OnInit {
     constructor(public autoescolaservice: AutoescolaService, public dialog: MatDialog, private storage: StorageService, private datePipe: DatePipe) { }
 
     ngOnInit() {
-      this.autoescolaservice.getHourOfChange().subscribe(data => {
-        this.hourChange = data;
+      this.autoescolaservice.getCity(this.storage.getData('franchise')).subscribe(data => {
+        this.city = data;
       });
       this.updateRowData();
     }
     updateHourOfChange() {
-      this.hourChange.instructorAdminPeople = this.storage.getData('name');
-      this.hourChange.instructorAdmin = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-      this.autoescolaservice.patchHourOfChange(this.hourChange).subscribe();
+      this.city.instructorAdminPeople = this.storage.getData('name');
+      this.city.instructorAdmin = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+      this.autoescolaservice.patchCity(this.city).subscribe();
     }
     doFilter(value: string) {
       this.dataSource.filter = value.trim().toLowerCase();

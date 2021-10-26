@@ -14,6 +14,7 @@ import {AuthGuardService} from '../shared/auth-guard.service';
 import {MainNavComponent} from './main-nav.component';
 import {AdminTabelasPraticasComponent} from '../admin-tabelas-praticas/admin-tabelas-praticas.component';
 import {AlunosComponent} from '../alunos/alunos.component';
+import {InitialComponent} from '../initial/initial.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
         component: MainNavComponent,
         canActivateChild: [AuthGuardService],
         children: [
+            {path: 'inicio', component: InitialComponent},
             {path: 'admin-alunos', component: AdminAlunosComponent},
             {path: 'admin-instrutor', component: AdminInstrutorComponent},
             {path: 'admin-funcionarios', component: AdminFuncionariosComponent},
