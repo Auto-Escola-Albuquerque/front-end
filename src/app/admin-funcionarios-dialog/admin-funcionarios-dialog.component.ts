@@ -24,6 +24,7 @@ export class AdminFuncionariosDialogComponent implements OnInit {
   obj: any;
   loading = false;
   action: string;
+  hide: any;
 
   constructor(public autoescolaservice: AutoescolaService,
               @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
