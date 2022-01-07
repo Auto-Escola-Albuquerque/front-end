@@ -38,11 +38,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AdminAlunosDialogComponent } from './admin-alunos-dialog/admin-alunos-dialog.component';
 import { AdminInstrutorDialogComponent } from './admin-instrutor-dialog/admin-instrutor-dialog.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
-import { TrafficTicketComponent } from './traffic-ticket/traffic-ticket.component';
-import { TrafficTicketBoxComponent } from './traffic-ticket-box/traffic-ticket-box.component';
 import { AdminFuncionariosDialogComponent } from './admin-funcionarios-dialog/admin-funcionarios-dialog.component';
-import { InstrutorTeoricoComponent } from './instrutor-teorico/instrutor-teorico.component';
-import { InstructorClassDialogComponent } from './instructor-class-dialog/instructor-class-dialog.component';
 import {SnackBarService} from './shared/snack-bar.service';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
@@ -79,11 +75,7 @@ import { InitialComponent } from './initial/initial.component';
     AdminAlunosDialogComponent,
     AdminInstrutorDialogComponent,
     DeleteDialogComponent,
-    TrafficTicketComponent,
-    TrafficTicketBoxComponent,
     AdminFuncionariosDialogComponent,
-    InstrutorTeoricoComponent,
-    InstructorClassDialogComponent,
     AdminClassesDialogComponent,
     AddRelationshipDialogComponent,
     AdminFranquiasDialogComponent,
@@ -132,7 +124,7 @@ import { InitialComponent } from './initial/initial.component';
     MatSlideToggleModule
   ],
   entryComponents: [DialogBoxComponent, AdminAlunosDialogComponent, AdminInstrutorDialogComponent, DeleteDialogComponent,
-      TrafficTicketBoxComponent, InstructorClassDialogComponent, AdminFuncionariosDialogComponent, AdminClassesDialogComponent, AddRelationshipDialogComponent,
+    AdminFuncionariosDialogComponent, AdminClassesDialogComponent, AddRelationshipDialogComponent,
       AdminFranquiasDialogComponent, MainNavComponent, AdminTabelasPraticasDialogComponent, LinesDialogComponent],
   providers: [AutoescolaService, SnackBarService, StorageService, AuthGuardService, HttpInterceptorService, {
       provide: HTTP_INTERCEPTORS,

@@ -69,6 +69,7 @@ export class AdminClassesComponent implements OnInit {
           this.classes[i].seq = i + 1;
         }
         this.dataSource = new MatTableDataSource(this.classes);
+        this.dataSource.sort = this.sort;
       });
     }
 }

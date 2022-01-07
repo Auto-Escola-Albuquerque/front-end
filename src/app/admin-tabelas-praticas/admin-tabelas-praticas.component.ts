@@ -24,6 +24,8 @@ export class AdminTabelasPraticasComponent implements OnInit {
 
   @ViewChild(MatTable, { static: false }) matTable: MatTable<any>;
   @ViewChild(MatPaginator, { static: false }) matPaginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
+
 
   constructor(public dialog: MatDialog, private autoescolaService: AutoescolaService,  private storage: StorageService, private datePipe: DatePipe) { }
 
@@ -70,6 +72,7 @@ export class AdminTabelasPraticasComponent implements OnInit {
         });
       }
       this.dataSource = new MatTableDataSource(this.practicalTable);
+      this.dataSource.sort = this.sort;
     });
   }
 }

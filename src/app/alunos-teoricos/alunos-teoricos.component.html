@@ -16,66 +16,66 @@
             </ng-container>
 
             <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
-                <td mat-cell *matCellDef="let student" class="gray-element"> {{student.name}}
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="centralize"> Nome </th>
+                <td mat-cell *matCellDef="let student" class="gray-element "> {{student.name}}
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="mat1">
-                <th mat-header-cell *matHeaderCellDef> Direção Defensiva </th>
+                <th mat-header-cell *matHeaderCellDef class="centralize"> Direção Defensiva </th>
                 <td mat-cell *matCellDef="let student" (click)="openDialog(student, 0)" class="centralize"> {{student.defensiveDriving}}
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="mat2">
-                <th mat-header-cell *matHeaderCellDef> Legislação </th>
+                <th mat-header-cell *matHeaderCellDef class="centralize"> Legislação </th>
                 <td mat-cell *matCellDef="let student" (click)="openDialog(student, 1)" class="centralize"> {{student.legislation}}
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="mat3">
-                <th mat-header-cell *matHeaderCellDef> Mecânica </th>
+                <th mat-header-cell *matHeaderCellDef class="centralize"> Mecânica </th>
                 <td mat-cell *matCellDef="let student" (click)="openDialog(student, 2)" class="centralize"> {{student.mechanics}}
                 </td>
 
             </ng-container>
 
             <ng-container matColumnDef="mat4">
-                <th mat-header-cell *matHeaderCellDef> Meio Ambiente </th>
+                <th mat-header-cell *matHeaderCellDef class="centralize"> Meio Ambiente </th>
                 <td mat-cell *matCellDef="let student" (click)="openDialog(student, 3)" class="centralize"> {{student.environment}}
 
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="mat5">
-                <th mat-header-cell *matHeaderCellDef> Primeiros Socorros </th>
+                <th mat-header-cell *matHeaderCellDef class="centralize"> Primeiros Socorros </th>
                 <td mat-cell *matCellDef="let student" (click)="openDialog(student, 4)" class="centralize"> {{student.firstAid}}
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="c1">
-              <th mat-header-cell *matHeaderCellDef> Check 1 </th>
-              <td mat-cell *matCellDef="let student" class="centralize" >
+              <th mat-header-cell *matHeaderCellDef class="centralize"> F </th>
+              <td mat-cell *matCellDef="let student" class="centralize">
                 <mat-checkbox [checked]="student.check1" (change)="this.changeCheck1(student)"></mat-checkbox>
               </td>
             </ng-container>
 
             <ng-container matColumnDef="c2">
-              <th mat-header-cell *matHeaderCellDef> Check 2 </th>
+              <th mat-header-cell *matHeaderCellDef class="centralize"> F </th>
               <td mat-cell *matCellDef="let student" class="centralize">
                 <mat-checkbox [checked]="student.check2" (change)="this.changeCheck2(student)"></mat-checkbox>
               </td>
             </ng-container>
 
             <ng-container matColumnDef="c3">
-              <th mat-header-cell *matHeaderCellDef> Check 3 </th>
-              <td mat-cell *matCellDef="let student"  class="centralize">
+              <th mat-header-cell *matHeaderCellDef class="centralize"> F </th>
+              <td mat-cell *matCellDef="let student" class="centralize">
                 <mat-checkbox [checked]="student.check3" (change)="this.changeCheck3(student)"></mat-checkbox>
               </td>
             </ng-container>
 
             <ng-container matColumnDef="delete">
-              <th mat-header-cell *matHeaderCellDef> Excluir aluno da turma </th>
+              <th mat-header-cell *matHeaderCellDef class="centralize"> Excluir aluno da turma </th>
               <td mat-cell *matCellDef="let student" class="centralize">
                 <button mat-icon-button (click)="openDeleteDialog(student)">
                   <mat-icon>delete</mat-icon>

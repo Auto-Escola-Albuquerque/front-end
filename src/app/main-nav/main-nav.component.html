@@ -1,5 +1,5 @@
 <mat-toolbar color="accent">
-    <img src="././assets/logofinal.png" class="logo">
+    <img src="https://autoescolaalbuquerque.com/images/logofinal.png" class="logo">
     <span style="flex: 1 1 auto;"></span>
     <div>
       <mat-card-title class="change-franchise" (click)="this.changeFranchise()">Mudar Franquia</mat-card-title>
@@ -42,28 +42,6 @@
             </mat-nav-list>
           </mat-expansion-panel>
 
-          <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
-            <mat-expansion-panel-header>
-              Multas
-            </mat-expansion-panel-header>
-            <mat-nav-list dense>
-              <a mat-list-item routerLink="/home/multas">
-                Todas as multas
-              </a>
-            </mat-nav-list>
-          </mat-expansion-panel>
-
-            <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
-                <mat-expansion-panel-header>
-                    Instrutores
-                </mat-expansion-panel-header>
-                <mat-nav-list dense *ngFor="let instructor of this.instructors">
-                      <a mat-list-item [routerLink]="['/home/instrutor', instructor.id]">
-                          {{instructor.name}}
-                      </a>
-                </mat-nav-list>
-            </mat-expansion-panel>
-
             <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
                 <mat-expansion-panel-header>
                     Turmas
@@ -81,7 +59,7 @@
                 </mat-expansion-panel-header>
                 <mat-nav-list dense>
                     <a mat-list-item routerLink="/home/admin-alunos">Alunos</a>
-                    <a mat-list-item routerLink="/home/admin-instrutor">Instrutor</a>
+                    <!-- <a mat-list-item routerLink="/home/admin-instrutor">Instrutor</a> -->
                     <a *ngIf="this.isAdmin === true" mat-list-item routerLink="/home/admin-funcionarios">Funcionários</a>
                     <a *ngIf="this.isAdmin === true" mat-list-item routerLink="/home/admin-franquias">Franquias</a>
                     <a mat-list-item routerLink="/home/admin-classes">Turmas</a>

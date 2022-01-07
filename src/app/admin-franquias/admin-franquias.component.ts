@@ -62,7 +62,8 @@ export class AdminFranquiasComponent implements OnInit {
     updateRowData() {
       this.autoescolaService.getCityList().subscribe(data => {
         this.franchises = data;
-        this.dataSource.data = this.franchises;
+        this.dataSource = new MatTableDataSource(this.franchises);
+        this.dataSource.sort = this.sort;
       });
     }
 

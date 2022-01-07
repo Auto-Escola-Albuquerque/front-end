@@ -68,7 +68,8 @@ export class AdminAlunosComponent implements OnInit {
         for (let i = 0; i < this.students.length; i++){
           this.students[i].seqNo = i + 1;
         }
-        this.dataSource.data = this.students;
+        this.dataSource = new MatTableDataSource(this.students);
+        this.dataSource.sort = this.sort;
       });
     }
 

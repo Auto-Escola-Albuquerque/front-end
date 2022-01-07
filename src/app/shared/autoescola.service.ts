@@ -16,7 +16,8 @@ import {PracticalLines} from './practical-lines/practical-lines.model';
 
 @Injectable()
 export class AutoescolaService {
-    private url = 'http://autoescolaalbuquerque.com:5000';
+    private url = 'https://autoescolaalbuquerque.com:5000';
+    // private url = 'http://127.0.0.1:8000';
     client: any;
     constructor(private authHttp: HttpClient, private httpBackend: HttpBackend) {
       this.client = new HttpClient(httpBackend);
